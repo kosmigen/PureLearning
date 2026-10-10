@@ -82,68 +82,51 @@
   transition: transform var(--dur-short) var(--ease-out);
 }
 
-.kb-home-node--python,
-.kb-home-node--ai {
+.kb-home-node--notes {
   --node-surface: var(--color-node-cool-paper);
   --node-accent: var(--color-node-cool-border);
   --node-mark-surface: var(--color-paper);
 }
 
-.kb-home-node--engineering,
-.kb-home-node--fundamentals,
-.kb-home-node--blog {
+.kb-home-node--articles,
+.kb-home-node--about {
   --node-surface: var(--color-node-warm-paper);
   --node-accent: var(--color-node-warm-border);
   --node-mark-surface: var(--color-paper);
 }
 
-.kb-home-node.kb-home-node--python {
+.kb-home-node.kb-home-node--notes {
   --node-rotate: -0.8deg;
   --paper-card-radius: 1.7rem 0.4rem 1.35rem 0.65rem / 0.5rem 1.5rem 0.45rem 1.2rem;
-  --node-icon: url("../icons/koboyo/cartoon-python-file.svg");
-  justify-self: start;
-}
-
-.kb-home-node.kb-home-node--fundamentals {
-  --node-rotate: 0.7deg;
-  --paper-card-radius: 0.55rem 1.65rem 0.45rem 1.4rem / 1.45rem 0.5rem 1.3rem 0.7rem;
   --node-icon: url("../icons/koboyo/cartoon-abstract-syntax-tree.svg");
-  width: 91%;
-  justify-self: end;
-}
-
-.kb-home-node.kb-home-node--engineering {
-  --node-rotate: 0.65deg;
-  --paper-card-radius: 1.4rem 0.65rem 1.6rem 0.4rem / 0.65rem 1.35rem 0.45rem 1.5rem;
-  --node-icon: url("../icons/koboyo/cartoon-build-step.svg");
-  width: 90%;
+  width: 96%;
   justify-self: start;
-}
-
-.kb-home-node.kb-home-node--ai {
-  --node-rotate: -0.55deg;
-  --paper-card-radius: 0.4rem 1.5rem 0.7rem 1.3rem / 1.3rem 0.55rem 1.55rem 0.45rem;
-  --node-icon: url("../icons/koboyo/cartoon-brain-circuit.svg");
-  width: 92%;
-  justify-self: end;
 }
 
 .kb-home-node.kb-home-node--projects {
-  --node-rotate: 0.75deg;
+  --node-rotate: 0.7deg;
   --paper-card-radius: 1.6rem 0.5rem 1.3rem 0.75rem / 0.45rem 1.4rem 0.65rem 1.5rem;
   --node-surface: var(--color-node-neutral-paper);
   --node-accent: var(--color-node-neutral-border);
   --node-mark-surface: var(--color-accent-soft);
-  --node-icon: url("../icons/koboyo/cartoon-roadmap.svg");
-  width: 95%;
+  --node-icon: url("../icons/koboyo/cartoon-build-step.svg");
+  width: 91%;
+  justify-self: end;
+}
+
+.kb-home-node.kb-home-node--articles {
+  --node-rotate: 0.65deg;
+  --paper-card-radius: 1.4rem 0.65rem 1.6rem 0.4rem / 0.65rem 1.35rem 0.45rem 1.5rem;
+  --node-icon: url("../icons/koboyo/cartoon-published-article.svg");
+  width: 90%;
   justify-self: start;
 }
 
-.kb-home-node.kb-home-node--blog {
-  --node-rotate: -0.65deg;
-  --paper-card-radius: 0.65rem 1.55rem 0.4rem 1.4rem / 1.45rem 0.65rem 1.3rem 0.45rem;
-  --node-icon: url("../icons/koboyo/cartoon-published-article.svg");
-  width: 89%;
+.kb-home-node.kb-home-node--about {
+  --node-rotate: -0.55deg;
+  --paper-card-radius: 0.4rem 1.5rem 0.7rem 1.3rem / 1.3rem 0.55rem 1.55rem 0.45rem;
+  --node-icon: url("../icons/koboyo/cartoon-person.svg");
+  width: 92%;
   justify-self: end;
 }
 
@@ -278,13 +261,12 @@
 
 @media (min-width: 60rem) {
   .kb-home-canvas-board {
-    height: 29rem;
+    min-height: 22rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
     gap: var(--space-3) var(--space-6);
     align-content: space-between;
     padding: var(--space-4) var(--space-5);
-    overflow: clip;
   }
 
   .kb-home-canvas-paths {
@@ -335,39 +317,27 @@
     max-width: 14.5rem;
   }
 
-  .kb-home-node.kb-home-node--python {
+  .kb-home-node.kb-home-node--notes {
     --node-rotate: -2.4deg;
     grid-row: 1;
     grid-column: 1;
   }
 
-  .kb-home-node.kb-home-node--fundamentals {
+  .kb-home-node.kb-home-node--projects {
     --node-rotate: 2.3deg;
     grid-row: 1;
     grid-column: 2;
   }
 
-  .kb-home-node.kb-home-node--engineering {
+  .kb-home-node.kb-home-node--articles {
     --node-rotate: 1.8deg;
     grid-row: 2;
     grid-column: 1;
   }
 
-  .kb-home-node.kb-home-node--ai {
+  .kb-home-node.kb-home-node--about {
     --node-rotate: -2.1deg;
     grid-row: 2;
-    grid-column: 2;
-  }
-
-  .kb-home-node.kb-home-node--projects {
-    --node-rotate: -1.6deg;
-    grid-row: 3;
-    grid-column: 1;
-  }
-
-  .kb-home-node.kb-home-node--blog {
-    --node-rotate: 2.5deg;
-    grid-row: 3;
     grid-column: 2;
   }
 }
