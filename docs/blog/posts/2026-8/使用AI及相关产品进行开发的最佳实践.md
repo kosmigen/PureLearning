@@ -1,7 +1,7 @@
 ---
 date: 2026-08-26
 slug: ai-development-best-practices
-category:
+categories:
  - AI
  - 项目
 ---
