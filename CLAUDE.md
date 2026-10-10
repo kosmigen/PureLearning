@@ -23,18 +23,20 @@ This is a **Material for MkDocs** knowledge base — a personal Python learning 
 
 ### Navigation system (decentralized)
 
-Navigation is *not* defined in `mkdocs.yml`. Each content directory contains its own `.nav.yml` file that the `mkdocs-awesome-nav` plugin reads to build that section's sidebar. The root `docs/.nav.yml` only defines the top-level sections (Python, AI, project archives, engineering, blog, about). When adding new pages to a section, update that directory's `.nav.yml` — not `mkdocs.yml`.
+Navigation is *not* defined in `mkdocs.yml`. Each content directory contains its own `.nav.yml` file that the `mkdocs-awesome-nav` plugin reads to build that section's sidebar. The root `docs/.nav.yml` only defines the top-level sections (笔记, 项目, 文章, 关于). When adding new pages to a section, update that directory's `.nav.yml` — not `mkdocs.yml`.
 
-### Blog vs logs (two separate content streams)
+Section names in `.nav.yml` are *labels*, independent of the directory names beneath them — `notes/fundamentals/` is labelled 计算机基础, `notes/engineering/` is labelled 工程笔记. Renaming a section is a one-line change to the label; the directory does not move.
 
-The `blog` plugin (`mkdocs.yml` line 61) manages `docs/blog/posts/`:
+### Blog vs notes (two separate content streams)
+
+The `blog` plugin (`mkdocs.yml` line 61) manages `docs/blog/posts/` and powers the 文章 section:
 - Posts live in year-month subdirectories (`posts/2026-8/YYYY-MM-DD-slug.md`)
-- Posts need `date`, `categories`, and `tags` in frontmatter
+- Posts need `date`, `categories`, and `tags` in frontmatter. The key is **`categories` (plural)** — a `category` key is silently ignored and the post lands in no category
 - `<!-- more -->` marks the excerpt boundary in posts
 - Drafts use `draft: true` in frontmatter — hidden in production, visible in `mkdocs serve`
 - The plugin auto-generates archive pages, category pages, pagination, and reading-time estimates
 
-`docs/logs/` is a plain docs section (not managed by the blog plugin) for rough field notes and in-progress learning. Logs use tags but not categories.
+`docs/notes/` (笔记) is the plain-docs knowledge base and is *not* managed by the blog plugin. The split is deliberate: 文章 holds finished writing meant to be read, 笔记 holds working notes meant to be looked up again.
 
 ### Custom CJK reading-time hook
 
@@ -46,7 +48,7 @@ The `blog` plugin (`mkdocs.yml` line 61) manages `docs/blog/posts/`:
 
 ### Custom CSS architecture
 
-Three stylesheets in `docs/assets/stylesheets/`:
+Four stylesheets in `docs/assets/stylesheets/`:
 - `extra.css` — general site overrides
 - `home-map.css` — the SVG node map on the homepage
 - `blog.css` — blog-specific styling
@@ -60,10 +62,15 @@ These are loaded via `extra_css` in `mkdocs.yml`, not imported within CSS files.
 
 ### Content organization
 
-- `docs/python/` — stable Python knowledge (core language, standard library)
-- `docs/ai/` — ML/DL fundamentals, neural networks, PyTorch, AI applications
-- `docs/engineering/` — cross-cutting practices (testing, typing, packaging, snippets)
-- `docs/projects/` — per-project archives with goals, decisions, postmortems
+- `docs/notes/` — the knowledge base (笔记). Its landing page `notes/index.md` is the learning roadmap, and it doubles as the target of the homepage's 开始学习 action:
+  - `notes/python/` — the language and standard library
+  - `notes/fundamentals/` — language-agnostic CS basics (labelled 计算机基础): 数据结构与算法, 计算机系统, 操作系统, 计算机网络, 数据库基础
+  - `notes/ai/` — ML/DL fundamentals, neural networks, AI applications
+  - `notes/engineering/` — cross-cutting practices, labelled 工程笔记 (testing, typing, packaging, snippets)
+- `docs/projects/` — per-project records: what it is, stack, status, goals/tradeoffs, postmortem
 - `docs/blog/posts/` — polished articles (managed by blog plugin)
-- `docs/logs/` — rough field notes and learning progress
-- `docs/about/` — site metadata: changelog, roadmap, author, technical notes, content guidelines
+- `docs/about/` — site metadata: author, changelog
+
+There is no `docs/logs/` section. Rough in-progress notes belong under `docs/notes/`.
+
+Note: the AI section sits under 笔记 rather than at the top level so that the top nav stays a list of *containers* rather than a course catalogue of half-empty subject areas.

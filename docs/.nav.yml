@@ -2,11 +2,7 @@ ignore: 404.md
 
 nav:
   - 首页: index.md
-  - Python: python
-  - 算法与基础: fundamentals
-  - AI: ai
-  - 项目档案: projects
-  - 工程实践: engineering
-  - 博客:
-      - 博客文章: blog
-  - 关于本站: about
+  - 笔记: notes
+  - 项目: projects
+  - 文章: blog
+  - 关于: about
