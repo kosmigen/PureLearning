@@ -1,9 +1,13 @@
 ---
-title: 项目总览
+title: 项目
+description: 已经做了和想做的项目，发掘好的想法
 tags:
   - 项目管理
-  - 项目复盘
+  - 优质想法
+  - vibecoding
 ---
 
-# 项目总览
+# 项目
+
+
 
