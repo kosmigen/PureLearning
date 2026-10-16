@@ -1,0 +1,7 @@
+{% set first = page.toc | first %}
+{% if first and (first.level != 1 or first.children) %}
+  <details class="kb-blog-mobile-toc">
+    <summary>本文目录</summary>
+    {% include "partials/toc.html" %}
+  </details>
+{% endif %}

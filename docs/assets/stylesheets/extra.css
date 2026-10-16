@@ -54,6 +54,45 @@ pre {
   font-family: var(--font-body);
 }
 
+/* Mermaid renders into a closed shadow root; contain its host, not the SVG. */
+.md-typeset .mermaid {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  --md-mermaid-font-family: var(--font-body);
+}
+
+.md-typeset .kb-diagram {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin-block: var(--space-3) var(--space-6);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.md-typeset .kb-diagram--horizontal > .mermaid {
+  width: max(100%, var(--width-diagram-horizontal));
+  max-width: none;
+}
+
+.md-typeset .kb-diagram:focus-visible {
+  outline: var(--rule-focus) solid var(--color-focus);
+  outline-offset: var(--space-1);
+}
+
+.md-typeset .kb-diagram[data-drag-scroll] {
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.md-typeset .kb-diagram.is-dragging {
+  cursor: grabbing;
+}
+
 .kb-home {
   min-width: 0;
   color: var(--color-ink);

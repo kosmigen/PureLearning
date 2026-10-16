@@ -80,6 +80,7 @@ plugins:
 
 hooks:
   - hooks/blog_metadata.py
+  - hooks/diagrams.py
 
 markdown_extensions:
   - abbr
@@ -121,6 +122,7 @@ extra_css:
 extra_javascript:
   - assets/javascripts/site-navigation.mjs
   - assets/javascripts/home-animation.mjs
+  - assets/javascripts/diagram-drag.mjs
 
 extra:
   generator: false

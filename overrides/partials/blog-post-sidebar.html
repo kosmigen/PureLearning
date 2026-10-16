@@ -1,0 +1,65 @@
+<aside class="kb-blog-context" aria-label="文章信息">
+  <a class="kb-blog-context__back" href="{{ 'blog/' | url }}">
+    <span class="kb-blog-context__icon" aria-hidden="true">
+      {% include ".icons/material/arrow-left.svg" %}
+    </span>
+    <span>所有文章</span>
+  </a>
+
+  {% if page.authors %}
+    <div class="kb-blog-context__authors">
+      {% for author in page.authors %}
+        <div class="kb-blog-context__author">
+          <img class="kb-blog-context__avatar" src="{{ author.avatar | url }}" alt="">
+          <div>
+            {% if author.url %}
+              <a class="kb-blog-context__name" href="{{ author.url | url }}">{{ author.name }}</a>
+            {% else %}
+              <strong class="kb-blog-context__name">{{ author.name }}</strong>
+            {% endif %}
+            {% if author.description %}<p>{{ author.description }}</p>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <section class="kb-blog-context__section" aria-labelledby="kb-blog-details">
+    <h2 id="kb-blog-details">文章信息</h2>
+    <dl class="kb-blog-context__details">
+      <div><dt>发布</dt><dd><time datetime="{{ page.config.date.created.isoformat() }}">{{ page.config.date.created | date }}</time></dd></div>
+      {% if page.config.date.updated %}
+        <div><dt>更新</dt><dd><time datetime="{{ page.config.date.updated.isoformat() }}">{{ page.config.date.updated | date }}</time></dd></div>
+      {% endif %}
+      {% if page.config.readtime %}<div><dt>阅读</dt><dd>约 {{ page.config.readtime }} 分钟</dd></div>{% endif %}
+      {% if page.meta.word_count %}<div><dt>字数</dt><dd>约 {{ page.meta.word_count }} 字</dd></div>{% endif %}
+    </dl>
+  </section>
+
+  {% if page.categories %}
+    <section class="kb-blog-context__section" aria-labelledby="kb-blog-categories">
+      <h2 id="kb-blog-categories">文章分类</h2>
+      <ul class="kb-blog-context__categories">
+        {% for category in page.categories %}
+          <li><a href="{{ category.url | url }}">{{ category.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% if page.previous_page or page.next_page %}
+    <nav class="kb-blog-context__section kb-blog-context__reading" aria-label="继续阅读">
+      <h2>继续阅读</h2>
+      {% if page.previous_page %}
+        <a href="{{ page.previous_page.url | url }}" rel="prev">
+          <span>上一篇</span><strong>{{ page.previous_page.title }}</strong>
+        </a>
+      {% endif %}
+      {% if page.next_page %}
+        <a href="{{ page.next_page.url | url }}" rel="next">
+          <span>下一篇</span><strong>{{ page.next_page.title }}</strong>
+        </a>
+      {% endif %}
+    </nav>
+  {% endif %}
+</aside>
