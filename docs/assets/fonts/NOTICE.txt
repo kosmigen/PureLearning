@@ -1,5 +1,27 @@
 Font asset notice
 
+Caveat (footer particle signature)
+- Source: https://github.com/google/fonts/tree/main/ofl/caveat
+- The complete variable font is self-hosted in WOFF2 format; glyphs and
+  font names are unchanged. Weights 400-700 remain variable.
+- Copyright 2014 The Caveat Project Authors.
+- The upstream copyright and SIL Open Font License are in caveat-OFL.txt.
+
+PureLearning Sans / PureLearning Serif (reading fonts)
+- Derived web subsets of Adobe Source Han Sans CN VF 2.005 and
+  Source Han Serif CN VF 2.003 (Simplified Chinese regional glyphs).
+- Sources:
+  https://github.com/adobe-fonts/source-han-sans/blob/release/Variable/WOFF2/TTF/Subset/SourceHanSansCN-VF.ttf.woff2
+  https://github.com/adobe-fonts/source-han-serif/blob/release/Variable/WOFF2/TTF/Subset/SourceHanSerifCN-VF.ttf.woff2
+- Copyright 2014-2025 Adobe (Sans); Copyright 2017-2024 Adobe (Serif).
+- Reserved Font Name: Source. Derived font names are PureLearning Sans
+  and PureLearning Serif; original copyright and license remain embedded.
+- Complete source character coverage is split into Unicode-ranged WOFF2
+  shards, with hinting removed. Weights 250-900 remain variable.
+- Rebuild instructions and source hashes: scripts/subset_reading_fonts.py.
+- reading-sans/ is used for navigation, headings and technical prose;
+  reading-serif/ is used only for blog article prose.
+
 Maple Mono NF CN
 - Source: https://github.com/subframe7536/maple-font/releases/tag/v7.9
 - The Regular face is self-hosted as a WOFF2 webfont with complete Unicode

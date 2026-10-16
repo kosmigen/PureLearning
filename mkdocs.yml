@@ -16,22 +16,22 @@ theme:
   font: false
   palette:
     - media: "(prefers-color-scheme)"
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-auto
         name: 跟随系统主题
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: 切换至深色模式
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: 切换至浅色模式
@@ -114,10 +114,12 @@ markdown_extensions:
 
 extra_css:
   - assets/stylesheets/extra.css
+  - assets/stylesheets/site.css
   - assets/stylesheets/home-map.css
   - assets/stylesheets/blog.css
 
 extra_javascript:
+  - assets/javascripts/site-navigation.mjs
   - assets/javascripts/home-animation.mjs
 
 extra:

@@ -32,6 +32,28 @@ pre {
   filter: brightness(0) invert(1);
 }
 
+.md-typeset {
+  font-size: var(--text-reading);
+  line-height: 1.8;
+}
+
+.md-typeset :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-body);
+  font-style: normal;
+}
+
+/* Keep prose readable on wide screens without changing the homepage or archive. */
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) {
+  width: calc(100% - 1.6rem);
+  max-width: var(--width-reading);
+  margin-inline: auto;
+}
+
+.md-typeset .md-button,
+.md-typeset .tabbed-labels {
+  font-family: var(--font-body);
+}
+
 .kb-home {
   min-width: 0;
   color: var(--color-ink);

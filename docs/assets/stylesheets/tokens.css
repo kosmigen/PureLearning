@@ -1,4 +1,14 @@
 /* Shared visual tokens for light and dark themes. */
+@import url("./reading-fonts.css");
+
+@font-face {
+  font-family: "Caveat";
+  src: url("../fonts/caveat-variable.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400 700;
+}
+
 @font-face {
   font-family: "Maple Mono NF CN";
   src:
@@ -28,37 +38,39 @@
 
 :root {
   --font-display: "Maple Mono NF CN", ui-monospace, monospace;
-  --font-body: "Maple Mono NF CN", ui-monospace, monospace;
+  --font-body: "PureLearning Sans", "PingFang SC", "Microsoft YaHei",
+    system-ui, sans-serif;
   --font-code: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
     "Liberation Mono", monospace;
-  --font-blog: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC",
+  --font-blog: "PureLearning Serif", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC",
     SimSun, serif;
   --font-sketch: "Excalifont", "Xiaolai", "Maple Mono NF CN", cursive;
+  --font-signature: "Caveat", "Excalifont", cursive;
 
-  --color-paper: oklch(99.2% 0.006 275);
-  --color-canvas: oklch(98% 0.01 275);
-  --color-surface: oklch(96.5% 0.012 275);
-  --color-ink: oklch(23% 0.02 275);
-  --color-muted: oklch(48% 0.026 275);
-  --color-faint: oklch(56% 0.022 275);
-  --color-rule: oklch(86% 0.018 275);
-  --color-rule-strong: oklch(70% 0.045 275);
-  --color-pencil: oklch(61% 0.055 275);
-  --color-grid-dot: oklch(82% 0.022 275);
-  --color-accent: oklch(49% 0.19 276);
-  --color-accent-strong: oklch(40% 0.2 276);
-  --color-accent-ink: oklch(98% 0.006 276);
-  --color-accent-soft: oklch(94.5% 0.035 276);
-  --color-focus: oklch(56% 0.22 276);
-  --color-status-active: oklch(68% 0.17 63);
-  --color-status-done: oklch(62% 0.15 145);
-  --color-node-cool-paper: oklch(95.5% 0.035 276);
-  --color-node-cool-border: oklch(59% 0.12 276);
-  --color-node-warm-paper: oklch(96% 0.04 78);
-  --color-node-warm-border: oklch(65% 0.11 70);
-  --color-node-neutral-paper: oklch(97% 0.012 275);
-  --color-node-neutral-border: oklch(67% 0.045 275);
-  --color-node-shadow: oklch(78% 0.025 275);
+  --color-paper: #fcfbf8;
+  --color-canvas: #f7f6f1;
+  --color-surface: #f0f1e9;
+  --color-ink: #272824;
+  --color-muted: #6e7068;
+  --color-faint: #777a70;
+  --color-rule: #e5e4dd;
+  --color-rule-strong: #b5bbad;
+  --color-pencil: #858e7a;
+  --color-grid-dot: #d3d6cb;
+  --color-accent: #6c7960;
+  --color-accent-strong: #4d6140;
+  --color-accent-ink: #fcfbf8;
+  --color-accent-soft: #edf0e6;
+  --color-focus: #657d51;
+  --color-status-active: #a77835;
+  --color-status-done: #638653;
+  --color-node-cool-paper: #edf0e6;
+  --color-node-cool-border: #8d9c7e;
+  --color-node-warm-paper: #f2eee7;
+  --color-node-warm-border: #bbae90;
+  --color-node-neutral-paper: #f5f4ef;
+  --color-node-neutral-border: #aeb5a4;
+  --color-node-shadow: #cdd1c5;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -77,18 +89,19 @@
   --text-sm: 0.78rem;
   --text-base: 0.88rem;
   --text-lg: clamp(0.96rem, 0.6vw + 0.78rem, 1.06rem);
-  --text-reading: 1rem;
+  --text-reading: clamp(0.85rem, 0.8rem + 0.15vw, 0.9rem);
   --text-blog-title: clamp(1.2rem, 1vw + 1rem, 1.6rem);
   --text-blog-lead-title: clamp(1.55rem, 1.5vw + 1rem, 1.9rem);
-  --text-blog-reading: 0.9rem;
+  --text-blog-reading: var(--text-reading);
   --text-blog-index-title: clamp(1.06rem, 0.55vw + 0.96rem, 1.3rem);
   --text-blog-display: clamp(1.4rem, 1.6vw, 1.6rem);
   --text-section: clamp(1.45rem, 2.4vw, 2rem);
   --text-display: clamp(2.05rem, 4.4vw, 3.1rem);
 
-  --width-blog-post: 48rem;
+  --width-reading: 40rem;
+  --width-blog-post: 36rem;
+  --width-diagram-horizontal: 48rem;
   --measure-blog-title: 20em;
-  --measure-blog-prose: 44em;
 
   --radius-xs: 0.15rem;
   --radius-sm: 0.35rem;
@@ -107,28 +120,28 @@
 }
 
 [data-md-color-scheme="slate"] {
-  --color-paper: oklch(19% 0.016 270);
-  --color-canvas: oklch(21.5% 0.02 270);
-  --color-surface: oklch(24% 0.021 270);
-  --color-ink: oklch(93% 0.008 275);
-  --color-muted: oklch(73% 0.018 275);
-  --color-faint: oklch(62% 0.022 275);
-  --color-rule: oklch(34% 0.027 270);
-  --color-rule-strong: oklch(50% 0.045 270);
-  --color-pencil: oklch(60% 0.05 275);
-  --color-grid-dot: oklch(39% 0.028 270);
-  --color-accent: oklch(72% 0.14 276);
-  --color-accent-strong: oklch(79% 0.11 276);
-  --color-accent-ink: oklch(22% 0.02 276);
-  --color-accent-soft: oklch(29% 0.048 276);
-  --color-focus: oklch(77% 0.16 276);
-  --color-status-active: oklch(78% 0.14 70);
-  --color-status-done: oklch(75% 0.13 145);
-  --color-node-cool-paper: oklch(27% 0.045 276);
-  --color-node-cool-border: oklch(65% 0.1 276);
-  --color-node-warm-paper: oklch(27% 0.04 70);
-  --color-node-warm-border: oklch(70% 0.1 70);
-  --color-node-neutral-paper: oklch(24% 0.02 275);
-  --color-node-neutral-border: oklch(50% 0.04 275);
-  --color-node-shadow: oklch(14% 0.018 270);
+  --color-paper: #20221f;
+  --color-canvas: #262924;
+  --color-surface: #2b3027;
+  --color-ink: #eeeee6;
+  --color-muted: #b1b4a9;
+  --color-faint: #9fa594;
+  --color-rule: #3c4037;
+  --color-rule-strong: #646e5c;
+  --color-pencil: #9ba98b;
+  --color-grid-dot: #4b5542;
+  --color-accent: #b1bea0;
+  --color-accent-strong: #c5d6af;
+  --color-accent-ink: #20221f;
+  --color-accent-soft: #2e3828;
+  --color-focus: #a3bc8f;
+  --color-status-active: #c7a66c;
+  --color-status-done: #a5c58e;
+  --color-node-cool-paper: #2e3828;
+  --color-node-cool-border: #81966c;
+  --color-node-warm-paper: #302e29;
+  --color-node-warm-border: #a49575;
+  --color-node-neutral-paper: #282d25;
+  --color-node-neutral-border: #6b7760;
+  --color-node-shadow: #161a13;
 }
