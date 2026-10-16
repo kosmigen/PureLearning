@@ -1,0 +1,47 @@
+<footer class="md-footer kb-footer" id="site-footer" aria-label="网站信息">
+  <div class="kb-footer__inner md-grid">
+    <div class="kb-footer__links">
+      <nav class="kb-footer__explore" aria-label="页脚内容导航">
+        <h2 lang="en">Explore</h2>
+        <ul>
+          <li><a href="{{ 'notes/' | url }}">学习笔记</a></li>
+          <li><a href="{{ 'projects/' | url }}">项目实践</a></li>
+          <li><a href="{{ 'blog/' | url }}">文章与随笔</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="页脚关于导航">
+        <h2 lang="en">About</h2>
+        <ul>
+          <li><a href="{{ 'about/' | url }}">本站介绍</a></li>
+          <li><a href="{{ 'about/author/' | url }}">关于作者</a></li>
+          <li><a href="{{ 'about/changelog/' | url }}">更新历史</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="页脚源码导航">
+        <h2 lang="en">Open source</h2>
+        <ul>
+          <li><a href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer">GitHub 仓库 <span aria-hidden="true">↗</span></a></li>
+          <li><a href="{{ config.repo_url }}/issues" target="_blank" rel="noopener noreferrer">问题反馈 <span aria-hidden="true">↗</span></a></li>
+          <li><a href="{{ config.repo_url }}/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+
+  <div class="kb-footer__sand md-grid" data-particle-text="{{ config.site_name | e }}" aria-hidden="true">
+    <span class="kb-footer__fallback">{{ config.site_name }}</span>
+    <canvas class="kb-footer__canvas"></canvas>
+  </div>
+
+  <div class="kb-footer__bottom md-grid">
+    <div class="kb-footer__colophon">
+      <p class="kb-footer__copyright">{{ config.copyright }}</p>
+      <a class="kb-footer__top" href="#">
+        回到顶部
+        <span class="kb-footer__icon" aria-hidden="true">{% include ".icons/material/arrow-up.svg" %}</span>
+      </a>
+    </div>
+  </div>
+
+</footer>

@@ -118,11 +118,13 @@ extra_css:
   - assets/stylesheets/site.css
   - assets/stylesheets/home-map.css
   - assets/stylesheets/blog.css
+  - assets/stylesheets/footer.css
 
 extra_javascript:
   - assets/javascripts/site-navigation.mjs
   - assets/javascripts/home-animation.mjs
   - assets/javascripts/diagram-drag.mjs
+  - assets/javascripts/footer-motion.mjs
 
 extra:
   generator: false
