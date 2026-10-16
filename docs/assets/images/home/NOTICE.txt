@@ -1,0 +1,13 @@
+Character artwork: Snoopy and Woodstock, © Peanuts Worldwide LLC.
+Source: the official Peanuts character pages, retrieved 2026-10-16.
+The downloaded character images are unmodified; presentation crops use CSS.
+
+snoopy.jpg
+https://www.peanuts.com/about/snoopy
+https://static.wixstatic.com/media/449abe_7b15686b2118476da4a733a7861dd772~mv2.jpg
+
+woodstock.jpg
+https://www.peanuts.com/about/woodstock
+https://static.wixstatic.com/media/449abe_da6f6e862186407c867210c856d6e430~mv2.jpg/v1/fill/w_1080,h_1080,al_c,q_85/wo-color.jpg
+
+paper-study.svg: site-authored illustration of the paper-reading project concept.

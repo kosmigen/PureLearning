@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" fill="none">
+  <title>论文阅读与理解的概念示意</title>
+  <g stroke="#394335" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m174 55 218 8-5 265-221-8Z" fill="#e2e5d6" stroke="#bdc4b0"/>
+    <path d="M157 43h218v266H157z" fill="#fcfbf8"/>
+    <path d="M182 72h58m-58 13h31" stroke="#949d87"/>
+    <path d="M182 111h155m-155 13h139m-139 14h151m-151 14h118" stroke="#b7bcae"/>
+    <path d="M182 169h150" stroke="#e5d891" stroke-width="11"/>
+    <path d="M182 169h151m-151 15h130m-130 14h147" stroke="#a1a991"/>
+    <path d="M183 221h38v38h-38zm58 13h38v25h-38zm58-14h38v39h-38z" fill="#eef0e6" stroke="#a4ae94"/>
+    <path d="M182 280h124" stroke="#b7bcae"/>
+    <path d="M341 114c43-24 66-20 82-13m-7-7 8 7-11 3" stroke="#79876c"/>
+    <path d="M335 184c45 10 63 14 84 7m-10-3 11 3-7 8" stroke="#79876c"/>
+    <path d="M337 254c31 11 62 12 83 7m-11-3 12 3-8 7" stroke="#79876c"/>
+  </g>
+  <g fill="#626e57" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="17" letter-spacing="2">
+    <text x="438" y="108">问题</text>
+    <text x="438" y="196">方法</text>
+    <text x="438" y="267">证据</text>
+  </g>
+</svg>
