@@ -76,7 +76,11 @@ plugins:
       pagination_per_page: 8
       pagination_format: "$link_first $link_previous ~2~ $link_next $link_last"
       draft: false
-  - tags
+  - tags:
+      filters:
+        include:
+          - blog/**
+      tags_name_property: categories
 
 hooks:
   - hooks/blog_metadata.py

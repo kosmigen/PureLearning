@@ -1,10 +1,6 @@
 ---
 title: 项目
 description: kosmigen 正在做的论文理解项目，以及有关项目开发的思考。
-tags:
-  - 项目管理
-  - 优质想法
-  - vibecoding
 ---
 
 # 正在做的项目

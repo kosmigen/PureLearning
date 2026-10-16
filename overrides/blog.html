@@ -3,14 +3,18 @@
 {% block container %}
   <div class="md-content" data-md-component="content">
     <div class="md-content__inner kb-blog-index">
-      <header class="md-typeset kb-blog-index__intro">
-        <p class="kb-blog-index__eyebrow">Writing archive</p>
-        <h1>{{ page.title }}</h1>
-        {% if page.meta.description %}
-          <p>{{ page.meta.description }}</p>
-        {% endif %}
-        {{ page.content }}
-      </header>
+      {% if not page.meta.hide_blog_intro %}
+        <header class="md-typeset kb-blog-index__intro">
+          <p class="kb-blog-index__eyebrow">Writing archive</p>
+          {% if "<h1" not in page.content %}
+            <h1>{{ page.title }}</h1>
+          {% endif %}
+          {% if page.meta.description %}
+            <p>{{ page.meta.description }}</p>
+          {% endif %}
+          {{ page.content }}
+        </header>
+      {% endif %}
 
       <ol class="kb-blog-index__posts" aria-label="博客文章">
         {% for post in posts %}
