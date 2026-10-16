@@ -1,11 +1,11 @@
 site_name: PureLearning
 site_description: Python、计算机基础与 AI 的学习笔记，以及做过的项目和写下的文章
-site_author: Pure Learning
-site_url: https://purelearning-dev.github.io/PureLearning/
-repo_url: https://github.com/PureLearning-dev/PureLearning
-repo_name: PureLearning-dev/PureLearning
+site_author: kosmigen
+site_url: https://kosmigen.github.io/PureLearning/
+repo_url: https://github.com/kosmigen/PureLearning
+repo_name: kosmigen/PureLearning
 edit_uri: edit/main/docs/
-copyright: Copyright &copy; 2026 - 2026 Pure Learning
+copyright: Copyright &copy; 2026 Pure Learning
 
 theme:
   name: material
