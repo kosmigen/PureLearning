@@ -64,7 +64,7 @@
       ('notes', '笔记', 'notes/'),
       ('projects', '项目', 'projects/'),
       ('blog', '文章', 'blog/'),
-      ('about', '关于', 'about/author/')
+      ('about', '关于', 'about/')
     ] %}
       {% set active = page and page.url and page.url.startswith(section ~ '/') %}
       <a href="{{ target | url }}" data-site-section="{{ section }}"{% if active %} class="is-active" aria-current="{{ 'page' if page.url == target else 'true' }}"{% endif %}>{{ title }}</a>
