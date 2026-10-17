@@ -47,10 +47,10 @@
         >
           {{- page.config.date.created.strftime("%B %d, %Y") | replace(" 0", " ") -}}
         </time>
-        {% if page.categories %}
+        {% if tags %}
           <span aria-hidden="true"> in </span>
-          {% for category in page.categories %}
-            <a class="kb-blog-post-meta__link" href="{{ category.url | url }}">{{ category.title }}</a>
+          {% for tag in tags %}
+            <a class="kb-blog-post-meta__link" href="{{ tag.url | url }}">{{ tag.name }}</a>
             {%- if loop.revindex > 1 %}, {% endif -%}
           {% endfor %}
         {% endif %}

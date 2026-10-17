@@ -36,12 +36,12 @@
     </dl>
   </section>
 
-  {% if page.categories %}
-    <section class="kb-blog-context__section" aria-labelledby="kb-blog-categories">
-      <h2 id="kb-blog-categories">文章分类</h2>
-      <ul class="kb-blog-context__categories">
-        {% for category in page.categories %}
-          <li><a href="{{ category.url | url }}">{{ category.title }}</a></li>
+  {% if tags %}
+    <section class="kb-blog-context__section" aria-labelledby="kb-blog-tags">
+      <h2 id="kb-blog-tags">Tags</h2>
+      <ul class="kb-blog-context__tags">
+        {% for tag in tags %}
+          <li><a href="{{ tag.url | url }}">{{ tag.name }}</a></li>
         {% endfor %}
       </ul>
     </section>

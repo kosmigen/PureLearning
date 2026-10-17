@@ -43,10 +43,14 @@
           </li>
         {% endif %}
 
-        {% if post.categories %}
+        {% set tag_config = config.plugins["material/tags"].config %}
+        {% set post_tags = post.meta.get(tag_config.tags_name_property, []) %}
+        {% if post_tags %}
           <li>
-            {% for category in post.categories %}
-              <a href="{{ category.url | url }}">{{ category.title }}</a>
+            {% for tag in post_tags %}
+              {% set slug = tag_config.tags_slugify(tag, tag_config.tags_slugify_separator) %}
+              {% set anchor = tag_config.tags_slugify_format.format(slug=slug) %}
+              <a href="{{ ('blog/tags/#' ~ anchor) | url }}">{{ tag }}</a>
               {%- if loop.revindex > 1 %}, {% endif -%}
             {% endfor %}
           </li>

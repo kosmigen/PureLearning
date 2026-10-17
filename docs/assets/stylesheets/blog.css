@@ -575,7 +575,7 @@
   margin: 0;
 }
 
-.kb-blog-context__categories {
+.kb-blog-context__tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
@@ -584,7 +584,7 @@
   list-style: none;
 }
 
-.kb-blog-context__categories a {
+.kb-blog-context__tags a {
   display: inline-flex;
   min-height: 1.75rem;
   align-items: center;
