@@ -1,5 +1,7 @@
-{# A compact, text-first excerpt for the blog index. #}
-<article class="md-post md-post--excerpt kb-blog-entry">
+{# Optional cover images share the excerpt's layout across blog views. #}
+{% set image = post.meta.get("image") %}
+{% set image_layout = "top" if post.meta.get("image_layout") == "top" else "side" %}
+<article class="md-post md-post--excerpt kb-blog-entry{% if image %} kb-blog-entry--image-{{ image_layout }}{% endif %}">
   <header class="kb-blog-entry__date">
     <time datetime="{{ post.config.date.created.isoformat() }}">
       <span class="kb-blog-entry__day">
@@ -18,8 +20,16 @@
   </header>
 
   <div class="kb-blog-entry__main">
-    <div class="md-post__content md-typeset kb-blog-entry__content">
-      {{ post.content }}
+    <div class="kb-blog-entry__body">
+      <div class="md-post__content md-typeset kb-blog-entry__content">
+        {{ post.content }}
+      </div>
+
+      {% if image %}
+        <a class="kb-blog-entry__cover" href="{{ post.url | url }}" aria-label="阅读全文：{{ post.post.title | e }}">
+          <img src="{{ image | url | e }}" alt="{{ (post.meta.get('image_alt') or '') | e }}" width="640" height="480" loading="lazy" decoding="async">
+        </a>
+      {% endif %}
     </div>
 
     <footer class="kb-blog-entry__footer">
