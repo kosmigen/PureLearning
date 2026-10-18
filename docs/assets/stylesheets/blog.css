@@ -130,7 +130,6 @@
   display: grid;
   margin: 0;
   padding: 0;
-  border-top: var(--rule-thin) solid var(--color-rule);
   list-style: none;
 }
 
@@ -138,6 +137,9 @@
   min-width: 0;
   margin: 0;
   padding: 0;
+}
+
+.kb-blog-index__entry:not(:last-child) {
   border-bottom: var(--rule-thin) solid var(--color-rule);
 }
 
