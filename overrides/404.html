@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+
+{# Markdown pages are rendered before static theme templates are built. #}
+{% set not_found = namespace(page=none) %}
+{% for file in pages if file.src_uri == "404.md" %}
+  {% set not_found.page = file.page %}
+{% endfor %}
+
+{% block htmltitle %}
+  <title>{{ (not_found.page.title if not_found.page else "页面未找到") | e }} - {{ config.site_name | e }}</title>
+{% endblock %}
+
+{% block extrahead %}
+  {{ super() }}
+  {% if not_found.page %}
+    {# Resolve Markdown links from their source page, even on missing nested URLs. #}
+    <base href="{{ not_found.page.url | url | e }}">
+  {% endif %}
+  <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block content %}
+  {% if not_found.page %}
+    {{ not_found.page.content }}
+  {% else %}
+    <h1>页面未找到</h1>
+  {% endif %}
+{% endblock %}
