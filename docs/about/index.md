@@ -1,6 +1,6 @@
 ---
 title: 本站介绍
-description: 关于这份 Python、项目与 AI 个人知识记录
+description: 网站建设详情
 ---
 
 # 关于这个网站
