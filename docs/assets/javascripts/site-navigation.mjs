@@ -1,16 +1,17 @@
 function updateSiteNavigation() {
   const navigation = document.querySelector(".kb-site-navigation");
-  const home = document.querySelector('.md-header [data-md-component="logo"]');
-  if (!navigation || !home) return;
+  if (!navigation) return;
 
-  const basePath = new URL(home.href).pathname;
   const currentPath = window.location.pathname;
-  const section = currentPath.startsWith(basePath)
-    ? currentPath.slice(basePath.length).split("/")[0]
-    : "";
+  const links = [...navigation.querySelectorAll("[data-site-section]")];
+  const matches = links
+    .map((link) => ({ link, path: new URL(link.href).pathname }))
+    .filter(({ path }) => currentPath.startsWith(path))
+    .sort((a, b) => b.path.length - a.path.length);
+  const activeLink = matches[0]?.link;
 
-  navigation.querySelectorAll("[data-site-section]").forEach((link) => {
-    const active = section === link.dataset.siteSection;
+  links.forEach((link) => {
+    const active = link === activeLink;
     link.classList.toggle("is-active", active);
     if (active) {
       link.setAttribute("aria-current", currentPath === new URL(link.href).pathname ? "page" : "true");

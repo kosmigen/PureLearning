@@ -77,6 +77,7 @@ body:has(.kb-home) .md-header__button[for="__drawer"] { display: none; }
   padding-block: .5rem;
   color: var(--color-muted);
   text-decoration: none;
+  white-space: nowrap;
 }
 .kb-site-navigation a::after {
   position: absolute;
@@ -122,13 +123,11 @@ body:has(.kb-home) .md-header__button[for="__drawer"] { display: none; }
     position: static;
     height: 2.3rem;
     justify-content: center;
-    gap: 2rem;
+    gap: clamp(.6rem, 3vw, 1.2rem);
+    padding-inline: .5rem;
     transform: none;
   }
 }
 @media (max-width: 39.99em) {
   .kb-site-header .md-header__inner { padding-inline: .25rem; }
-}
-@media (max-width: 23em) {
-  .kb-site-navigation { gap: 1.6rem; }
 }

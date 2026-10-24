@@ -2,6 +2,8 @@ ignore: 404.md
 
 nav:
   - 首页: index.md
+  - Python: notes/python
+  - C++: notes/cpp
   - 笔记: notes
   - 项目: projects
   - 文章: blog

@@ -60,13 +60,22 @@
     {% endif %}
   </nav>
   <nav class="kb-site-navigation" aria-label="主导航">
-    {% for section, title, target in [
+    {% set sections = [
+      ('python', 'Python', 'notes/python/'),
+      ('cpp', 'C++', 'notes/cpp/'),
       ('notes', '笔记', 'notes/'),
       ('projects', '项目', 'projects/'),
       ('blog', '文章', 'blog/'),
       ('about', '关于', 'about/')
     ] %}
-      {% set active = page and page.url and page.url.startswith(section ~ '/') %}
+    {% set current = namespace(target='') %}
+    {% for section, title, target in sections %}
+      {% if page and page.url and page.url.startswith(target) and target | length > current.target | length %}
+        {% set current.target = target %}
+      {% endif %}
+    {% endfor %}
+    {% for section, title, target in sections %}
+      {% set active = target == current.target %}
       <a href="{{ target | url }}" data-site-section="{{ section }}"{% if active %} class="is-active" aria-current="{{ 'page' if page.url == target else 'true' }}"{% endif %}>{{ title }}</a>
     {% endfor %}
   </nav>
