@@ -588,6 +588,17 @@
   .md-typeset .kb-blog-mobile-toc {
     display: none;
   }
+
+  .kb-blog-toc {
+    height: auto;
+  }
+
+  .kb-blog-toc > .md-sidebar__scrollwrap {
+    /* Keep a real sticky box: Material otherwise shrinks this inline height
+       as the footer enters the viewport, clipping the sidebar in place. */
+    height: auto !important;
+    max-height: calc(100dvh - var(--site-header-height) - 2.4rem - var(--space-2));
+  }
 }
 
 .kb-blog-context__back {
@@ -711,6 +722,16 @@
 }
 
 @media screen and (min-width: 76.25em) {
+  .kb-blog-sidebar {
+    height: auto;
+  }
+
+  .kb-blog-sidebar > .md-sidebar__scrollwrap {
+    /* Let the article boundary push the whole sidebar above the footer. */
+    height: auto !important;
+    max-height: calc(100dvh - var(--site-header-height) - 2.4rem - var(--space-2));
+  }
+
   .kb-blog-mobile-nav {
     display: none;
   }
