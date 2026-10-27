@@ -42,6 +42,54 @@ pre {
   width: calc(100% - 1.6rem);
   max-width: var(--width-reading);
   margin-inline: auto;
+  font-size: var(--text-doc-body);
+  line-height: var(--line-doc-body);
+}
+
+/* Document typography follows https://huggingface.co/docs/inference-providers/index. */
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: 600;
+}
+
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) h1 {
+  font-size: var(--text-doc-h1);
+  line-height: 32px;
+}
+
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) h2 {
+  font-size: var(--text-doc-h2);
+  line-height: 28px;
+}
+
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) h3 {
+  font-size: var(--text-doc-h3);
+  line-height: 28px;
+}
+
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) :is(h4, h5, h6) {
+  font-size: var(--text-doc-body);
+  line-height: 1.5;
+}
+
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) code {
+  font-size: var(--text-doc-code);
+  line-height: 20px;
+}
+
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) pre,
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) pre code {
+  font-size: var(--text-doc-code);
+  line-height: 1.8;
+}
+
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post)) table:not([class]) {
+  font-size: var(--text-doc-table);
+  line-height: 1.7142857143;
+}
+
+body:not(:has(.kb-home, .kb-blog-index, .kb-blog-post)) .md-sidebar .md-nav {
+  font-size: var(--text-doc-nav);
+  line-height: 1.5;
 }
 
 .md-typeset .md-button,

@@ -7,6 +7,13 @@ Caveat (footer particle signature)
 - Copyright 2014 The Caveat Project Authors.
 - The upstream copyright and SIL Open Font License are in caveat-OFL.txt.
 
+Charter (blog article reading font)
+- Source: https://practicaltypography.com/charter.html
+- Original, unmodified WOFF2 files from the Charter 210112 distribution.
+- Copyright 1989-1992, Bitstream Inc., Cambridge, MA.
+- BITSTREAM CHARTER is a registered trademark of Bitstream Inc.
+- The complete original license is in charter/LICENSE.txt.
+
 PureLearning Sans / PureLearning Serif (reading fonts)
 - Derived web subsets of Adobe Source Han Sans CN VF 2.005 and
   Source Han Serif CN VF 2.003 (Simplified Chinese regional glyphs).
@@ -20,7 +27,7 @@ PureLearning Sans / PureLearning Serif (reading fonts)
   shards, with hinting removed. Weights 250-900 remain variable.
 - Rebuild instructions and source hashes: scripts/subset_reading_fonts.py.
 - reading-sans/ is used for navigation, headings and technical prose;
-  reading-serif/ is used only for blog article prose.
+  reading-serif/ remains available as an alternative reading font.
 
 Maple Mono NF CN
 - Source: https://github.com/subframe7536/maple-font/releases/tag/v7.9
@@ -41,5 +48,5 @@ Xiaolai
 - Copyright 2020-2024 LXGW.
 - Copyright 2014 Nozomi Seto.
 
-All font assets are distributed under the SIL Open Font License 1.1. The
+All font assets except Charter are distributed under the SIL Open Font License 1.1. The
 complete license text is included in OFL-1.1.txt.
