@@ -130,4 +130,9 @@ body:has(.kb-home) .md-header__button[for="__drawer"] { display: none; }
 }
 @media (max-width: 39.99em) {
   .kb-site-header .md-header__inner { padding-inline: .25rem; }
+  .kb-site-navigation {
+    gap: clamp(.25rem, 1.6vw, .75rem);
+    padding-inline: .4rem;
+    font-size: .7rem;
+  }
 }

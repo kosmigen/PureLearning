@@ -1,5 +1,5 @@
 site_name: PureLearning
-site_description: Python、计算机基础与 AI 的学习笔记，以及做过的项目和写下的文章
+site_description: Python、Java、计算机基础与 AI 的学习笔记，以及项目实践和博客
 site_author: kosmigen
 site_url: https://kosmigen.github.io/PureLearning/
 repo_url: https://github.com/kosmigen/PureLearning
@@ -84,6 +84,7 @@ plugins:
 hooks:
   - hooks/blog_metadata.py
   - hooks/diagrams.py
+  - hooks/navigation_redirects.py
 
 markdown_extensions:
   - abbr

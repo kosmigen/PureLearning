@@ -4,7 +4,8 @@ nav:
   - 首页: index.md
   - Python: notes/python
   - Java: notes/java
-  - 笔记: notes
+  - 计算机基础: fundamentals
+  - AI: ai
   - 项目: projects
   - 博客: blog
   - 关于: about

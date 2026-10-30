@@ -1,17 +1,17 @@
 ---
-title: 通用笔记
-description: 计算机基础、AI 原理与工程实践的通用学习笔记
+title: 学习导航
+description: Python、Java、计算机基础、AI 与工程实践的学习入口
 ---
 
-# 通用笔记
+# 学习导航
 
-这里收录 Python、Java 学习和项目开发中共用的知识：计算机基础、AI 原理与工程实践。语言本身的语法、标准库和工具用法，分别在 [Python](python/index.md) 和 [Java](java/index.md) 栏目整理。
+这里汇总各个学习主题的入口。[Python](python/index.md) 和 [Java](java/index.md) 记录语言与标准库，计算机基础和 AI 已独立为顶部栏目，工程笔记归入项目栏目。
 
 <div class="grid cards" markdown>
 
-- [**计算机基础**](fundamentals/index.md) · 语言背后的通用概念：数据结构、系统、网络与数据库
-- [**AI**](ai/index.md) · 从机器学习基础到生成式 AI 的实际应用
-- [**工程笔记**](engineering/index.md) · 让代码可测试、可复现、可交付的那些做法
+- [**计算机基础**](../fundamentals/index.md) · 语言背后的通用概念：数据结构、系统、网络与数据库
+- [**AI**](../ai/index.md) · 从机器学习基础到生成式 AI 的实际应用
+- [**工程笔记**](../projects/engineering/index.md) · 让代码可测试、可复现、可交付的那些做法
 
 </div>
 
