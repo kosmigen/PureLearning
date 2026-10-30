@@ -14,6 +14,7 @@ function initialiseFooter(body = document) {
   let grains = [];
   let width = 0;
   let height = 0;
+  let signatureHeight = 0;
   let frame = 0;
   let lastTime = 0;
   let elapsed = 0;
@@ -53,8 +54,11 @@ function initialiseFooter(body = document) {
     lastTime = time;
     elapsed += step / 60;
     // One gentle eight-second breath moves the whole signature together.
-    floatY = Math.sin(elapsed * Math.PI * 2 / 8) * Math.min(14, height * 0.07);
+    floatY = Math.sin(elapsed * Math.PI * 2 / 8) * Math.min(14, signatureHeight * 0.07);
     const radius = Math.min(100, Math.max(48, width * 0.085));
+    const edge = 4;
+    const softEdge = 32;
+    const softEdgeX = Math.min(softEdge, width * 0.04);
 
     for (const grain of grains) {
       if (pointer.active) {
@@ -77,11 +81,31 @@ function initialiseFooter(body = document) {
         + Math.sin(elapsed * 0.9 + grain.homeX * 0.012) * motionScale;
       grain.vx += (targetX - grain.x) * 0.018 * step;
       grain.vy += (targetY - grain.y) * 0.018 * step;
+
+      // Ease particles back before they reach the canvas boundary. The guard
+      // below also contains a fast pointer flick or a long animation frame.
+      const drawY = grain.y + floatY;
+      grain.vx += (Math.max(0, softEdgeX - grain.x)
+        - Math.max(0, grain.x + grain.size - (width - softEdgeX))) * 0.12 * step;
+      grain.vy += (Math.max(0, softEdge - drawY)
+        - Math.max(0, drawY + grain.size - (height - softEdge))) * 0.12 * step;
       const damping = 0.88 ** step;
       grain.vx *= damping;
       grain.vy *= damping;
       grain.x += grain.vx * step;
       grain.y += grain.vy * step;
+
+      const maxX = width - edge - grain.size;
+      const minY = edge - floatY;
+      const maxY = height - edge - grain.size - floatY;
+      if (grain.x < edge || grain.x > maxX) {
+        grain.vx = Math.abs(grain.vx) * (grain.x < edge ? 0.35 : -0.35);
+        grain.x = Math.max(edge, Math.min(maxX, grain.x));
+      }
+      if (grain.y < minY || grain.y > maxY) {
+        grain.vy = Math.abs(grain.vy) * (grain.y < minY ? 0.35 : -0.35);
+        grain.y = Math.max(minY, Math.min(maxY, grain.y));
+      }
     }
 
     pointer.dx *= 0.7;
@@ -112,6 +136,7 @@ function initialiseFooter(body = document) {
     floatY = 0;
     width = stage.clientWidth;
     height = stage.clientHeight;
+    signatureHeight = height - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
     if (!width || !height) return;
     motionScale = Math.max(0.5, Math.min(1, width / 850));
 
@@ -125,7 +150,7 @@ function initialiseFooter(body = document) {
     mask.height = height;
     const textContext = mask.getContext("2d", { willReadFrequently: true });
     if (!textContext) return;
-    let size = height * 0.95;
+    let size = signatureHeight * 0.95;
     const font = () => `${weight} ${size}px ${family}`;
     textContext.font = font();
     size *= Math.min(1, width * 0.86 / textContext.measureText(text).width);

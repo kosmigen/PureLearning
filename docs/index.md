@@ -13,7 +13,7 @@ hide:
     <header class="kb-home-hero-copy" lang="en">
       <h1 id="kosmigen"><span class="kb-home-name">kosmigen</span></h1>
       <p class="kb-home-intro">Exploring AI agents, deep learning, and backend development.</p>
-      <p class="kb-home-note">Currently building a tool to make research papers easier to understand. Outside of coding, I enjoy reading and exercising.</p>
+      <p class="kb-home-note">I share notes on Python and Java, projects I build, and reflections along the way. Outside of coding, I enjoy reading and exercising.</p>
       <nav class="kb-home-actions" aria-label="Get to know me">
         <a href="about/author/">About me</a>
         <a href="https://github.com/kosmigen">GitHub</a>

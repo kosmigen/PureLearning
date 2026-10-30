@@ -5,7 +5,7 @@ description: 计算机基础、AI 原理与工程实践的通用学习笔记
 
 # 通用笔记
 
-这里收录 Python、C++ 学习和项目开发中共用的知识：计算机基础、AI 原理与工程实践。语言本身的语法、标准库和工具用法，分别在 [Python](python/index.md) 和 [C++](cpp/index.md) 栏目整理。
+这里收录 Python、Java 学习和项目开发中共用的知识：计算机基础、AI 原理与工程实践。语言本身的语法、标准库和工具用法，分别在 [Python](python/index.md) 和 [Java](java/index.md) 栏目整理。
 
 <div class="grid cards" markdown>
 

@@ -59,7 +59,8 @@
 }
 
 .kb-footer__explore ul {
-  gap: var(--space-2);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2) var(--space-5);
 }
 
 .kb-footer__explore a {
@@ -103,7 +104,11 @@
 
 .kb-footer__sand {
   position: relative;
+  box-sizing: content-box;
   height: clamp(6rem, 18vw, 11rem);
+  /* Reserve room inside the canvas for scattered particles, on both sides
+     of the signature, without increasing the lettering itself. */
+  padding-block: clamp(2rem, 4vw, 3rem);
   margin-top: var(--space-8);
   margin-bottom: var(--space-4);
   color: var(--color-ink);
