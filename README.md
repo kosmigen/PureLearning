@@ -8,6 +8,7 @@
 
 | 栏目 | 内容目录 | 访问路径 |
 | --- | --- | --- |
+| C | `docs/notes/c/` | `/PureLearning/notes/c/` |
 | Python | `docs/notes/python/` | `/PureLearning/notes/python/` |
 | Java | `docs/notes/java/` | `/PureLearning/notes/java/` |
 | 计算机基础 | `docs/fundamentals/` | `/PureLearning/fundamentals/` |

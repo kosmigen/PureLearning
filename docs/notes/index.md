@@ -1,11 +1,11 @@
 ---
 title: 学习导航
-description: Python、Java、计算机基础、AI 与工程实践的学习入口
+description: C、Python、Java、计算机基础、AI 与工程实践的学习入口
 ---
 
 # 学习导航
 
-这里汇总各个学习主题的入口。[Python](python/index.md) 和 [Java](java/index.md) 记录语言与标准库，计算机基础和 AI 已独立为顶部栏目，工程笔记归入项目栏目。
+这里汇总各个学习主题的入口。[C](c/index.md)、[Python](python/index.md) 和 [Java](java/index.md) 记录语言与标准库，计算机基础和 AI 已独立为顶部栏目，工程笔记归入项目栏目。
 
 <div class="grid cards" markdown>
 

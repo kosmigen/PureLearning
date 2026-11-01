@@ -64,7 +64,7 @@ body:has(.kb-home) .md-header__button[for="__drawer"] { display: none; }
   display: flex;
   height: 3.8rem;
   align-items: center;
-  gap: 1.65rem;
+  gap: clamp(.75rem, 2.1vw, 1.65rem);
   transform: translateX(-50%);
   font-family: var(--font-body);
   font-size: .75rem;

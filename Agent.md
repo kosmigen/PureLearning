@@ -48,10 +48,11 @@ node --check docs/assets/javascripts/site-navigation.mjs
 
 站点地址为 `https://kosmigen.github.io/PureLearning/`。站内链接必须考虑 `/PureLearning/` 这一部署前缀。
 
-顶部顺序：**Python → Java → 计算机基础 → AI → 项目 → 博客 → 关于**。
+顶部顺序：**C → Python → Java → 计算机基础 → AI → 项目 → 博客 → 关于**。
 
 | 栏目 | 内容目录 | 当前访问路径 |
 | --- | --- | --- |
+| C | `docs/notes/c/` | `/PureLearning/notes/c/` |
 | Python | `docs/notes/python/` | `/PureLearning/notes/python/` |
 | Java | `docs/notes/java/` | `/PureLearning/notes/java/` |
 | 计算机基础 | `docs/fundamentals/` | `/PureLearning/fundamentals/` |
@@ -60,7 +61,7 @@ node --check docs/assets/javascripts/site-navigation.mjs
 | 博客 | `docs/blog/` | `/PureLearning/blog/` |
 | 关于 | `docs/about/` | `/PureLearning/about/` |
 
-- Python、Java 保留在 `notes/` 下，这是当前约定；顶部栏目独立不要求物理目录也移到第一层。以后新增主题可按内容组织，再决定导航层级。
+- C、Python、Java 保留在 `notes/` 下，这是当前约定；顶部栏目独立不要求物理目录也移到第一层。以后新增主题可按内容组织，再决定导航层级。
 - 工程笔记位于 `docs/projects/engineering/`，属于项目栏目。
 - `docs/notes/index.md` 保留为学习导航页，仍能访问，但不再是顶部栏目。
 - `docs/index.md` 是首页，目前是个人介绍和插画，不是 SVG 学习路线图。
