@@ -14,20 +14,18 @@ Charter (blog article reading font)
 - BITSTREAM CHARTER is a registered trademark of Bitstream Inc.
 - The complete original license is in charter/LICENSE.txt.
 
-PureLearning Sans / PureLearning Serif (reading fonts)
-- Derived web subsets of Adobe Source Han Sans CN VF 2.005 and
-  Source Han Serif CN VF 2.003 (Simplified Chinese regional glyphs).
-- Sources:
+PureLearning Sans (navigation and technical reading font)
+- Derived web subsets of Adobe Source Han Sans CN VF 2.005
+  (Simplified Chinese regional glyphs).
+- Source:
   https://github.com/adobe-fonts/source-han-sans/blob/release/Variable/WOFF2/TTF/Subset/SourceHanSansCN-VF.ttf.woff2
-  https://github.com/adobe-fonts/source-han-serif/blob/release/Variable/WOFF2/TTF/Subset/SourceHanSerifCN-VF.ttf.woff2
-- Copyright 2014-2025 Adobe (Sans); Copyright 2017-2024 Adobe (Serif).
-- Reserved Font Name: Source. Derived font names are PureLearning Sans
-  and PureLearning Serif; original copyright and license remain embedded.
+- Copyright 2014-2025 Adobe.
+- Reserved Font Name: Source. The derived family is named PureLearning Sans;
+  original copyright and license remain embedded.
 - Complete source character coverage is split into Unicode-ranged WOFF2
   shards, with hinting removed. Weights 250-900 remain variable.
 - Rebuild instructions and source hashes: scripts/subset_reading_fonts.py.
-- reading-sans/ is used for navigation, headings and technical prose;
-  reading-serif/ remains available as an alternative reading font.
+- reading-sans/ is used for navigation, headings and technical prose.
 
 Maple Mono NF CN
 - Source: https://github.com/subframe7536/maple-font/releases/tag/v7.9
@@ -35,18 +33,12 @@ Maple Mono NF CN
   coverage; font hinting and unused metadata were removed for web delivery.
 - Copyright 2022 The Maple Mono Project Authors.
 
-Excalifont
+Excalifont (embedded in assets/images/readme-logo.svg)
 - Source: https://github.com/excalidraw/excalidraw/tree/master/packages/excalidraw/fonts/Excalifont
-- The Latin webfont subset is distributed unchanged.
+- The repository README logo embeds a small Latin subset. No standalone
+  Excalifont webfont is used by the website.
 - Copyright (c) 2024 by Excalidraw. All rights reserved.
 - Excalifont modifications by Jan Filipek / DizajnDesign.
-
-Xiaolai
-- Source: https://github.com/lxgw/kose-font/releases/tag/v3.126
-- The local webfont is a WOFF2 subset containing the characters used by the
-  homepage knowledge map.
-- Copyright 2020-2024 LXGW.
-- Copyright 2014 Nozomi Seto.
 
 All font assets except Charter are distributed under the SIL Open Font License 1.1. The
 complete license text is included in OFL-1.1.txt.
