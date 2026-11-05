@@ -1,4 +1,4 @@
-/* Shared visual tokens for light and dark themes. */
+/* Neutral surfaces with VitePress-inspired blue accents, shared by both themes. */
 @import url("./reading-fonts.css");
 
 @font-face {
@@ -20,22 +20,6 @@
   font-weight: 400;
 }
 
-@font-face {
-  font-family: "Excalifont";
-  src: url("../fonts/excalifont-latin.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Xiaolai";
-  src: url("../fonts/xiaolai-map.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 400;
-}
-
 :root {
   --font-display: "Maple Mono NF CN", ui-monospace, monospace;
   --font-body: "PureLearning Sans", "PingFang SC", "Microsoft YaHei",
@@ -43,33 +27,20 @@
   --font-code: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
     "Liberation Mono", monospace;
   --font-blog: "Charter", serif;
-  --font-sketch: "Excalifont", "Xiaolai", "Maple Mono NF CN", cursive;
-  --font-signature: "Caveat", "Excalifont", cursive;
+  --font-signature: "Caveat", cursive;
 
-  --color-paper: #fcfbf8;
-  --color-canvas: #f7f6f1;
-  --color-surface: #f0f1e9;
-  --color-ink: #272824;
-  --color-muted: #6e7068;
-  --color-faint: #777a70;
-  --color-rule: #e5e4dd;
-  --color-rule-strong: #b5bbad;
-  --color-pencil: #858e7a;
-  --color-grid-dot: #d3d6cb;
-  --color-accent: #6c7960;
-  --color-accent-strong: #4d6140;
-  --color-accent-ink: #fcfbf8;
-  --color-accent-soft: #edf0e6;
-  --color-focus: #657d51;
-  --color-status-active: #a77835;
-  --color-status-done: #638653;
-  --color-node-cool-paper: #edf0e6;
-  --color-node-cool-border: #8d9c7e;
-  --color-node-warm-paper: #f2eee7;
-  --color-node-warm-border: #bbae90;
-  --color-node-neutral-paper: #f5f4ef;
-  --color-node-neutral-border: #aeb5a4;
-  --color-node-shadow: #cdd1c5;
+  --color-paper: #ffffff;
+  --color-surface: #f3f4f6;
+  --color-ink: #24262b;
+  --color-muted: #62666d;
+  --color-faint: #70757d;
+  --color-rule: #e5e7eb;
+  --color-rule-strong: #b8bdc5;
+  --color-accent: #5672cd;
+  --color-accent-strong: #3451b2;
+  --color-accent-ink: #ffffff;
+  --color-accent-soft: rgba(100, 108, 255, 0.14);
+  --color-focus: #5672cd;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -80,9 +51,7 @@
   --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
-  --space-16: 4rem;
   --space-20: 5rem;
-  --space-24: 6rem;
 
   --text-xs: 0.68rem;
   --text-sm: 0.78rem;
@@ -98,58 +67,34 @@
   --text-doc-table: 14.7px;
   --text-doc-nav: 15.2px;
   --line-doc-body: 1.75;
-  --text-blog-title: clamp(1.2rem, 1vw + 1rem, 1.6rem);
-  --text-blog-lead-title: clamp(1.55rem, 1.5vw + 1rem, 1.9rem);
   --text-blog-reading: var(--text-reading);
   --text-blog-index-title: clamp(1.06rem, 0.55vw + 0.96rem, 1.3rem);
   --text-blog-display: clamp(1.4rem, 1.6vw, 1.6rem);
-  --text-section: clamp(1.45rem, 2.4vw, 2rem);
-  --text-display: clamp(2.05rem, 4.4vw, 3.1rem);
 
   --width-reading: 40rem;
   --width-blog-post: 36rem;
   --width-diagram-horizontal: 48rem;
-  --measure-blog-title: 20em;
 
   --radius-xs: 0.15rem;
   --radius-sm: 0.35rem;
-  --radius-sketch-a: 0.4rem 0.75rem 0.45rem 0.65rem;
-  --radius-sketch-b: 0.7rem 0.4rem 0.75rem 0.45rem;
   --rule-thin: 0.05rem;
-  --rule-sketch: 0.075rem;
   --rule-focus: 0.125rem;
   --underline-offset: 0.14rem;
-  --dur-micro: 120ms;
   --dur-short: 220ms;
-  --dur-long: 420ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 [data-md-color-scheme="slate"] {
-  --color-paper: #20221f;
-  --color-canvas: #262924;
-  --color-surface: #2b3027;
-  --color-ink: #eeeee6;
-  --color-muted: #b1b4a9;
-  --color-faint: #9fa594;
-  --color-rule: #3c4037;
-  --color-rule-strong: #646e5c;
-  --color-pencil: #9ba98b;
-  --color-grid-dot: #4b5542;
-  --color-accent: #b1bea0;
-  --color-accent-strong: #c5d6af;
-  --color-accent-ink: #20221f;
-  --color-accent-soft: #2e3828;
-  --color-focus: #a3bc8f;
-  --color-status-active: #c7a66c;
-  --color-status-done: #a5c58e;
-  --color-node-cool-paper: #2e3828;
-  --color-node-cool-border: #81966c;
-  --color-node-warm-paper: #302e29;
-  --color-node-warm-border: #a49575;
-  --color-node-neutral-paper: #282d25;
-  --color-node-neutral-border: #6b7760;
-  --color-node-shadow: #161a13;
+  --color-paper: #1b1d21;
+  --color-surface: #292d33;
+  --color-ink: #edf0f4;
+  --color-muted: #b3b8c2;
+  --color-faint: #9aa2ae;
+  --color-rule: #383e47;
+  --color-rule-strong: #697383;
+  --color-accent: #a8b1ff;
+  --color-accent-strong: #a8b1ff;
+  --color-accent-ink: #1b1d21;
+  --color-accent-soft: rgba(100, 108, 255, 0.16);
+  --color-focus: #a8b1ff;
 }

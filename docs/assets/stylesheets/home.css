@@ -4,7 +4,7 @@
   --home-ink: var(--color-ink);
   --home-muted: var(--color-muted);
   --home-rule: var(--color-rule);
-  --home-green: var(--color-accent);
+  --home-accent: var(--color-accent);
 }
 
 .md-main:has(.kb-home) > .md-main__inner {
@@ -78,7 +78,7 @@
   text-decoration: none;
   text-underline-offset: .3rem;
 }
-.md-typeset .kb-home-actions a:hover { color: var(--home-green); text-decoration: underline; }
+.md-typeset .kb-home-actions a:hover { color: var(--home-accent); text-decoration: underline; }
 .md-typeset .kb-home-actions a {
   font-size: .75rem;
   text-decoration: underline;
