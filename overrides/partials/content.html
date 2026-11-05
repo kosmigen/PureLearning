@@ -19,69 +19,7 @@
 
 {% if is_blog_post %}
   {% set post_meta %}
-    <ul class="kb-blog-post-meta" aria-label="文章元数据">
-      {% if page.authors %}
-        <li class="kb-blog-post-meta__item kb-blog-post-meta__authors">
-          {% for author in page.authors %}
-            {% if author.url %}
-              <a class="kb-blog-post-meta__author" href="{{ author.url | url }}" title="{{ author.description }}">
-                <img class="kb-blog-post-meta__avatar" src="{{ author.avatar | url }}" alt="">
-                <span>{{ author.name }}</span>
-              </a>
-            {% else %}
-              <span class="kb-blog-post-meta__author" title="{{ author.description }}">
-                <img class="kb-blog-post-meta__avatar" src="{{ author.avatar | url }}" alt="">
-                <span>{{ author.name }}</span>
-              </span>
-            {% endif %}
-            {%- if loop.revindex > 1 %}<span aria-hidden="true">、</span>{% endif -%}
-          {% endfor %}
-        </li>
-      {% endif %}
-
-      <li class="kb-blog-post-meta__item">
-        <time
-          datetime="{{ page.config.date.created.isoformat() }}"
-          aria-label="发布于 {{ page.config.date.created | date }}"
-          title="发布于 {{ page.config.date.created | date }}"
-        >
-          {{- page.config.date.created.strftime("%B %d, %Y") | replace(" 0", " ") -}}
-        </time>
-        {% if tags %}
-          <span aria-hidden="true"> in </span>
-          {% for tag in tags %}
-            <a class="kb-blog-post-meta__link" href="{{ tag.url | url }}">{{ tag.name }}</a>
-            {%- if loop.revindex > 1 %}, {% endif -%}
-          {% endfor %}
-        {% endif %}
-      </li>
-
-      {% if page.config.date.updated %}
-        <li class="kb-blog-post-meta__item">
-          <time
-            datetime="{{ page.config.date.updated.isoformat() }}"
-            aria-label="更新于 {{ page.config.date.updated | date }}"
-            title="更新于 {{ page.config.date.updated | date }}"
-          >
-            Updated {{ page.config.date.updated.strftime("%B %d, %Y") | replace(" 0", " ") }}
-          </time>
-        </li>
-      {% endif %}
-
-      {% if page.config.readtime %}
-        {% set time = page.config.readtime %}
-        <li class="kb-blog-post-meta__item" aria-label="预计阅读时间 {{ time }} 分钟" title="预计阅读时间">
-          {{ time }} min read
-        </li>
-      {% endif %}
-
-      {% if page.meta.word_count %}
-        <li class="kb-blog-post-meta__item" aria-label="正文约 {{ page.meta.word_count }} 字" title="正文字数">
-          {{ page.meta.word_count }} words
-        </li>
-      {% endif %}
-    </ul>
-    {% include "partials/blog-post-toc.html" %}
+    {% include "partials/blog-post-meta.html" %}
   {% endset %}
 {% endif %}
 

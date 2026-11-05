@@ -1,0 +1,56 @@
+<div class="kb-blog-post-header">
+  <ul class="kb-blog-post-meta" aria-label="文章信息">
+    {% if page.authors %}
+      <li class="kb-blog-post-meta__item kb-blog-post-meta__authors">
+        {% for author in page.authors %}
+          {% if author.url %}
+            <a class="kb-blog-post-meta__author" href="{{ author.url | url }}">
+              <img class="kb-blog-post-meta__avatar" src="{{ author.avatar | url }}" alt="" width="24" height="24">
+              <span>{{ author.name }}</span>
+            </a>
+          {% else %}
+            <span class="kb-blog-post-meta__author">
+              <img class="kb-blog-post-meta__avatar" src="{{ author.avatar | url }}" alt="" width="24" height="24">
+              <span>{{ author.name }}</span>
+            </span>
+          {% endif %}
+          {%- if loop.revindex > 1 %}<span aria-hidden="true">、</span>{% endif -%}
+        {% endfor %}
+      </li>
+    {% endif %}
+
+    <li class="kb-blog-post-meta__item">
+      <time datetime="{{ page.config.date.created.isoformat() }}" title="发布日期">{{ page.config.date.created | date }}</time>
+    </li>
+
+    {% if page.meta.word_count is defined %}
+      <li class="kb-blog-post-meta__item" title="正文字数">约 {{ page.meta.word_count }} 字</li>
+    {% endif %}
+    {% if page.config.readtime %}
+      <li class="kb-blog-post-meta__item" title="预计阅读时间">约 {{ page.config.readtime }} 分钟</li>
+    {% endif %}
+
+    {% if page.config.date.updated %}
+      <li class="kb-blog-post-meta__item">
+        <time datetime="{{ page.config.date.updated.isoformat() }}" title="更新日期">更新于 {{ page.config.date.updated | date }}</time>
+      </li>
+    {% endif %}
+  </ul>
+
+  {% for author in page.authors %}
+    {% if author.description %}
+      <blockquote class="kb-blog-post-signature" aria-label="{{ author.name | e }} 的简介">
+        <p>{{ author.description }}</p>
+      </blockquote>
+    {% endif %}
+  {% endfor %}
+
+  {% if tags %}
+    <ul class="kb-blog-post-tags" aria-label="文章标签">
+      {% for tag in tags %}
+        <li><a href="{{ tag.url | url }}">{{ tag.name }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% include "partials/blog-post-toc.html" %}

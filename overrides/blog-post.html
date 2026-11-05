@@ -1,17 +1,9 @@
-{# Keep Material's three-column shell, with article context on the left. #}
+{# Reading layout: article plus an optional right-hand table of contents. #}
 {% extends "main.html" %}
 
 {% block site_nav %}
-  <div class="md-sidebar md-sidebar--primary kb-blog-sidebar" data-md-component="sidebar" data-md-type="navigation">
-    <div class="md-sidebar__scrollwrap">
-      <div class="md-sidebar__inner">
-        <div class="kb-blog-mobile-nav">
-          {% include "partials/nav.html" %}
-        </div>
-        {% include "partials/blog-post-sidebar.html" %}
-      </div>
-    </div>
-  </div>
+  {% set first = page.toc | first %}
+  {% if "toc" not in page.meta.get("hide", []) and first and (first.level != 1 or first.children) %}
   <div class="md-sidebar md-sidebar--secondary kb-blog-toc" data-md-component="sidebar" data-md-type="toc">
     <div class="md-sidebar__scrollwrap">
       <div class="md-sidebar__inner">
@@ -19,4 +11,5 @@
       </div>
     </div>
   </div>
+  {% endif %}
 {% endblock %}
