@@ -3,9 +3,13 @@ function updateSiteNavigation() {
   if (!navigation) return;
 
   const currentPath = window.location.pathname;
+  const siteRoot = navigation.dataset.siteRoot || document.baseURI;
   const links = [...navigation.querySelectorAll("[data-site-section]")];
   const matches = links
-    .map((link) => ({ link, path: new URL(link.href).pathname }))
+    .flatMap((link) => {
+      const paths = link.dataset.sitePaths?.split(/\s+/).filter(Boolean) || [link.href];
+      return paths.map((path) => ({ link, path: new URL(path, siteRoot).pathname }));
+    })
     .filter(({ path }) => currentPath.startsWith(path))
     .sort((a, b) => b.path.length - a.path.length);
   const activeLink = matches[0]?.link;

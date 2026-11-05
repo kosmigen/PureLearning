@@ -59,26 +59,25 @@
       </div>
     {% endif %}
   </nav>
-  <nav class="kb-site-navigation" aria-label="主导航">
+  <nav class="kb-site-navigation" aria-label="主导航" data-site-root="{{ config.site_url | e }}">
     {% set sections = [
-      ('c', 'C', 'notes/c/'),
-      ('python', 'Python', 'notes/python/'),
-      ('java', 'Java', 'notes/java/'),
-      ('fundamentals', '计算机基础', 'fundamentals/'),
-      ('ai', 'AI', 'ai/'),
-      ('projects', '项目', 'projects/'),
-      ('blog', '博客', 'blog/'),
-      ('about', '关于', 'about/')
+      ('blog', '博客', 'blog/', ['blog/']),
+      ('docs', '文档', 'notes/', ['notes/', 'fundamentals/', 'ai/']),
+      ('projects', '项目', 'projects/', ['projects/']),
+      ('about', '关于', 'about/', ['about/'])
     ] %}
-    {% set current = namespace(target='') %}
-    {% for section, title, target in sections %}
-      {% if page and page.url and page.url.startswith(target) and target | length > current.target | length %}
-        {% set current.target = target %}
-      {% endif %}
+    {% set current = namespace(section='', length=0) %}
+    {% for section, title, target, paths in sections %}
+      {% for path in paths %}
+        {% if page and page.url and page.url.startswith(path) and path | length > current.length %}
+          {% set current.section = section %}
+          {% set current.length = path | length %}
+        {% endif %}
+      {% endfor %}
     {% endfor %}
-    {% for section, title, target in sections %}
-      {% set active = target == current.target %}
-      <a href="{{ target | url }}" data-site-section="{{ section }}"{% if active %} class="is-active" aria-current="{{ 'page' if page.url == target else 'true' }}"{% endif %}>{{ title }}</a>
+    {% for section, title, target, paths in sections %}
+      {% set active = section == current.section %}
+      <a href="{{ target | url }}" data-site-section="{{ section }}" data-site-paths="{{ paths | join(' ') | e }}"{% if active %} class="is-active" aria-current="{{ 'page' if page.url == target else 'true' }}"{% endif %}>{{ title }}</a>
     {% endfor %}
   </nav>
   {% if "navigation.tabs.sticky" in features %}
