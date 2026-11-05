@@ -1,18 +1,14 @@
 ---
 title: 项目
-description: kosmigen 正在做的论文理解项目，以及有关项目开发的思考。
+description: kosmigen 的项目与实验，以及各项目的说明网站。
+template: projects.html
+hide:
+  - navigation
+  - toc
+projects:
+  - id: pygit
+    name: PyGit
+    url: https://kosmigen.github.io/PyGit/
+    description: 用 Python 从零实现一个小型版本控制工具，探索 Git 的对象存储、暂存区与提交历史，并记录实现过程。
+    status: 进行中
 ---
-
-# 正在做的项目
-
-## 论文理解项目 {#paper-understanding}
-
-**进行中**
-
-我正在做一个帮助更好理解论文内容的项目。这里会记录它的目标、开发过程和逐步形成的思考。
-
-## 与开发有关的思考
-
-- [工程笔记](engineering/index.md)：记录测试、类型、打包、依赖管理与可复现性等工程实践。
-- [使用 AI 及相关产品进行开发的最佳实践](../blog/posts/2026-8/使用AI及相关产品进行开发的最佳实践.md)：从需求出发，寻找已有基础，再进行适配与验证。
-- [最近的学习好像没有太多的收获](../blog/posts/2026-8/最近的学习好像没有太多的收获.md)：学习时长之外，怎样留下可验证的产出。

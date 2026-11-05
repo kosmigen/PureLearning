@@ -1,0 +1,30 @@
+<section class="kb-projects" aria-label="项目展示">
+  {% for project in projects %}
+    <wa-card class="kb-project-card" id="{{ project.id | e }}" role="article" aria-labelledby="{{ project.id | e }}-title" appearance="outlined" with-media with-footer>
+      {% if project.url %}
+        <div class="kb-project-card__preview" slot="media" data-preview-state="loading" aria-busy="true">
+          <span class="kb-project-card__preview-message" role="status">首页预览加载中…</span>
+          <img src="{{ project.preview_url | e }}" alt="{{ project.name | e }} 网站首页预览" width="1200" height="750" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+        </div>
+      {% else %}
+        <div class="kb-project-card__preview" slot="media">
+          <span class="kb-project-card__preview-message">网站上线后显示首页预览</span>
+        </div>
+      {% endif %}
+      <div class="kb-project-card__heading">
+        <h2 id="{{ project.id | e }}-title">{{ project.name | e }}</h2>
+        {% if project.status %}
+          <wa-badge variant="neutral" appearance="outlined" pill>{{ project.status | e }}</wa-badge>
+        {% endif %}
+        <p class="kb-project-card__description">{{ project.description | e }}</p>
+      </div>
+      {% if project.url %}
+        <a class="kb-project-card__visit" slot="footer" href="{{ project.url | e }}" target="_blank" rel="noopener noreferrer" aria-label="前往 {{ project.name | e }} 网站（新窗口打开）">
+          前往网站 <span aria-hidden="true">↗</span>
+        </a>
+      {% else %}
+        <span class="kb-project-card__pending" slot="footer">前往网站 · 待上线</span>
+      {% endif %}
+    </wa-card>
+  {% endfor %}
+</section>

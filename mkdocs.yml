@@ -1,5 +1,5 @@
 site_name: PureLearning
-site_description: C、Python、Java、计算机基础与 AI 的学习笔记，以及项目实践和博客
+site_description: C、Python、Java、计算机基础与 AI 的技术文档，以及项目实践和博客
 site_author: kosmigen
 site_url: https://kosmigen.github.io/PureLearning/
 repo_url: https://github.com/kosmigen/PureLearning
@@ -83,6 +83,7 @@ plugins:
 
 hooks:
   - hooks/blog_metadata.py
+  - hooks/project_cards.py
   - hooks/diagrams.py
   - hooks/navigation_redirects.py
 
@@ -120,12 +121,14 @@ markdown_extensions:
 extra_css:
   - assets/stylesheets/extra.css
   - assets/stylesheets/site.css
-  - assets/stylesheets/home-map.css
+  - assets/stylesheets/home.css
+  - assets/stylesheets/projects.css
   - assets/stylesheets/blog.css
   - assets/stylesheets/footer.css
 
 extra_javascript:
   - assets/javascripts/site-navigation.mjs
   - assets/javascripts/home-animation.mjs
+  - assets/javascripts/projects.mjs
   - assets/javascripts/diagram-drag.mjs
   - assets/javascripts/footer-motion.mjs
