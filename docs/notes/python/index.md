@@ -1,8 +1,6 @@
 ---
 title: Python
-description: 语言本身与标准库的学习笔记
+description: Python 核心内容和相关生态
 ---
 
-# Python
 
-这一部分记 Python 语言本身：语法与数据模型、标准库、类型注解、异步与并发。重点不是罗列语法条目，而是把「我知道」推到「我能写出来并且跑对」。
