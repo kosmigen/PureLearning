@@ -25,5 +25,3 @@ description: 编程语言、计算机基础、AI，以及框架与工具的技�
 - [**AI**](../ai/index.md) · 机器学习、神经网络与生成式 AI 的概念和实践
 
 </div>
-
-项目中的测试、依赖管理与可复现性等内容，收录在[工程笔记](../projects/engineering/index.md)中。

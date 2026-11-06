@@ -63,8 +63,7 @@ node --check docs/assets/javascripts/site-navigation.mjs
 | 文档 / AI | `docs/ai/` | `/PureLearning/ai/` |
 
 - C、Python、Java、计算机基础和 AI 都属于“技术文档”。三门语言保留在 `notes/` 下，基础和 AI 保留当前目录；导航合并不移动文件或修改已有网址。以后框架与工具文档可继续放在 `notes/` 下，并按需加入导航。
-- 工程笔记位于 `docs/projects/engineering/`，属于项目栏目。
-- `docs/projects/index.md` 是隐藏左右侧栏的项目卡片展示页。使用 Web Awesome 卡片，省略页内标题和开发记录。项目列表在该文件的 `projects` 元数据中维护；每项的 `url` 同时用于自动首页缩略图和网站入口，新增示例见 `handbook/网站内容编辑手册.md`；工程笔记子页面保留文档布局。
+- `docs/projects/index.md` 是隐藏左右侧栏的项目卡片展示页。使用 Web Awesome 卡片，省略页内标题和开发记录。项目列表在该文件的 `projects` 元数据中维护；每项的 `url` 同时用于自动首页缩略图和网站入口，新增示例见 `handbook/网站内容编辑手册.md`。项目栏目只维护项目展示；技术实践文档按主题放入“技术文档”。
 - `docs/notes/index.md` 是顶部“文档”的入口页，标题为“技术文档”。
 - `docs/index.md` 是首页，目前是个人介绍和插画，不是 SVG 学习路线图。
 - 普通知识文档按主题组织；博客用于完整文章、随笔。不要把所有普通文档都假定为 `docs/notes/` 下的内容。
@@ -99,7 +98,6 @@ node --check docs/assets/javascripts/site-navigation.mjs
 | --- | --- |
 | `notes/fundamentals/` | `fundamentals/` |
 | `notes/ai/` | `ai/` |
-| `notes/engineering/` | `projects/engineering/` |
 
 跳转页包含 canonical、JavaScript 跳转、meta refresh 和普通链接。JavaScript 跳转保留查询参数和锚点；无 JavaScript 时的回退只保证到达新页面。新增迁移时检查嵌套页面、部署前缀及旧书签，不直接删除兼容入口。
 

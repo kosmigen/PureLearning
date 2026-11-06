@@ -12,7 +12,6 @@ from urllib.parse import urljoin
 _MOVED_SECTIONS = {
     "notes/fundamentals": "fundamentals",
     "notes/ai": "ai",
-    "notes/engineering": "projects/engineering",
 }
 
 
