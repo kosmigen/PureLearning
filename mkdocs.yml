@@ -127,6 +127,7 @@ extra_css:
   - assets/stylesheets/projects.css
   - assets/stylesheets/blog.css
   - assets/stylesheets/footer.css
+  - assets/stylesheets/not-found.css
 
 extra_javascript:
   - assets/javascripts/site-navigation.mjs

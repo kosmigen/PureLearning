@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
 {# Markdown pages are rendered before static theme templates are built. #}
-{% set not_found = namespace(page=none) %}
+{% set not_found = namespace(page=page if page and page.file.src_uri == "404.md" else none) %}
 {% for file in pages if file.src_uri == "404.md" %}
   {% set not_found.page = file.page %}
 {% endfor %}
@@ -25,4 +25,15 @@
   {% else %}
     <h1>页面未找到</h1>
   {% endif %}
+  <nav class="kb-not-found__actions" aria-label="404 页面操作">
+    <a class="kb-not-found__home" href="{{ nav.homepage.url | url }}">← 返回首页</a>
+    <a class="kb-not-found__provider" href="https://wx.gtimg.com/core/404.html" target="_blank" rel="noopener noreferrer">打开腾讯公益页面 ↗</a>
+  </nav>
 {% endblock %}
+
+{% block header %}{% endblock %}
+{% block tabs %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block site_nav %}{% endblock %}
+{# The independent 404 has no Material header/search/footer components to mount. #}
+{% block scripts %}{% endblock %}
