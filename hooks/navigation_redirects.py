@@ -17,6 +17,18 @@ _MOVED_SECTIONS = {
     "notes/java": "notes/Java",
 }
 
+# Section landing pages that became regular pages so their directories render
+# as expandable groups instead of links.
+_MOVED_SECTION_PAGES = {
+    "notes/Java": "notes/Java/intro",
+    "notes/Java/basics": "notes/Java/basics/overview",
+    "notes/Java/advanced": "notes/Java/advanced/overview",
+    "notes/Java/framework": "notes/Java/framework/overview",
+    "notes/Java/third-party": "notes/Java/third-party/overview",
+    "notes/Java/basics/io/overview": "notes/Java/basics/io",
+    "notes/Java/basics/io/1.File对象": "notes/Java/basics/io",
+}
+
 _RETIRED_FUNDAMENTALS = {
     "": "notes",
     "algorithms": "notes",
@@ -74,6 +86,14 @@ def on_post_build(*, config):
         for page in current_dir.rglob("*.html"):
             old_page = site_dir / previous / page.relative_to(current_dir)
             _write_redirect(old_page, page, config=config)
+
+    for previous, current in _MOVED_SECTION_PAGES.items():
+        for old in (previous, previous.replace("notes/Java", "notes/java", 1)):
+            _write_redirect(
+                site_dir / old / "index.html",
+                site_dir / current / "index.html",
+                config=config,
+            )
 
     for previous in ("fundamentals", "notes/fundamentals"):
         for topic, current in _RETIRED_FUNDAMENTALS.items():

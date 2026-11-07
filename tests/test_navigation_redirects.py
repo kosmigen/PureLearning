@@ -56,6 +56,24 @@ class NavigationRedirectTests(unittest.TestCase):
             for topic in ("algorithms", "databases", "networks", "operating-systems"):
                 self.assertRedirect(f"{prefix}/{topic}/index.html", "notes/")
 
+    def test_moved_java_section_pages_redirect_to_overviews(self):
+        pages = {
+            "notes/Java/index.html": "notes/Java/intro/",
+            "notes/Java/basics/index.html": "notes/Java/basics/overview/",
+            "notes/Java/advanced/index.html": "notes/Java/advanced/overview/",
+            "notes/Java/framework/index.html": "notes/Java/framework/overview/",
+            "notes/Java/third-party/index.html": "notes/Java/third-party/overview/",
+            "notes/Java/basics/io/overview/index.html": "notes/Java/basics/io/",
+            "notes/Java/basics/io/1.File对象/index.html": "notes/Java/basics/io/",
+        }
+        for current in pages.values():
+            self.page(f"{current}index.html")
+
+        on_post_build(config=self.config)
+
+        for previous, current in pages.items():
+            self.assertRedirect(previous, current)
+
     def test_case_aliases_preserve_current_pages(self):
         for name in ("C", "Python", "Java", "AI"):
             canonical = self.page(f"notes/{name}/index.html", f"Current {name}")

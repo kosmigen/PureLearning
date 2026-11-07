@@ -13,7 +13,7 @@ description: 编程语言、计算机基础、AI，以及框架与工具的技�
 
 - [**C**](C/index.md)
 - [**Python**](Python/index.md)
-- [**Java**](Java/index.md)
+- [**Java**](Java/intro.md)
 
 </div>
 
