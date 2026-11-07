@@ -1,6 +1,6 @@
 ---
 title: Java
-description: Java 的由来、发展历史、运行方式与关键字速查，以 JDK 21 为示例基准。
+description: Java 的由来、发展历史、第一个程序与编译运行过程、JDK/JRE/JVM 的关系和关键字速查，以 JDK 21 为示例基准。
 ---
 
 # Java
@@ -8,6 +8,8 @@ description: Java 的由来、发展历史、运行方式与关键字速查，�
 Java 是一种静态类型、以类和对象为主要组织方式的通用编程语言。学习 Java，既需要掌握语言语法，也需要理解标准库和 Java 虚拟机提供的运行环境。
 
 本栏目以 **JDK 21** 为示例基准，使用正式发布的语言特性。每个专题先解释概念，再通过语法、示例和运行结果说明用法。
+
+教程结构、主要特性、C++ 对比、数据类型、Unicode 与运算符等语言层面的概念见 [Java 概述](overview.md)。
 
 ## Java 的由来
 
@@ -27,22 +29,6 @@ Java 的一个重要设计目标是让程序能够跨平台运行。编译器先
 | Java 21，2023 年 | 虚拟线程、记录模式、模式匹配 switch 等特性正式发布 |
 
 学习时需要区分语言版本和具体的 JDK 发行版。使用同一语言版本的不同发行版，也可能有不同的支持周期和许可条件。
-
-## Java 可以做什么
-
-Java 常见于后端服务、企业应用、数据处理和基础设施软件。标准库提供集合、文件、网络和并发等能力，框架与第三方库则在此基础上提供更完整的应用开发支持。
-
-Java 的静态类型和编译检查便于在运行前发现一部分错误；垃圾回收简化了对象内存管理。同时，启动时间、内存占用、依赖管理和运行时诊断也是实际开发中需要关注的内容。
-
-## JDK、运行环境与 JVM
-
-| 名称 | 作用 |
-| --- | --- |
-| JVM | 执行 Java 字节码，提供类加载、运行时内存管理等机制 |
-| Java 运行环境 | JVM 与运行程序需要的标准库、配置等资源 |
-| JDK | 开发工具包，包含运行环境、`javac` 编译器和诊断工具等 |
-
-JRE 是 Java Runtime Environment 的缩写。理解概念时可以用它表示运行环境；安装和发布时应查看具体发行版的打包方式，也可以使用 `jlink` 构建应用需要的运行时。
 
 ## 第一个 Java 程序
 
@@ -69,7 +55,58 @@ java Main
 Start learning Java.
 ```
 
-`javac` 生成 `Main.class`，`java Main` 从类路径中加载并运行这个类。`main` 是本例的程序入口，`System.out.println` 向标准输出写入一行文本。后续完整示例采用相同的编译方式；多个示例中的 `Main` 应分别保存和运行。
+程序各组成部分的含义：
+
+| 组成部分 | 含义 |
+| --- | --- |
+| `class` | 声明一个类 |
+| `public` | 访问修饰符，表示对外可见 |
+| `static` | 静态方法，不需要创建对象即可调用 |
+| `void` | 方法不返回值 |
+| `main` | 入口方法名，由 JVM 调用 |
+| `String[] args` | 命令行参数 |
+| `System.out.println` | 输出一行文本：`System` 是类，`out` 是 `PrintStream` 类型的静态字段，`println` 是输出方法 |
+
+### 编译与运行发生了什么
+
+编译时，`javac` 把源代码转换为 `.class` 字节码文件，编译器不与操作系统直接交互。运行时按以下步骤处理：
+
+```text
+类加载器加载类文件
+    ↓
+字节码校验器检查代码是否违反访问规则
+    ↓
+解释器执行字节码；HotSpot 等实现还会用 JIT 编译热点代码
+```
+
+字节码与执行细节的进一步说明见[进阶：JVM](advanced/jvm/index.md)。
+
+### 源文件命名
+
+- `public` 类的源文件名必须与类名一致：`public class Main` 必须保存为 `Main.java`。
+- 非 `public` 类可以保存在不同名称的文件里：编译用文件名，运行用类名。
+- 一个源文件可以包含多个类，但 `public` 类最多一个；编译后每个类各自生成 `.class` 文件。
+
+## JDK、JRE 与 JVM
+
+| 名称 | 定义 | 包含内容 |
+| --- | --- | --- |
+| JVM | 执行字节码的抽象机器，是一个规范 | 类加载、校验、执行引擎与运行时数据区 |
+| JRE | 运行环境，是 JVM 的实现加上运行所需资源 | JVM、类库和其他运行组件 |
+| JDK | 开发工具包，是 JRE 加上开发工具 | JRE、`javac` 编译器、`jar`、`javadoc` 和诊断工具 |
+
+关系可以记为：`JDK = JRE + 开发工具`，`JRE = JVM + 类库`。三者在每个操作系统上都有各自的实现，因此是平台相关的；Java 程序的平台无关性来自字节码与 JVM 的分工。
+
+JVM 内部的主要组成部分：
+
+| 组件 | 作用 |
+| --- | --- |
+| 类加载器 | 加载类文件并建立运行时类型信息 |
+| 运行时数据区 | 栈、堆、方法区等存储区域 |
+| 执行引擎 | 解释器与 JIT 编译器执行字节码 |
+| 本地方法接口 | 调用 JVM 之外的原生代码 |
+
+详细结构与垃圾回收见[进阶：JVM](advanced/jvm/index.md)。
 
 ## 关键字速查
 
@@ -115,13 +152,19 @@ with       yield
 
 | 分类 | 内容 |
 | --- | --- |
-| [核心](basics/index.md) | 基本语法、流程控制、面向对象、字符串与数组、集合、泛型、异常和 IO |
-| [进阶](advanced/index.md) | 函数式编程、反射与注解、网络、并发和 JVM |
-| [框架](framework/index.md) | 框架的职责、依赖注入与应用组织方式 |
-| [第三方库](third-party/index.md) | 引入依赖、使用外部 API 与管理版本 |
+| 入门 | 语言由来与历史、第一个程序、JDK/JRE/JVM、关键字（本页）；教程结构、特性、数据类型、Unicode 与运算符见 [Java 概述](overview.md) |
+| [核心](basics/overview.md) | 基本语法、流程控制、面向对象、字符串与数组、集合、泛型、异常和 IO |
+| [进阶](advanced/overview.md) | 函数式编程、反射与注解、网络、并发和 JVM |
+| [框架](framework/overview.md) | 框架的职责、依赖注入与应用组织方式 |
+| [第三方库](third-party/overview.md) | 引入依赖、使用外部 API 与管理版本 |
 
 ## 参考资料
 
-- [Tpoint Tech：Java Tutorial](https://www.tpointtech.com/java-tutorial)，参考专题组织与示例讲解形式。
 - [Tpoint Tech：History of Java](https://www.tpointtech.com/history-of-java)。
+- [Tpoint Tech：Java Hello World Program](https://www.tpointtech.com/java-hello-world-program)。
+- [Tpoint Tech：Internal Details of Hello Java Program](https://www.tpointtech.com/internal-details-of-hello-java-program)。
+- [Tpoint Tech：Difference between JDK, JRE, and JVM](https://www.tpointtech.com/difference-between-jdk-jre-and-jvm)。
+- [Tpoint Tech：JVM (Java Virtual Machine) Architecture](https://www.tpointtech.com/jvm-java-virtual-machine)。
+- [Tpoint Tech：Java Keywords](https://www.tpointtech.com/java-keywords)。
 - [Java 21 语言规范：Keywords](https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html#jls-3.9)。
+- [Java 21 JVM 规范：The Structure of the Java Virtual Machine](https://docs.oracle.com/javase/specs/jvms/se21/html/jvms-2.html)。

@@ -12,6 +12,15 @@
 | UDP | 以数据报为单位发送，不保证送达或顺序 |
 | HTTP | 规定请求、响应、方法、状态码和头部等应用层语义 |
 
+TCP 与 UDP 的主要区别：
+
+| 比较项 | TCP | UDP |
+| --- | --- | --- |
+| 连接 | 建立连接后通信 | 无连接，直接发送数据报 |
+| 可靠性 | 保证按序送达，丢失自动重传 | 可能丢失、重复或乱序 |
+| 边界 | 字节流，没有消息边界 | 保留数据报边界 |
+| 适用场景 | 文件传输、HTTP、数据库连接 | 实时音视频、游戏状态、DNS 查询 |
+
 TCP 不保留应用消息边界。一次写入不一定对应对端的一次读取，应用需要约定分隔符、固定长度或长度前缀等规则。
 
 ## Java 网络 API
@@ -25,6 +34,15 @@ TCP 不保留应用消息边界。一次写入不一定对应对端的一次读�
 | `HttpClient` | 发送 HTTP 请求，获取响应或异步结果 |
 
 HTTP 业务通常可以先使用 `java.net.http.HttpClient`，只有需要直接控制传输过程时才下探到 Socket 等 API。
+
+常见网络异常：
+
+| 异常 | 常见触发 |
+| --- | --- |
+| `UnknownHostException` | 主机名无法解析 |
+| `ConnectException` | 目标拒绝连接或不可达 |
+| `SocketTimeoutException` | 连接或读取超时 |
+| `MalformedURLException` | 地址格式不符合规范 |
 
 ## 示例：访问本地 HTTP 服务
 
@@ -85,7 +103,7 @@ Body: Java networking
 
 `connectTimeout` 约束新连接的建立过程，请求上的 `timeout` 约束该请求等待响应的时间。它们不是完全相同的概念。`send` 同步等待响应，`sendAsync` 则返回 `CompletableFuture`。
 
-`HttpServer` 属于 JDK 的 `jdk.httpserver` 模块；使用自行裁剪的运行时时，需要包含该模块。本例用于解释请求与响应，完整 Web 应用可以进一步使用[框架](../../framework/index.md)。
+`HttpServer` 属于 JDK 的 `jdk.httpserver` 模块；使用自行裁剪的运行时时，需要包含该模块。本例用于解释请求与响应，完整 Web 应用可以进一步使用[框架](../../framework/overview.md)。
 
 ## Socket 中的消息边界
 
@@ -105,10 +123,12 @@ String message = reader.readLine();
 - 阻塞式 Socket 应分别考虑连接超时和读取超时，资源使用完及时关闭。
 - 对请求设置重试前，应判断操作是否可以安全重复执行。
 - 公网请求使用 HTTPS 时应保持证书验证，并正确处理重定向和认证信息。
+- UDP 不保证送达，重要数据需要应用层自行确认和重传。
 
 ## 练习
 
-为本地服务增加 `/missing` 路径并返回 404，修改客户端输出，让它根据状态码区分成功与失败。再把同步 `send` 改为 `sendAsync`，比较两种调用方式。
+1. 为本地服务增加 `/missing` 路径并返回 404，修改客户端输出，让它根据状态码区分成功与失败。再把同步 `send` 改为 `sendAsync`，比较两种调用方式。
+2. 为示例的 HTTP 响应增加 `GET /topic?name=Java` 的查询参数处理，让服务端按参数返回不同的内容。
 
 ## 参考资料
 

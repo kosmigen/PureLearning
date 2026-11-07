@@ -11,9 +11,51 @@ Spring IoC 容器负责创建、配置和管理对象。交给容器管理的对
 | `ApplicationContext` | 访问容器中的对象及相关应用能力 |
 | `@Configuration` | 声明提供 Bean 定义的配置类 |
 | `@Bean` | 将方法创建的对象注册为 Bean |
+| `@ComponentScan` | 扫描指定包，注册带组件注解的类 |
 | 依赖注入 | 由容器为对象提供它依赖的其他对象 |
 
 Bean 的默认作用域是 singleton，表示同一个容器中相应 Bean 定义通常对应一个共享实例；这不意味着这个类在整个 JVM 中只能有一个对象。
+
+| 作用域 | 行为 |
+| --- | --- |
+| `singleton` | 容器内共享一个实例，默认值 |
+| `prototype` | 每次获取时创建新的实例 |
+| `request`、`session` 等 | Web 应用中与请求或会话生命周期绑定 |
+
+## 组件扫描
+
+除了在配置类中逐个声明 `@Bean`，还可以让容器扫描带组件注解的类：
+
+```java
+@Component
+public class StudyService {
+    private final Formatter formatter;
+
+    public StudyService(Formatter formatter) {
+        this.formatter = formatter;
+    }
+}
+```
+
+配合 `@ComponentScan("learning")` 或 `@SpringBootApplication` 等入口，容器会自动注册组件并注入其构造器依赖。`@Service`、`@Repository` 等是 `@Component` 的语义化特化，便于按职责区分。
+
+## 生命周期
+
+容器创建 Bean 并完成注入后，会调用标注 `@PostConstruct` 的方法；关闭上下文时，会调用标注 `@PreDestroy` 的方法：
+
+```java
+@PostConstruct
+void init() {
+    // 依赖已注入，完成初始化
+}
+
+@PreDestroy
+void cleanup() {
+    // 容器关闭前执行
+}
+```
+
+初始化失败会阻止 Bean 投入使用。销毁回调依赖上下文正常关闭，进程被强制终止时不会执行。
 
 ## 创建项目
 

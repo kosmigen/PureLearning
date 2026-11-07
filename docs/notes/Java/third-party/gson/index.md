@@ -14,6 +14,35 @@ Gson 用于在 Java 对象和 JSON 文本之间进行转换。把对象转换成
 | `GsonBuilder` | 配置字段处理、格式化和类型适配器等行为 |
 | `TypeToken` | 描述列表等带类型参数的目标类型 |
 
+`GsonBuilder` 常用配置：
+
+| 配置 | 作用 |
+| --- | --- |
+| `setPrettyPrinting()` | 输出带缩进和换行的 JSON |
+| `serializeNulls()` | 保留值为 `null` 的字段，默认省略 |
+| `setFieldNamingPolicy(...)` | 统一转换字段命名风格 |
+| `registerTypeAdapter(...)` | 为特定类型提供自定义转换 |
+
+字段名与 JSON 键不同时，使用 `@SerializedName`：
+
+```java
+public class ExternalRecord {
+    @SerializedName("topic_name")
+    String topic;
+    @SerializedName("minutes_spent")
+    int minutes;
+}
+```
+
+`new GsonBuilder().setPrettyPrinting().create()` 创建美化输出的转换器，上面类转换的结果：
+
+```text
+{
+  "topic_name": "Java",
+  "minutes_spent": 40
+}
+```
+
 ## 创建项目
 
 ```text
@@ -105,7 +134,7 @@ TypeToken<List<StudyRecord>> type = new TypeToken<>() {};
 List<StudyRecord> records = gson.fromJson(jsonArray, type.getType());
 ```
 
-此片段需要导入 `java.util.List` 与 `com.google.gson.reflect.TypeToken`，`jsonArray` 应为一个 JSON 数组字符串。类型参数的基础见[泛型](../../basics/generics/index.md)。
+此片段需要导入 `java.util.List` 与 `com.google.gson.reflect.TypeToken`，`jsonArray` 应为一个 JSON 数组字符串。类型参数的基础见[泛型](../../basics/generics.md)。
 
 ## 转换与校验
 
