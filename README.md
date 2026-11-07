@@ -33,15 +33,20 @@ python3 -m venv .venv
 docs/                    网站内容与公开资源
   index.md               首页
   blog/                  博客入口、作者、标签与 posts/ 文章
-  notes/                 技术文档入口、C / Python / Java，以及未来的框架文档
-  fundamentals/          计算机基础
-  ai/                    AI 文档
+  notes/                 技术文档入口
+    C/                   C 语言
+    Python/              Python
+    Java/                Java，以及其框架和第三方库
+    AI/                  AI 文档
+    CSAPP/               深入理解计算机系统
+    Tools/               开发工具与其他工具
   projects/              项目卡片数据
   about/                 关于网站与作者
   assets/                字体、图片、样式、脚本与本地组件
 overrides/               实际需要自定义的主题模板
 hooks/                   字数统计、项目卡片、图表与旧网址兼容
 scripts/                 按需运行的维护工具（字体分片）
+tests/                   旧网址兼容等构建逻辑的检查
 handbook/                内容编辑手册，不发布到网站
 mkdocs.yml               站点配置与功能开关
 requirements.txt         固定的直接依赖
@@ -49,7 +54,9 @@ requirements.txt         固定的直接依赖
 
 顶部顺序为 **博客｜文档｜项目｜关于**；“文档”首页与左侧栏目叫“技术文档”。导航结构由 `docs/.nav.yml` 与各目录的 `.nav.yml` 管理，自定义顶部文字在 `overrides/partials/header.html` 中配置。
 
-三门语言保留在 `notes/` 下，基础与 AI 保留当前目录。原来的 `notes/fundamentals/`、`notes/ai/` 及其子页通过构建时生成的跳转页兼容。
+当前技术文档统一位于 `docs/notes/`，栏目目录使用上面的大小写。新增内容按主题加入对应目录和 `.nav.yml`。
+
+旧 `ai/` 及仍存在的子页跳转到 `notes/AI/`；小写语言地址由构建时生成的跳转兼容。已撤下的 `fundamentals/`、`notes/fundamentals/` 及已知分类入口回到技术文档首页，其中 `computer-systems/` 转到 `notes/CSAPP/`。跳转规则维护在 `hooks/navigation_redirects.py`。
 
 新增文档、博客元数据、自动项目预览、Markdown 扩展、导航调整、资源路径、预览部署与常见问题，统一见[编辑手册](handbook/网站内容编辑手册.md)。
 

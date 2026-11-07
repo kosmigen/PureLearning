@@ -56,13 +56,15 @@ node --check docs/assets/javascripts/site-navigation.mjs
 | 文档 | `docs/notes/index.md` | `/PureLearning/notes/` |
 | 项目 | `docs/projects/` | `/PureLearning/projects/` |
 | 关于 | `docs/about/` | `/PureLearning/about/` |
-| 文档 / C | `docs/notes/c/` | `/PureLearning/notes/c/` |
-| 文档 / Python | `docs/notes/python/` | `/PureLearning/notes/python/` |
-| 文档 / Java | `docs/notes/java/` | `/PureLearning/notes/java/` |
-| 文档 / 计算机基础 | `docs/fundamentals/` | `/PureLearning/fundamentals/` |
-| 文档 / AI | `docs/ai/` | `/PureLearning/ai/` |
+| 文档 / C | `docs/notes/C/` | `/PureLearning/notes/C/` |
+| 文档 / Python | `docs/notes/Python/` | `/PureLearning/notes/Python/` |
+| 文档 / Java | `docs/notes/Java/` | `/PureLearning/notes/Java/` |
+| 文档 / AI | `docs/notes/AI/` | `/PureLearning/notes/AI/` |
+| 文档 / CSAPP | `docs/notes/CSAPP/` | `/PureLearning/notes/CSAPP/` |
+| 文档 / 工具 | `docs/notes/Tools/` | `/PureLearning/notes/Tools/` |
 
-- C、Python、Java、计算机基础和 AI 都属于“技术文档”。三门语言保留在 `notes/` 下，基础和 AI 保留当前目录；导航合并不移动文件或修改已有网址。以后框架与工具文档可继续放在 `notes/` 下，并按需加入导航。
+- 当前技术文档统一位于 `docs/notes/`，一级分类为 C、Python、Java、AI、CSAPP 和 Tools。沿用现有目录大小写；在区分大小写的部署环境中，`notes/Java/` 与 `notes/java/` 是不同路径。
+- 原 `docs/ai/` 已迁入 `docs/notes/AI/`，原 `docs/fundamentals/` 及其分类已撤下，计算机系统内容以 CSAPP 为当前入口。新增框架或工具内容按主题加入现有分类，必要时再扩充 `notes/` 下的栏目。
 - `docs/projects/index.md` 是隐藏左右侧栏的项目卡片展示页。使用 Web Awesome 卡片，省略页内标题和开发记录。项目列表在该文件的 `projects` 元数据中维护；每项的 `url` 同时用于自动首页缩略图和网站入口，新增示例见 `handbook/网站内容编辑手册.md`。项目栏目只维护项目展示；技术实践文档按主题放入“技术文档”。
 - `docs/notes/index.md` 是顶部“文档”的入口页，标题为“技术文档”。
 - `docs/index.md` 是首页，目前是个人介绍和插画，不是 SVG 学习路线图。
@@ -81,7 +83,7 @@ node --check docs/assets/javascripts/site-navigation.mjs
 | 默认页面的元数据和正文标题 | 对应 `index.md` 的 `title` 与一级标题（如果有） |
 | 即时导航、前进后退后的选中状态 | `docs/assets/javascripts/site-navigation.mjs`；读取顶部链接的 `data-site-paths` |
 
-- “文档”的路径别名包括 `notes/`、`fundamentals/` 和 `ai/`，由 `header.html` 的 `sections` 同时生成服务端选中状态及 `data-site-paths`，客户端基于 `data-site-root` 解析路径。新增其他物理目录下的文档分类时，同步补充这些别名。
+- “文档”的当前路径为 `notes/`，由 `header.html` 的 `sections` 同时生成服务端选中状态及 `data-site-paths`，客户端基于 `data-site-root` 解析路径。历史入口通过独立跳转页兼容；以后增加其他根目录下的文档分类时，再按实际路径补充别名。
 - 顶部文字和左侧名称独立配置。只修改 `.nav.yml` 标签不会自动修改自定义顶部导航；改栏目时检查顶部、左侧、页脚和文档链接是否需要一起更新。
 - `navigation.indexes` 将栏目 `index.md` 合并为可点击的栏目入口。栏目名称与页面正文标题可以不同。
 - 显式列出页面且没有通配规则的 `.nav.yml`，新增页面时要按需更新列表，不能假定自动进入侧栏。
@@ -93,14 +95,17 @@ node --check docs/assets/javascripts/site-navigation.mjs
 
 ### 旧网址兼容
 
-`hooks/navigation_redirects.py` 在 `on_post_build` 为已构建的子页面生成旧路径跳转：
+`hooks/navigation_redirects.py` 在 `on_post_build` 为仍存在的页面生成旧路径跳转，并为已撤下的基础栏目提供当前入口：
 
 | 旧路径（相对站点根） | 新路径（相对站点根） |
 | --- | --- |
-| `notes/fundamentals/` | `fundamentals/` |
-| `notes/ai/` | `ai/` |
+| `ai/`、`notes/ai/` 及仍存在的子页 | `notes/AI/` 及对应子页 |
+| `notes/c/`、`notes/python/`、`notes/java/` 及子页 | `notes/C/`、`notes/Python/`、`notes/Java/` 及对应子页 |
+| `fundamentals/`、`notes/fundamentals/` | `notes/` |
+| 上述基础栏目下的 `computer-systems/` | `notes/CSAPP/` |
+| 上述基础栏目下的 `algorithms/`、`databases/`、`networks/`、`operating-systems/` | `notes/` |
 
-跳转页包含 canonical、JavaScript 跳转、meta refresh 和普通链接。JavaScript 跳转保留查询参数和锚点；无 JavaScript 时的回退只保证到达新页面。新增迁移时检查嵌套页面、部署前缀及旧书签，不直接删除兼容入口。
+跳转页包含 canonical、JavaScript 跳转、meta refresh 和普通链接。JavaScript 跳转保留查询参数和锚点；无 JavaScript 时的回退只保证到达新页面。目标页面存在时才生成跳转；大小写不敏感的文件系统会复用当前页面，避免覆盖正文。新增迁移时运行 `.venv/bin/python -m unittest discover -s tests`，并检查嵌套页面、部署前缀及旧书签。
 
 ## 博客写作约定
 
@@ -161,7 +166,9 @@ categories:
 
 全站使用中性白、浅灰和深灰作为大面积底色，使用 VitePress 风格的蓝色作为强调色。按用户偏好避免恢复米黄底色和泛黄的纸张色调；配色统一维护在 `tokens.css` 中。
 
-页眉 GitHub 入口复用主题的 `partials/source.html`，组件内部外观沿用主题默认样式，Star、Fork 等统计由主题动态获取。桌面宽度（`60em` 起）显示仓库名称与统计，窄屏保留图标；仅调整外部宽度、间距与显示断点，同时检查中间导航、搜索与仓库信息是否重叠。
+页眉 GitHub 入口复用主题的 `partials/source.html`，组件内部外观沿用主题默认样式，Star、Fork 等统计由主题动态获取。桌面宽度（`60em` 起）为原生组件保留完整宽度，窄屏保留图标；中等桌面窗口适当缩小导航字号和间距，同时检查导航、搜索与仓库信息是否重叠。
+
+`overrides/main.html` 在主题主脚本之前加载 `repository-cache.js`，仅移除 GitHub 请求失败留下的空统计缓存，使刷新能够重试。有效的 Star/Fork 数据（包括数值 0）继续由原生组件缓存与展示；外部 API 限流仍可能使统计暂时不可用。
 
 文档阅读、博客正文、首页和界面文字有各自的字体与字号作用域。博客正文使用自托管 Charter；更换字体或资源时保留对应授权文件，不把不同字体的许可证混用。
 
