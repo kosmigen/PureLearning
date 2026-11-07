@@ -1,2 +1,8 @@
 nav:
   - index.md
+  - C: C/index.md
+  - Python: Python/index.md
+  - Java: Java/index.md
+  - AI: AI/index.md
+  - CSAPP: CSAPP/index.md
+

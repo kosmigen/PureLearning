@@ -3,12 +3,6 @@ ignore: 404.md
 nav:
   - 首页: index.md
   - 博客: blog
-  - 技术文档:
-      - notes/index.md
-      - C: notes/c
-      - Python: notes/python
-      - Java: notes/java
-      - 计算机基础: fundamentals
-      - AI: ai
+  - 文档: notes
   - 项目: projects
   - 关于: about

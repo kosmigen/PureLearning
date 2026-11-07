@@ -5,23 +5,51 @@ description: 编程语言、计算机基础、AI，以及框架与工具的技�
 
 # 技术文档
 
-这里整理编程语言、计算机基础与 AI 的核心概念和实践方法。框架与工具相关的内容也按主题收录于此，方便查阅和持续补充。
+汇总**学过、做过**的“技术事儿”。
 
 ## 编程语言
 
 <div class="grid cards" markdown>
 
-- [**C**](c/index.md) · 语言基础、指针与内存管理、编译工具链
-- [**Python**](python/index.md) · 语言特性、标准库与 Python 生态
-- [**Java**](java/index.md) · 语言基础、面向对象与开发生态
+- [**C**](C/index.md)
+- [**Python**](Python/index.md)
+- [**Java**](Java/index.md)
 
 </div>
+
+在 AI 时代，我更希望深入掌握 C、Python 和 Java，以及它们各自常用的工具与框架。这三门语言足以覆盖我目前的学习和实践需求。
+
+学习 C，一方面是出于兴趣（可以写轮子），另一方面是希望理解内存、编译和程序运行背后的机制。Python 用于自动化、数据处理和 AI 相关实践，Java 则用于学习后端开发和应用工程。
+
+当然，语言不是固定的，需要针对具体的场景具体选择，不必拘泥！
+
+这部分内容质量随着阅历、经验的提升而提升，如有什么不足之处，欢迎提交 PR 。
+
+
+## 工具
+
+<div class="grid cards" markdown>
+
+- [**Git**]()
+- [**Maven**]()
+- [**CMake**]()
+- [**uv**]()
+
+</div>
+
+除了语言本身，开发过程中还需要使用版本控制、项目构建、依赖管理和环境管理等工具。
+
+好的工具对实际开发有着很大的裨益。
 
 ## 基础与应用
 
 <div class="grid cards" markdown>
 
-- [**计算机基础**](../fundamentals/index.md) · 数据结构、算法、操作系统、网络与数据库
-- [**AI**](../ai/index.md) · 机器学习、神经网络与生成式 AI 的概念和实践
+- [**CSAPP**](CSAPP/index.md)
+- [**AI**](AI/index.md) 
 
 </div>
+
+尽管现在的 AI 非常强大，但是我们仍然需要牢牢掌握计算机基础部分和 AI 的相关原理，不要只做调用者。
+
+> What I cannot create, I do not understand. — Richard Feynman
