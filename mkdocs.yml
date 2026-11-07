@@ -13,6 +13,8 @@ theme:
   language: zh
   logo: assets/images/cipher-wheel.svg
   favicon: assets/images/cipher-wheel.svg
+  icon:
+    repo: fontawesome/brands/github
   font: false
   palette:
     - media: "(prefers-color-scheme)"
