@@ -85,6 +85,7 @@ node --check docs/assets/javascripts/site-navigation.mjs
 - 顶部文字和左侧名称独立配置。只修改 `.nav.yml` 标签不会自动修改自定义顶部导航；改栏目时检查顶部、左侧、页脚和文档链接是否需要一起更新。
 - `navigation.indexes` 将栏目 `index.md` 合并为可点击的栏目入口。栏目名称与页面正文标题可以不同。
 - 显式列出页面且没有通配规则的 `.nav.yml`，新增页面时要按需更新列表，不能假定自动进入侧栏。
+- `.nav.yml` 顶层必须是映射（`nav:`），不能写成 `- nav:`。导航引用的目录至少需要一个 Markdown 页面；空文件夹不会成为可发布的导航分类。
 - 标签改名不等于路径迁移。仅调整导航层级时，不必移动目录；用户要求修改网址时，再同步目录、导航、站内链接和旧地址兼容。
 - Markdown 内部链接优先指向相对 `.md` 源文件；Jinja2 模板中的站内路径通过 `| url` 处理。不要把部署域名或错误的根路径硬编码进普通站内链接。
 - `docs/.nav.yml` 的 `ignore: 404.md` 只使它不进入导航；`docs/404.md` 仍会构建，并由 `overrides/404.html` 提供真正的站点 404 内容。
@@ -151,6 +152,7 @@ categories:
 | `hooks/project_cards.py` | 校验项目元数据，在 Markdown 转换前生成可搜索卡片；根据网址生成 thum.io 首页预览地址 |
 | `docs/assets/stylesheets/blog.css` | 博客列表、正文、右侧目录和响应式排版 |
 | `docs/assets/stylesheets/footer.css` | 页脚布局与粒子画布活动空间 |
+| `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |
 | `hooks/diagrams.py` | 为 Mermaid 添加滚动容器，横向流程图可拖动 |
 | `hooks/navigation_redirects.py` | 已迁移网址的兼容跳转页 |
@@ -159,11 +161,15 @@ categories:
 
 全站使用中性白、浅灰和深灰作为大面积底色，使用 VitePress 风格的蓝色作为强调色。按用户偏好避免恢复米黄底色和泛黄的纸张色调；配色统一维护在 `tokens.css` 中。
 
+页眉 GitHub 入口复用主题的 `partials/source.html`，组件内部外观沿用主题默认样式，Star、Fork 等统计由主题动态获取。桌面宽度（`60em` 起）显示仓库名称与统计，窄屏保留图标；仅调整外部宽度、间距与显示断点，同时检查中间导航、搜索与仓库信息是否重叠。
+
 文档阅读、博客正文、首页和界面文字有各自的字体与字号作用域。博客正文使用自托管 Charter；更换字体或资源时保留对应授权文件，不把不同字体的许可证混用。
 
 Web Awesome 3.14.0 的 Card、Badge 及其依赖保存在 `docs/assets/javascripts/vendor/webawesome/`，组件不使用外部 CDN；项目首页缩略图通过 thum.io 自动生成并缓存，首次生成或服务异常不应阻止访问网站。该目录的 `theme.css` 从官方主题提取声明并限定在 `.kb-projects` 内；更新组件时同时核对依赖、主题和许可证，不保留未使用组件。
 
 `handbook/` 存放仓库维护和内容编辑说明，不在 `docs/` 内，不会发布到网站。日常写作统一查阅 `handbook/网站内容编辑手册.md`；更新写作能力或元数据处理时同步维护手册。`README.md` 保留项目入口、目录分工和快速启动，避免重复维护长篇写作说明。
+
+Java 内容遵循 [Java 文档编写规范](handbook/Java文档编写规范.md)：参考 Tpoint Tech 的讲解组织方式，统一采用概念、语法、独立示例、输出、注意事项、练习与参考资料的形式。当前示例基准为 JDK 21，完整程序需要编译运行；按现有核心、进阶、框架、第三方库分类组织，正文与示例独立编写。
 
 修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。页脚粒子应在画布内完整绘制，博客右侧目录应在正文边界前避让页脚。
 
