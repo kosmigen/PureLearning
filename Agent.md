@@ -38,6 +38,7 @@ python3 -m venv .venv
 
 # 修改 JavaScript 模块后的语法检查示例
 node --check docs/assets/javascripts/site-navigation.mjs
+node --check docs/assets/javascripts/sidebar-state.mjs
 ```
 
 `site/` 是被 Git 忽略的生成目录，修改源文件后重新构建，不直接编辑生成页面。
@@ -82,10 +83,13 @@ node --check docs/assets/javascripts/site-navigation.mjs
 | 页脚导航 | `overrides/partials/footer.html` |
 | 默认页面的元数据和正文标题 | 对应 `index.md` 的 `title` 与一级标题（如果有） |
 | 即时导航、前进后退后的选中状态 | `docs/assets/javascripts/site-navigation.mjs`；读取顶部链接的 `data-site-paths` |
+| 左侧目录开合状态的保持 | `docs/assets/javascripts/sidebar-state.mjs`；为全部技术文档记录桌面端手动开合状态，在 `window.document$` 更新后恢复，并保留侧栏滚动位置 |
 
 - “文档”的当前路径为 `notes/`，由 `header.html` 的 `sections` 同时生成服务端选中状态及 `data-site-paths`，客户端基于 `data-site-root` 解析路径。历史入口通过独立跳转页兼容；以后增加其他根目录下的文档分类时，再按实际路径补充别名。
+- 文档侧栏以目录标题的层级路径为标识，通过 `sessionStorage` 在同一标签页内记住开合状态与滚动位置；离开页面时用实际开合状态覆盖旧记录（包括当前文章自动展开后覆盖旧的收起记录），新文章所在路径始终展开。恢复时暂时关闭开合动画，先同步恢复滚动位置，再在主题首帧定位后校正；刷新和整页跳转也恢复位置。手机抽屉沿用主题默认行为。
 - 顶部文字和左侧名称独立配置。只修改 `.nav.yml` 标签不会自动修改自定义顶部导航；改栏目时检查顶部、左侧、页脚和文档链接是否需要一起更新。
-- `navigation.indexes` 将栏目 `index.md` 合并为可点击的栏目入口。栏目名称与页面正文标题可以不同。
+- `navigation.indexes` 将栏目 `index.md` 合并为可点击的栏目入口。栏目名称与页面正文标题可以不同。需要点击标题只展开、不跳转的目录，不要在该目录放 `index.md`；把栏目页改为普通页面（如 `overview.md`、`intro.md`）并在 `.nav.yml` 中列出，Material 会把没有 index 页的目录原生渲染为展开开关。Java 栏目采用这种方式。
+- 只包含一篇文章时直接用单个 `.md` 文件（如 `basics/syntax.md`），不为其创建目录。`use_directory_urls` 下单个文件与 `index.md` 的网址相同，摊平不会改变已发布网址；目录留给多篇文章或子栏目。Java 的 `basics` 采用这种方式。
 - 显式列出页面且没有通配规则的 `.nav.yml`，新增页面时要按需更新列表，不能假定自动进入侧栏。
 - `.nav.yml` 顶层必须是映射（`nav:`），不能写成 `- nav:`。导航引用的目录至少需要一个 Markdown 页面；空文件夹不会成为可发布的导航分类。
 - 标签改名不等于路径迁移。仅调整导航层级时，不必移动目录；用户要求修改网址时，再同步目录、导航、站内链接和旧地址兼容。
@@ -95,12 +99,19 @@ node --check docs/assets/javascripts/site-navigation.mjs
 
 ### 旧网址兼容
 
-`hooks/navigation_redirects.py` 在 `on_post_build` 为仍存在的页面生成旧路径跳转，并为已撤下的基础栏目提供当前入口：
+`hooks/navigation_redirects.py` 在 `on_post_build` 为目标仍存在的页面生成旧路径跳转，并为已撤下的基础栏目提供当前入口：
 
 | 旧路径（相对站点根） | 新路径（相对站点根） |
 | --- | --- |
 | `ai/`、`notes/ai/` 及仍存在的子页 | `notes/AI/` 及对应子页 |
 | `notes/c/`、`notes/python/`、`notes/java/` 及子页 | `notes/C/`、`notes/Python/`、`notes/Java/` 及对应子页 |
+| `notes/Java/` | `notes/Java/intro/` |
+| `notes/Java/basics/` | `notes/Java/basics/overview/` |
+| `notes/Java/advanced/` | `notes/Java/advanced/overview/` |
+| `notes/Java/framework/` | `notes/Java/framework/overview/` |
+| `notes/Java/third-party/` | `notes/Java/third-party/overview/` |
+| `notes/Java/basics/io/overview/` | `notes/Java/basics/io/` |
+| `notes/Java/basics/io/1.File对象/` | `notes/Java/basics/io/` |
 | `fundamentals/`、`notes/fundamentals/` | `notes/` |
 | 上述基础栏目下的 `computer-systems/` | `notes/CSAPP/` |
 | 上述基础栏目下的 `algorithms/`、`databases/`、`networks/`、`operating-systems/` | `notes/` |
