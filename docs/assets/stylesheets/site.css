@@ -64,15 +64,26 @@ body { background: var(--color-paper); }
 .kb-site-header .md-source__repository { display: none; }
 
 @media (min-width: 60em) {
-  .kb-site-header .md-search__inner { width: 9rem; }
-}
-@media (min-width: 76.25em) {
+  .kb-site-header .md-search__inner { width: 6rem; }
   .kb-site-header .md-header__source {
-    width: 11.7rem;
-    max-width: 11.7rem;
+    width: 8.75rem;
+    max-width: 8.75rem;
     margin-inline-start: .6rem;
   }
   .kb-site-header .md-source__repository { display: inline-block; }
+}
+@media (min-width: 64em) {
+  .kb-site-header .md-header__source {
+    width: 10.5rem;
+    max-width: 10.5rem;
+  }
+}
+@media (min-width: 76.25em) {
+  .kb-site-header .md-search__inner { width: 9rem; }
+  .kb-site-header .md-header__source {
+    width: 11.7rem;
+    max-width: 11.7rem;
+  }
 }
 body:has(.kb-home, .kb-projects, .kb-blog-post) .md-header__button[for="__drawer"] { display: none; }
 
