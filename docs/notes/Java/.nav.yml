@@ -1,3 +1,6 @@
 nav:
   - index.md
-  - 基础知识: basics/1.认识java.md
+  - 核心: basics
+  - 进阶: advanced
+  - 框架: framework
+  - 第三方库: third-party
