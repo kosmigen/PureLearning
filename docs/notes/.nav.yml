@@ -1,8 +1,9 @@
 nav:
   - index.md
-  - C: C/index.md
-  - Python: Python/index.md
-  - Java: Java/index.md
-  - AI: AI/index.md
-  - CSAPP: CSAPP/index.md
+  - C: C
+  - Python: Python
+  - Java: Java
+  - AI: AI
+  - CSAPP: CSAPP
+  - 工具: Tools
 
