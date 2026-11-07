@@ -92,6 +92,23 @@ body:not(:has(.kb-home, .kb-blog-index, .kb-blog-post, .kb-projects)) .md-sideba
   line-height: 1.5;
 }
 
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary {
+    top: calc(var(--site-header-height) + 1px) !important;
+    height: auto;
+  }
+
+  .md-sidebar--primary > .md-sidebar__scrollwrap {
+    /* Keep a real sticky box instead of shrinking its contents near the footer. */
+    height: auto !important;
+    max-height: calc(100dvh - var(--site-header-height) - 2.4rem - 1px);
+  }
+
+  .md-sidebar--primary .md-nav--primary {
+    margin-bottom: 0;
+  }
+}
+
 .md-typeset .md-button,
 .md-typeset .tabbed-labels {
   font-family: var(--font-body);
