@@ -98,6 +98,10 @@
   max-width: none;
   height: auto;
   mix-blend-mode: multiply;
+  transform-origin: 50% 88%;
+  rotate: 0deg;
+  translate: 0 0;
+  transition: rotate 220ms var(--ease-out), translate 220ms var(--ease-out);
 }
 .md-typeset .kb-home-portrait figcaption {
   max-width: none;
