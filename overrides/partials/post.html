@@ -34,44 +34,27 @@
 
     <footer class="kb-blog-entry__footer">
       <ul class="kb-blog-entry__meta" aria-label="文章元数据">
-        {% if post.authors %}
-          <li class="kb-blog-entry__authors">
-            {% for author in post.authors %}
-              {% if author.url %}
-                <a class="kb-blog-entry__author" href="{{ author.url | url }}" title="{{ author.description }}">
-                  <img src="{{ author.avatar | url }}" alt="">
-                  <span>{{ author.name }}</span>
-                </a>
-              {% else %}
-                <span class="kb-blog-entry__author" title="{{ author.description }}">
-                  <img src="{{ author.avatar | url }}" alt="">
-                  <span>{{ author.name }}</span>
-                </span>
-              {% endif %}
-              {%- if loop.revindex > 1 %}<span aria-hidden="true">、</span>{% endif -%}
-            {% endfor %}
-          </li>
-        {% endif %}
-
         {% set tag_config = config.plugins["material/tags"].config %}
         {% set post_tags = post.meta.get(tag_config.tags_name_property, []) %}
         {% if post_tags %}
-          <li>
+          <li class="kb-blog-entry__tags">
             {% for tag in post_tags %}
               {% set slug = tag_config.tags_slugify(tag, tag_config.tags_slugify_separator) %}
               {% set anchor = tag_config.tags_slugify_format.format(slug=slug) %}
               <a href="{{ ('blog/tags/#' ~ anchor) | url }}">{{ tag }}</a>
-              {%- if loop.revindex > 1 %}, {% endif -%}
             {% endfor %}
           </li>
         {% endif %}
 
-        {% if post.config.readtime %}
-          <li>{{ post.config.readtime }} min read</li>
-        {% endif %}
-
-        {% if post.meta.word_count %}
-          <li>{{ post.meta.word_count }} words</li>
+        {% if post.config.readtime or post.meta.word_count %}
+          <li class="kb-blog-entry__stats">
+            {% if post.config.readtime %}
+              <span>{{ post.config.readtime }} min read</span>
+            {% endif %}
+            {% if post.meta.word_count %}
+              <span>{{ "{:,}".format(post.meta.word_count) }} words</span>
+            {% endif %}
+          </li>
         {% endif %}
       </ul>
 
