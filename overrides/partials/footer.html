@@ -6,12 +6,7 @@
     <div class="kb-footer__grid">
       <section class="kb-footer__intro" aria-labelledby="footer-brand">
         <h2 id="footer-brand"><a href="{{ nav.homepage.url | url }}">{{ config.site_name }}</a></h2>
-        <p>计算机科学与 AI 的学习笔记、项目实践和一些思考。</p>
-        {% if config.extra.social %}
-          <nav class="kb-footer__social" aria-label="社交账号">
-            {% include "partials/social.html" %}
-          </nav>
-        {% endif %}
+        <div class="kb-footer__emblem" aria-hidden="true"></div>
       </section>
 
       <section class="kb-footer__recent" aria-labelledby="footer-recent">
@@ -68,6 +63,10 @@
       </section>
     </div>
     <div class="kb-footer__bottom">
+      <p class="kb-footer__quote" lang="en">
+        <q cite="https://calteches.library.caltech.edu/51/2/CargoCult.htm">The first principle is that you must not fool yourself—and you are the easiest person to fool.</q>
+        <span class="kb-footer__attribution">Richard Feynman</span>
+      </p>
       <p class="kb-footer__copyright">{{ config.copyright }}</p>
     </div>
   </div>
