@@ -1,6 +1,6 @@
 Font asset notice
 
-Caveat (footer particle signature)
+Caveat (home handwritten accents)
 - Source: https://github.com/google/fonts/tree/main/ofl/caveat
 - The complete variable font is self-hosted in WOFF2 format; glyphs and
   font names are unchanged. Weights 400-700 remain variable.

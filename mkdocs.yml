@@ -120,6 +120,15 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/kosmigen
+      name: GitHub
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/kosmigen
+      name: X
+
 extra_css:
   - assets/stylesheets/extra.css
   - assets/stylesheets/site.css
@@ -135,4 +144,4 @@ extra_javascript:
   - assets/javascripts/home-animation.mjs
   - assets/javascripts/projects.mjs
   - assets/javascripts/diagram-drag.mjs
-  - assets/javascripts/footer-motion.mjs
+  - assets/javascripts/footer-jelly.mjs

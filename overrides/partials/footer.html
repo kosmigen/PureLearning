@@ -1,47 +1,74 @@
+{% set blog = config.plugins.get("material/blog") %}
+{% set recent_posts = (blog.blog.posts | rejectattr("config.draft") | sort(attribute="config.date.created", reverse=true)) if blog and blog.config.enabled else [] %}
 <footer class="md-footer kb-footer" id="site-footer" aria-label="网站信息">
+  <canvas class="kb-footer__jelly" aria-hidden="true"></canvas>
   <div class="kb-footer__inner md-grid">
-    <div class="kb-footer__links">
-      <nav class="kb-footer__explore" aria-label="页脚内容导航">
-        <h2 lang="en">Explore</h2>
+    <div class="kb-footer__grid">
+      <section class="kb-footer__intro" aria-labelledby="footer-brand">
+        <h2 id="footer-brand"><a href="{{ nav.homepage.url | url }}">{{ config.site_name }}</a></h2>
+        <p>计算机科学与 AI 的学习笔记、项目实践和一些思考。</p>
+        {% if config.extra.social %}
+          <nav class="kb-footer__social" aria-label="社交账号">
+            {% include "partials/social.html" %}
+          </nav>
+        {% endif %}
+      </section>
+
+      <section class="kb-footer__recent" aria-labelledby="footer-recent">
+        <h2 id="footer-recent" lang="en">Recent Posts</h2>
+        <div class="kb-footer__posts">
+          {% for post in recent_posts[:2] %}
+            <a class="kb-footer__post" href="{{ post.url | url }}" title="{{ post.title | e }}">
+              <span class="kb-footer__thumbnail" aria-hidden="true">
+                {% if post.meta.get("image") %}
+                  <img src="{{ post.meta.image | url | e }}" alt="" width="56" height="56" loading="lazy" decoding="async">
+                {% else %}
+                  {% include ".icons/material/file-document-outline.svg" %}
+                {% endif %}
+              </span>
+              <span class="kb-footer__post-copy">
+                <span class="kb-footer__post-title">{{ post.title }}</span>
+                <time datetime="{{ post.config.date.created.isoformat() }}">{{ post.config.date.created.strftime("%Y.%m.%d") }}</time>
+              </span>
+            </a>
+          {% else %}
+            <a href="{{ 'blog/' | url }}" lang="en">View all posts</a>
+          {% endfor %}
+        </div>
+      </section>
+
+      <nav class="kb-footer__navigation" aria-labelledby="footer-navigation" lang="en">
+        <h2 id="footer-navigation">Quick Links</h2>
         <ul>
-          <li><a href="{{ 'blog/' | url }}">博客</a></li>
-          <li><a href="{{ 'notes/' | url }}">技术文档</a></li>
-          <li><a href="{{ 'projects/' | url }}">项目</a></li>
+          <li><a href="{{ 'blog/' | url }}">Blog</a></li>
+          <li><a href="{{ 'notes/' | url }}">Docs</a></li>
+          <li><a href="{{ 'projects/' | url }}">Projects</a></li>
+          <li><a href="{{ 'about/' | url }}">About</a></li>
         </ul>
       </nav>
-      <nav aria-label="页脚关于导航">
-        <h2 lang="en">About</h2>
+
+      <section class="kb-footer__contact" aria-labelledby="footer-contact" lang="en">
+        <h2 id="footer-contact">Connect</h2>
         <ul>
-          <li><a href="{{ 'about/' | url }}">本站介绍</a></li>
-          <li><a href="{{ 'about/author/' | url }}">关于作者</a></li>
-          <li><a href="{{ config.repo_url }}/commits/main/" target="_blank" rel="noopener noreferrer">更新历史 <span aria-hidden="true">↗</span></a></li>
+          {% for social in config.extra.social %}
+            <li>
+              <a class="kb-footer__contact-link" href="{{ social.link }}" target="_blank" rel="noopener noreferrer">
+                <span class="kb-footer__contact-icon" aria-hidden="true">{% include ".icons/" ~ social.icon ~ ".svg" %}</span>
+                <span>{{ social.name }}<small>@kosmigen</small></span>
+              </a>
+            </li>
+          {% endfor %}
+          <li>
+            <a class="kb-footer__contact-link" href="{{ config.repo_url }}/issues" target="_blank" rel="noopener noreferrer">
+              <span class="kb-footer__contact-icon" aria-hidden="true">{% include ".icons/material/comment-outline.svg" %}</span>
+              <span>Feedback<small>Ideas &amp; fixes</small></span>
+            </a>
+          </li>
         </ul>
-      </nav>
-      <nav aria-label="页脚源码导航">
-        <h2 lang="en">Open source</h2>
-        <ul>
-          <li><a href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer">GitHub 仓库 <span aria-hidden="true">↗</span></a></li>
-          <li><a href="{{ config.repo_url }}/issues" target="_blank" rel="noopener noreferrer">问题反馈 <span aria-hidden="true">↗</span></a></li>
-          <li><a href="{{ config.repo_url }}/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License <span aria-hidden="true">↗</span></a></li>
-        </ul>
-      </nav>
+      </section>
     </div>
-
-  </div>
-
-  <div class="kb-footer__sand md-grid" data-particle-text="{{ config.site_name | e }}" aria-hidden="true">
-    <span class="kb-footer__fallback">{{ config.site_name }}</span>
-    <canvas class="kb-footer__canvas"></canvas>
-  </div>
-
-  <div class="kb-footer__bottom md-grid">
-    <div class="kb-footer__colophon">
+    <div class="kb-footer__bottom">
       <p class="kb-footer__copyright">{{ config.copyright }}</p>
-      <a class="kb-footer__top" href="#">
-        回到顶部
-        <span class="kb-footer__icon" aria-hidden="true">{% include ".icons/material/arrow-up.svg" %}</span>
-      </a>
     </div>
   </div>
-
 </footer>
