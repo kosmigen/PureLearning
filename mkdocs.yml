@@ -123,6 +123,22 @@ markdown_extensions:
   - pymdownx.tilde
 
 extra:
+  navigation_icons:
+    首页: lucide/house
+    博客: lucide/newspaper
+    Tags: lucide/tags
+    时间归档: lucide/archive
+    文档: lucide/book-open
+    技术文档: lucide/book-open
+    overview: lucide/book-open
+    项目: lucide/package-open
+    关于: lucide/users
+    C: lucide/code
+    Python: lucide/terminal
+    Java: lucide/coffee
+    AI: lucide/brain
+    CSAPP: lucide/cpu
+    工具: lucide/wrench
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/kosmigen
