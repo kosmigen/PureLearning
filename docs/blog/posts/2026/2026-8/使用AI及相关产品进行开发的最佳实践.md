@@ -1,6 +1,8 @@
 ---
 date: 2026-08-26
 slug: ai-development-best-practices
+image: https://raw.githubusercontent.com/kosmigen/picgo-pictures/master/20261108155802312.jpg
+image_layout: top
 categories:
  - AI
  - 项目

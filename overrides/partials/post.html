@@ -1,6 +1,6 @@
 {# Optional cover images share the excerpt's layout across blog views. #}
 {% set image = post.meta.get("image") %}
-{% set image_layout = "top" if post.meta.get("image_layout") == "top" else "side" %}
+{% set image_layout = "side" if post.meta.get("image_layout") == "side" else "top" %}
 <article class="md-post md-post--excerpt kb-blog-entry{% if image %} kb-blog-entry--image-{{ image_layout }}{% endif %}">
   <header class="kb-blog-entry__date">
     <time datetime="{{ post.config.date.created.isoformat() }}">

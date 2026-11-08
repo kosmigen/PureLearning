@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import math
 import re
 
@@ -9,6 +10,7 @@ from mkdocs.plugins import event_priority
 
 
 _POST_PATH = "blog/posts/"
+log = logging.getLogger("mkdocs.hooks.blog_metadata")
 _FENCED_CODE = re.compile(
     r"(?ms)^[ \t]*(?:```|~~~).*?^[ \t]*(?:```|~~~)[ \t]*$"
 )
@@ -47,6 +49,12 @@ def on_page_markdown(markdown, *, page, config, files):
 
     if not page.file.src_uri.startswith(_POST_PATH):
         return
+
+    if "iamge_layout" in page.meta:
+        log.warning(
+            "%s: 封面字段 iamge_layout 拼写有误，请改为 image_layout（top 或 side）。",
+            page.file.src_uri,
+        )
 
     word_count, reading_time = _reading_stats(markdown)
     page.meta["word_count"] = word_count
