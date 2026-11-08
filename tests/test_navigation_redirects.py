@@ -45,16 +45,27 @@ class NavigationRedirectTests(unittest.TestCase):
         self.assertEqual((self.site / "notes/AI/index.html").read_text(), "Current page")
 
     def test_retired_fundamentals_use_available_entries(self):
-        self.page("notes/index.html")
+        self.page("notes/overview/index.html")
         self.page("notes/CSAPP/index.html")
 
         on_post_build(config=self.config)
 
         for prefix in ("fundamentals", "notes/fundamentals"):
-            self.assertRedirect(f"{prefix}/index.html", "notes/")
+            self.assertRedirect(f"{prefix}/index.html", "notes/overview/")
             self.assertRedirect(f"{prefix}/computer-systems/index.html", "notes/CSAPP/")
             for topic in ("algorithms", "databases", "networks", "operating-systems"):
-                self.assertRedirect(f"{prefix}/{topic}/index.html", "notes/")
+                self.assertRedirect(f"{prefix}/{topic}/index.html", "notes/overview/")
+
+    def test_notes_landing_redirects_to_overview(self):
+        current = self.page("notes/overview/index.html", "Overview content")
+
+        on_post_build(config=self.config)
+
+        self.assertRedirect("notes/index.html", "notes/overview/")
+        self.assertEqual(current.read_text(), "Overview content")
+        redirect = (self.site / "notes/index.html").read_text()
+        self.assertIn("destination.search = window.location.search", redirect)
+        self.assertIn("destination.hash = window.location.hash", redirect)
 
     def test_moved_java_section_pages_redirect_to_overviews(self):
         pages = {

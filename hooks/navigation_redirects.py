@@ -20,6 +20,7 @@ _MOVED_SECTIONS = {
 # Section landing pages that became regular pages so their directories render
 # as expandable groups instead of links.
 _MOVED_SECTION_PAGES = {
+    "notes": "notes/overview",
     "notes/Java": "notes/Java/intro",
     "notes/Java/basics": "notes/Java/basics/overview",
     "notes/Java/advanced": "notes/Java/advanced/overview",
@@ -30,12 +31,12 @@ _MOVED_SECTION_PAGES = {
 }
 
 _RETIRED_FUNDAMENTALS = {
-    "": "notes",
-    "algorithms": "notes",
+    "": "notes/overview",
+    "algorithms": "notes/overview",
     "computer-systems": "notes/CSAPP",
-    "databases": "notes",
-    "networks": "notes",
-    "operating-systems": "notes",
+    "databases": "notes/overview",
+    "networks": "notes/overview",
+    "operating-systems": "notes/overview",
 }
 
 

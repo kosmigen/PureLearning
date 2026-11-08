@@ -2,7 +2,9 @@
 // Material still owns rendering, active paths, and the mobile drawer.
 const desktop = window.matchMedia("(min-width: 76.25em)");
 const docsLink = document.querySelector('[data-site-section="docs"]');
-const docsPath = docsLink ? new URL(docsLink.href).pathname : null;
+const docsRoot = docsLink?.dataset.sitePaths?.split(/\s+/).find(Boolean);
+const siteRoot = docsLink?.closest('[data-site-root]')?.dataset.siteRoot || document.baseURI;
+const docsPath = docsLink ? new URL(docsRoot || docsLink.href, siteRoot).pathname : null;
 const storageKey = `kb-sidebar-state:${docsPath}`;
 const scrollStorageKey = `${storageKey}:scroll`;
 let choices = new Map();
