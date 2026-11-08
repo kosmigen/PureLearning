@@ -1,8 +1,8 @@
 <div align="center">
-<img alt="PureLearning" src="docs/assets/images/readme-logo.svg">
+<img alt="kosmigen" src="docs/assets/images/readme-logo.svg">
 </div>
 
-个人技术文档、项目与博客，使用 Material for MkDocs 构建。
+kosmigen 的个人技术文档、项目与博客，使用 Material for MkDocs 构建。
 
 - 网站：<https://kosmigen.github.io/PureLearning/>
 - **内容编辑入口：[网站内容编辑手册](handbook/网站内容编辑手册.md)**
