@@ -25,7 +25,6 @@ description: 编程语言、计算机基础、AI，以及框架与工具的技�
 
 这部分内容质量随着阅历、经验的提升而提升，如有什么不足之处，欢迎提交 PR 。
 
-
 ## 工具
 
 <div class="grid cards" markdown>
@@ -51,6 +50,18 @@ description: 编程语言、计算机基础、AI，以及框架与工具的技�
 - [**AI**](AI/index.md) 
 
 </div>
+
+## 推荐学习资料
+
+[Point Tech](https://www.tpointtech.com/)
+
+印度的编程资源，内容全面并详细，更新时间很新，用于学习各类编程语言是不错的选择。
+
+[SpringBoot](https://docs.spring.io/spring-boot/docs/3.0.0/reference/html/index.html)
+
+SpringBoot 的官方参考网站，学习使用 SpringBoot 利用这个网站很不错。
+
+---
 
 尽管现在的 AI 非常强大，但是我们仍然需要牢牢掌握计算机基础部分和 AI 的相关原理，不要只做调用者。
 
