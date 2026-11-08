@@ -32,6 +32,23 @@ pre {
   line-height: 1.8;
 }
 
+.md-typeset figure:not(.kb-home-portrait):has(> figcaption) {
+  font: inherit;
+}
+
+.md-typeset figure:not(.kb-home-portrait) > figcaption {
+  max-width: 100%;
+  margin: .55em auto 0;
+  color: var(--color-caption);
+  font-family: inherit;
+  font-size: .85em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
 .md-typeset :is(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-body);
   font-style: normal;

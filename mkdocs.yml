@@ -84,6 +84,7 @@ plugins:
       tags_name_property: categories
 
 hooks:
+  - hooks/image_captions.py
   - hooks/blog_metadata.py
   - hooks/project_cards.py
   - hooks/diagrams.py

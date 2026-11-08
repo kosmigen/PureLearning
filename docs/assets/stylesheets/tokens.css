@@ -34,6 +34,7 @@
   --color-ink: #24262b;
   --color-muted: #62666d;
   --color-faint: #70757d;
+  --color-caption: #858585;
   --color-rule: #e5e7eb;
   --color-rule-strong: #b8bdc5;
   --color-accent: #5672cd;
@@ -90,6 +91,7 @@
   --color-ink: #edf0f4;
   --color-muted: #b3b8c2;
   --color-faint: #9aa2ae;
+  --color-caption: #a3a3a3;
   --color-rule: #383e47;
   --color-rule-strong: #697383;
   --color-accent: #a8b1ff;
