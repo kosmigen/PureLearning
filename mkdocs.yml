@@ -15,6 +15,7 @@ theme:
   favicon: assets/images/cipher-wheel.svg
   icon:
     repo: fontawesome/brands/github
+    search: lucide/search
   font: false
   palette:
     - media: "(prefers-color-scheme)"
@@ -141,6 +142,7 @@ extra_css:
 
 extra_javascript:
   - assets/javascripts/site-navigation.mjs
+  - assets/javascripts/site-search.mjs
   - assets/javascripts/sidebar-state.mjs
   - assets/javascripts/home-animation.mjs
   - assets/javascripts/projects.mjs
