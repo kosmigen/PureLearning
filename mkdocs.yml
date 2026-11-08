@@ -21,22 +21,22 @@ theme:
       primary: custom
       accent: custom
       toggle:
-        icon: material/brightness-auto
-        name: 跟随系统主题
+        icon: lucide/sun-moon
+        name: 切换至浅色模式
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: custom
       accent: custom
       toggle:
-        icon: material/brightness-7
+        icon: lucide/sun
         name: 切换至深色模式
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: custom
       accent: custom
       toggle:
-        icon: material/brightness-4
-        name: 切换至浅色模式
+        icon: lucide/moon-star
+        name: 跟随系统主题
   features:
     - navigation.instant
     - navigation.instant.prefetch

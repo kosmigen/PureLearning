@@ -49,6 +49,8 @@ body { background: var(--color-paper); }
 }
 .kb-site-header .md-header__topic[data-md-component="header-topic"] { display: none; }
 .kb-site-header .md-header__topic:first-child { transform: none; opacity: 1; }
+/* Lucide icons use strokes, while Material's other icons use solid fills. */
+.kb-site-header svg.lucide { fill: none; }
 .kb-site-header .md-header__button.md-logo img,
 .md-nav__button.md-logo img { filter: grayscale(1); }
 [data-md-color-scheme="slate"] .kb-site-header .md-header__button.md-logo img,
