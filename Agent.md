@@ -12,7 +12,7 @@
 
 ## 项目与命令
 
-PureLearning 是基于 Material for MkDocs 的个人知识站，主要使用中文 Markdown、Jinja2 模板、CSS 和少量 JavaScript/Python hooks。依赖以 `requirements.txt` 为准。
+kosmigen 是基于 Material for MkDocs 的个人知识站，对外品牌和署名统一使用 `kosmigen`。主要使用中文 Markdown、Jinja2 模板、CSS 和少量 JavaScript/Python hooks。依赖以 `requirements.txt` 为准。
 
 优先使用仓库现有虚拟环境。仅在 `.venv/` 不存在时创建；已有环境缺少依赖时，只执行安装命令：
 
@@ -80,7 +80,7 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 | Material 导航结构、左侧顶层栏目名称 | `docs/.nav.yml` |
 | 栏目内的页面、顺序和子栏目 | 各内容目录的 `.nav.yml` |
 | 自定义顶部导航名称、顺序、目标网址 | `overrides/partials/header.html` 的 `sections` |
-| 页脚导航 | `overrides/partials/footer.html` |
+| 页脚简介、近期文章、导航与联系方式 | `overrides/partials/footer.html`；联系方式在 `mkdocs.yml` 的 `extra.social` 中维护 |
 | 默认页面的元数据和正文标题 | 对应 `index.md` 的 `title` 与一级标题（如果有） |
 | 即时导航、前进后退后的选中状态 | `docs/assets/javascripts/site-navigation.mjs`；读取顶部链接的 `data-site-paths` |
 | 左侧目录开合状态的保持 | `docs/assets/javascripts/sidebar-state.mjs`；为全部技术文档记录桌面端手动开合状态，在 `window.document$` 更新后恢复，并保留侧栏滚动位置 |
@@ -128,7 +128,7 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 - `draft: true` 的文章默认不进入生产构建；当前 Material 默认 `draft_on_serve: true`，因此 `mkdocs serve` 会显示博客草稿。这条规则只适用于博客插件管理的文章。
 - `docs/blog/posts/.meta.yml` 提供默认作者 ID。展示名称、简介和头像在 `docs/blog/.authors.yml` 修改；点击作者后的完整介绍页是 `docs/about/author.md`。显示名称与内部作者 ID 不要混淆。
 - 博客阅读页采用正文与右侧目录两列，不显示左侧信息栏。作者、日期、字数与阅读时间位于标题下方，作者简介渲染为引用块，标签单独一行；上一篇、下一篇位于文末。窄屏使用可展开的本文目录。
-- 封面使用 `image`，可配 `image_alt`、`image_layout: side` 或 `top`；默认右侧小图。封面用于列表和时间归档，正文插图仍使用 Markdown。完整写作与元数据说明见 `handbook/网站内容编辑手册.md`。
+- 封面使用 `image`，可配 `image_alt`、`image_layout: top` 或 `side`；默认 `top`，只有显式填写 `side` 才使用右侧小图。布局同时作用于列表、时间归档和文章详情：详情页 `top` 在标题信息下方显示通栏封面，`side` 在宽屏标题信息右侧显示小图，手机统一上下排列；详情封面保持原图比例，正文其他插图仍使用 Markdown。拼成 `iamge_layout` 会产生明确构建警告。完整写作与元数据说明见 `handbook/网站内容编辑手册.md`。
 
 文章示例（日期替换为实际发布日期，`categories` 可省略）：
 
@@ -162,12 +162,14 @@ categories:
 | `docs/assets/stylesheets/tokens.css` | 全站字体、字号、间距与明暗配色变量 |
 | `docs/assets/stylesheets/site.css` | 主题色与顶部导航 |
 | `docs/assets/stylesheets/home.css` | 首页布局与插画 |
+| `docs/assets/javascripts/home-animation.mjs` | 首页文字淡入、插画鼠标跟随和弹跳；支持减少动态效果与即时导航清理 |
 | `overrides/projects.html`、`overrides/partials/project-cards.html` | 项目展示页和卡片，不插入文档默认标题 |
 | `docs/assets/stylesheets/projects.css` | 项目卡片配色、响应式网格和组件未加载时的基础布局 |
 | `docs/assets/javascripts/projects.mjs` | 按需加载本地组件、处理预览成功和失败，兼容即时导航 |
 | `hooks/project_cards.py` | 校验项目元数据，在 Markdown 转换前生成可搜索卡片；根据网址生成 thum.io 首页预览地址 |
 | `docs/assets/stylesheets/blog.css` | 博客列表、正文、右侧目录和响应式排版 |
-| `docs/assets/stylesheets/footer.css` | 页脚布局与粒子画布活动空间 |
+| `docs/assets/stylesheets/footer.css` | 随全站明暗主题切换的四列页脚、圆形联系图标与响应式排版 |
+| `docs/assets/javascripts/footer-jelly.mjs` | 页脚阴影果冻形变、鼠标弹性挤压与离屏暂停 |
 | `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |
 | `hooks/diagrams.py` | 为 Mermaid 添加滚动容器，横向流程图可拖动 |
@@ -189,7 +191,7 @@ Web Awesome 3.14.0 的 Card、Badge 及其依赖保存在 `docs/assets/javascrip
 
 Java 内容遵循 [Java 文档编写规范](handbook/Java文档编写规范.md)：参考 Tpoint Tech 的讲解组织方式，统一采用概念、语法、独立示例、输出、注意事项、练习与参考资料的形式。当前示例基准为 JDK 21，完整程序需要编译运行；按现有核心、进阶、框架、第三方库分类组织，正文与示例独立编写。
 
-修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。页脚粒子应在画布内完整绘制，博客右侧目录应在正文边界前避让页脚。
+修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。四列页脚跟随全站 `data-md-color-scheme` 切换：浅色复用全站颜色变量，深色使用深蓝灰配色；复用 Material 的社交图标模板。`footer-jelly.mjs` 为背景阴影提供自动果冻形变和鼠标弹性挤压，离屏或后台时暂停，减少动态效果时保留 CSS 静态阴影；装饰画布不阻挡链接和手机滚动。近期文章从 Blog 插件的数据中按日期取最近两篇，始终排除草稿，缺少封面时使用文档图标。博客右侧目录应在正文边界前避让页脚。
 
 ## 验证与部署
 
