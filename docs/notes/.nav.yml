@@ -1,3 +1,5 @@
+icon: lucide/book-open
+
 nav:
   - overview: overview.md
   - C: C

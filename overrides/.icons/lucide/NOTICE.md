@@ -1,18 +1,20 @@
-# Lucide palette icons
+# Lucide icons
 
-`sun-moon.svg`, `sun.svg`, `moon-star.svg`, and `search.svg` are Lucide icons, used in the
-same forms as the theme controls at <https://zensical.org/projects/>.
+Lucide SVGs are provided by the official `lucide-static` build dependency,
+pinned to version 1.69.0 in `package.json` and `package-lock.json`.
+Install them with `npm ci --ignore-scripts`; do not download individual icons.
 
 Upstream: <https://github.com/lucide-icons/lucide>
+Catalogue: <https://lucide.dev/icons/>
 
-Navigation icons in this directory also come from Lucide: code, terminal,
-coffee, brain, cpu, wrench, folder, file-text, house, book-open, newspaper,
-package-open, users, tags, and archive. Navigation defaults are configured in
-`mkdocs.yml` under `extra.navigation_icons`; explicit page icon metadata takes
-precedence.
+`hooks/icon_assets.py` makes package SVGs available as `.icons/lucide/<name>.svg`
+to Jinja templates. Only referenced icons are embedded into generated HTML;
+the complete library is not copied into the website. This directory retains
+the source notice and license, and can hold intentional project overrides.
 
-`menu.svg` and `list-filter.svg` are Lucide icons used for the mobile navigation
-and standalone table-of-contents control, following the layout at
-<https://zensical.org/docs/create-your-site/>.
+Directory navigation icons are configured in each directory's `.nav.yml`;
+page icons are configured in Markdown front matter. Menu, search and palette
+controls continue using `theme.icon` and the existing templates.
 
-Copyright and license: see [LICENSE](LICENSE), copied from the upstream project.
+Copyright and license: see [LICENSE](LICENSE), which matches the pinned
+package's license. Builds also publish it at `assets/licenses/lucide.txt`.

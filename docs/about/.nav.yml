@@ -1,3 +1,5 @@
+icon: lucide/users
+
 nav:
   - 关于网站: website.md
   - 关于作者: author.md

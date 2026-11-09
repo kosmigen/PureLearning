@@ -31,10 +31,14 @@ jobs:
       - name: Install documentation dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Set up Node.js for script checks
+      - name: Set up Node.js for icon assets and script checks
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: npm
+
+      - name: Install icon assets
+        run: npm ci --ignore-scripts
 
       - name: Test build hooks
         run: python -m unittest discover -s tests

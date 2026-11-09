@@ -14,7 +14,7 @@
             {% if child.is_index %}
               <li class="md-nav__item">
                 <a href="{{ section.url | url }}" class="md-nav__link kb-nav-row{% if page.url == section.url %} md-nav__link--active{% endif %}">
-                  {{ item.render_content(child, label=section.title) }}
+                  {{ item.render_content(child, label=section.title, directory=root) }}
                 </a>
               </li>
             {% else %}

@@ -1,3 +1,5 @@
+icon: lucide/coffee
+
 nav:
   - Java 入门: intro.md
   - Java 概述: overview.md

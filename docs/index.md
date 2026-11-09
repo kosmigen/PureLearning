@@ -1,4 +1,5 @@
 ---
+icon: lucide/house
 title: 首页
 description: 你好，我是 kosmigen。通过软件开发、实验和技术写作探索计算机科学与人工智能，也喜欢阅读和运动。
 hide:

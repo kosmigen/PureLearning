@@ -1,0 +1,8 @@
+{
+  "name": "kosmigen-site-assets",
+  "private": true,
+  "description": "Build-time icon assets for the MkDocs site",
+  "devDependencies": {
+    "lucide-static": "1.69.0"
+  }
+}
