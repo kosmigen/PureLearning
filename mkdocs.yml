@@ -89,6 +89,7 @@ hooks:
   - hooks/image_captions.py
   - hooks/blog_metadata.py
   - hooks/project_cards.py
+  - hooks/now.py
   - hooks/diagrams.py
 
 markdown_extensions:
@@ -142,6 +143,11 @@ extra:
       title_en: Projects
       url: projects/
       paths: [projects/]
+    - id: now
+      title: Now
+      title_en: Now
+      url: now/
+      paths: [now/]
     - id: about
       title: 关于
       title_en: About
@@ -179,6 +185,7 @@ extra_css:
   - assets/stylesheets/sidebar.css
   - assets/stylesheets/home.css
   - assets/stylesheets/projects.css
+  - assets/stylesheets/now.css
   - assets/stylesheets/blog.css
   - assets/stylesheets/footer.css
   - assets/stylesheets/not-found.css

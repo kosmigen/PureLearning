@@ -55,7 +55,7 @@ pre {
 }
 
 /* Keep prose readable on wide screens without changing the homepage or archive. */
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) {
   width: calc(100% - 1.6rem);
   max-width: var(--width-reading);
   margin-inline: auto;
@@ -64,42 +64,42 @@ pre {
 }
 
 /* Document typography follows https://huggingface.co/docs/inference-providers/index. */
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) :is(h1, h2, h3, h4, h5, h6) {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) :is(h1, h2, h3, h4, h5, h6) {
   font-weight: 600;
 }
 
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) h1 {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) h1 {
   font-size: var(--text-doc-h1);
   line-height: 32px;
 }
 
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) h2 {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) h2 {
   font-size: var(--text-doc-h2);
   line-height: 28px;
 }
 
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) h3 {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) h3 {
   font-size: var(--text-doc-h3);
   line-height: 28px;
 }
 
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) :is(h4, h5, h6) {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) :is(h4, h5, h6) {
   font-size: var(--text-doc-body);
   line-height: 1.5;
 }
 
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) code {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) code {
   font-size: var(--text-doc-code);
   line-height: 20px;
 }
 
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) pre,
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) pre code {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) pre,
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) pre code {
   font-size: var(--text-doc-code);
   line-height: 1.8;
 }
 
-.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects)) table:not([class]) {
+.md-content__inner:not(.kb-blog-index):not(:has(.kb-home, .kb-blog-post, .kb-projects, .kb-now)) table:not([class]) {
   font-size: var(--text-doc-table);
   line-height: 1.7142857143;
 }

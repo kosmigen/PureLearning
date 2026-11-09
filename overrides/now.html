@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+
+{% block content %}
+  {% set entry = page.meta.now_entry %}
+  <div class="kb-now">
+    <header class="kb-now-header">
+      {% if not page.meta.now_is_index %}
+        <a class="kb-now-back" href="{{ 'now/' | url }}">← Back to now</a>
+      {% endif %}
+      <h1>Now</h1>
+      {% if page.meta.get("intro") %}
+        <p class="kb-now-intro">{{ page.meta.intro | e }}</p>
+      {% endif %}
+      {% if entry %}
+        <p class="kb-now-date">
+          <span>{{ 'Updated' if page.meta.now_is_index else 'From the archive' }}</span>
+          <time datetime="{{ entry.date }}">{{ entry.date | replace('-', '.') }}</time>
+        </p>
+      {% endif %}
+    </header>
+    <div class="kb-now-content{% if not entry %} kb-now-content--empty{% endif %}">
+      {{ page.content }}
+    </div>
+    {% if page.meta.now_entries %}
+      <details class="kb-now-history">
+        <summary>Past updates <span>{{ page.meta.now_entries | length }}</span></summary>
+        <ol>
+          {% for update in page.meta.now_entries %}
+            <li>
+              <a href="{{ update.url | url }}"{% if entry and entry.source == update.source and not page.meta.now_is_index %} aria-current="page"{% endif %}>
+                <time datetime="{{ update.date }}">{{ update.date | replace('-', '.') }}</time>
+                {% if update.title != update.date %}<span>{{ update.title }}</span>{% endif %}
+                {% if loop.first %}<small>Latest</small>{% endif %}
+              </a>
+            </li>
+          {% endfor %}
+        </ol>
+      </details>
+    {% endif %}
+    <p class="kb-now-colophon">A <a href="https://nownownow.com/about">/now page</a>.</p>
+  </div>
+{% endblock %}
