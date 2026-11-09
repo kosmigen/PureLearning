@@ -37,19 +37,22 @@ class NowTests(unittest.TestCase):
         (self.docs / "reading.md").write_text("# Reading")
         (self.now / "index.md").write_text("---\ntitle: Now\n---\n\nNo updates yet.")
         (self.now / ".nav.yml").write_text("append_unmatched: true\nnav:\n  - index.md\n")
+        (self.now / ".meta.yml").write_text("intro: Shared introduction\n")
         (self.now / "picture.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
         repository = Path(__file__).resolve().parents[1]
         self.config = load_config(
             str(repository / "mkdocs.yml"), strict=True,
             docs_dir=str(self.docs), site_dir=str(self.site),
-            plugins=["search", "awesome-nav"],
+            plugins=["search", "awesome-nav", "meta"],
             extra={"site_navigation": [{
                 "id": "now", "title": "Now", "title_en": "Now", "url": "now/", "paths": ["now/"]
             }]},
         )
 
-    def write_entry(self, day, text, *, draft=False):
-        (self.now / f"{day}.md").write_text(
+    def write_entry(self, day, text, *, draft=False, directory=""):
+        folder = self.now / directory
+        folder.mkdir(parents=True, exist_ok=True)
+        (folder / f"{day}.md").write_text(
             f'---\ntitle: "{day}"\ndraft: {str(draft).lower()}\n---\n\n{text}'
         )
 
@@ -80,6 +83,56 @@ class NowTests(unittest.TestCase):
                     self.assertIn(urljoin(self.config.site_url, target), targets)
         self.assertFalse((self.site / "now/2099-01-01/index.html").exists())
         self.assertNotIn("PRIVATE_DRAFT", self.read("search/search_index.json"))
+
+    def test_year_folders_keep_dates_links_and_shared_intro_on_latest_and_archive(self):
+        self.write_entry("2025-12-31", "## Focus\nPREVIOUS_YEAR", directory="2025")
+        self.write_entry("2026-2-10", "FEBRUARY_BODY", directory="2026")
+        self.write_entry("2026-11-9", "## Focus\nNOVEMBER_BODY\n\n"
+                         "![Local image](picture.svg)\n![Shared image](../picture.svg)\n"
+                         "[Earlier](../2025/2025-12-31.md#focus)\n"
+                         "[Reading][reference]\n[Local anchor](#focus)\n"
+                         "[External](https://example.com/path?q=1#section)\n\n"
+                         "`[unchanged](picture.svg)`\n\n"
+                         "[reference]: ../../reading.md?mode=now#reading\n", directory="2026")
+        self.write_entry("2099-1-1", "NESTED_PRIVATE_DRAFT", draft=True, directory="2099")
+        (self.now / "2026/picture.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
+        build(self.config)
+
+        latest = self.read("now/index.html")
+        self.assertIn("NOVEMBER_BODY", latest)
+        self.assertNotIn("FEBRUARY_BODY", latest)
+        history = latest[latest.index('class="kb-now-history"'):]
+        self.assertLess(history.index('datetime="2026-11-09"'), history.index('datetime="2026-02-10"'))
+        self.assertLess(history.index('datetime="2026-02-10"'), history.index('datetime="2025-12-31"'))
+        for path in ("now/index.html", "now/2026/2026-11-9/index.html"):
+            with self.subTest(path=path):
+                html = self.read(path)
+                base = urljoin(self.config.site_url, path)
+                targets = {urljoin(base, target) for target in NowLinks(html).targets}
+                self.assertIn('<p class="kb-now-intro">Shared introduction</p>', html)
+                self.assertIn('<code>[unchanged](picture.svg)</code>', html)
+                for target in ("now/2026/picture.svg", "now/picture.svg",
+                               "now/2025/2025-12-31/#focus", "reading/?mode=now#reading"):
+                    self.assertIn(urljoin(self.config.site_url, target), targets)
+                self.assertIn(urljoin(base, "#focus"), targets)
+                self.assertIn("https://example.com/path?q=1#section", targets)
+        self.assertFalse((self.site / "now/2099/2099-1-1/index.html").exists())
+        self.assertNotIn("NESTED_PRIVATE_DRAFT", self.read("search/search_index.json"))
+
+        self.write_entry("2026-11-9", "WITHDRAWN", draft=True, directory="2026")
+        build(self.config)
+        self.assertIn("FEBRUARY_BODY", self.read("now/index.html"))
+        self.assertNotIn("NOVEMBER_BODY", self.read("now/index.html"))
+        self.assertFalse((self.site / "now/2026/2026-11-9/index.html").exists())
+
+    def test_duplicate_published_dates_fail_even_with_different_zero_padding(self):
+        self.write_entry("2026-11-09", "PUBLISHED")
+        self.write_entry("2026-11-9", "PRIVATE", draft=True, directory="2026")
+        build(self.config)
+        self.assertIn("PUBLISHED", self.read("now/index.html"))
+        self.write_entry("2026-11-9", "DUPLICATE", directory="2026")
+        with self.assertRaisesRegex(ConfigurationError, "Now 日期重复"):
+            build(self.config)
 
     def test_rebuilding_after_unpublishing_chooses_previous_then_empty_state(self):
         self.write_entry("2026-11-03", "EARLIER_BODY")
