@@ -24,14 +24,7 @@
 }
 
 [data-md-color-scheme="slate"] .md-footer.kb-footer {
-  --footer-paper: oklch(19% 0.025 258);
-  --footer-ink: oklch(94% 0.008 258);
-  --footer-muted: oklch(77% 0.018 258);
-  --footer-faint: oklch(70% 0.025 258);
-  --footer-accent: oklch(76% 0.09 264);
-  --footer-rule: oklch(31% 0.025 258);
-  --footer-surface: oklch(26% 0.028 258);
-  --footer-shape: oklch(24% 0.025 258);
+  --footer-shape: color-mix(in srgb, var(--color-paper) 35%, var(--color-surface));
 }
 
 .kb-footer::before {

@@ -24,7 +24,7 @@ function createJelly(footer) {
   const contour = Array.from({ length: 80 }, () => ({ offset: 0, velocity: 0 }));
 
   function palette() {
-    shapeColor = getComputedStyle(footer).getPropertyValue("--footer-shape").trim();
+    shapeColor = getComputedStyle(footer, "::before").backgroundColor;
   }
 
   function shape() {
