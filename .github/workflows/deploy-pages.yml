@@ -31,6 +31,21 @@ jobs:
       - name: Install documentation dependencies
         run: python -m pip install -r requirements.txt
 
+      - name: Set up Node.js for script checks
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Test build hooks
+        run: python -m unittest discover -s tests
+
+      - name: Check custom JavaScript syntax
+        run: |
+          shopt -s nullglob
+          for script in docs/assets/javascripts/*.mjs docs/assets/javascripts/*.js; do
+            node --check "$script"
+          done
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
