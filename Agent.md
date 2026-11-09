@@ -12,7 +12,7 @@
 
 ## 项目与命令
 
-kosmigen 是基于 Material for MkDocs 的个人知识站，对外品牌和署名统一使用 `kosmigen`。主要使用中文 Markdown、Jinja2 模板、CSS 和少量 JavaScript/Python hooks。依赖以 `requirements.txt` 为准。
+kosmigen 是基于 Material for MkDocs 的个人知识站，对外品牌和署名统一使用 `kosmigen`。主要使用中文 Markdown、Jinja2 模板、CSS 和少量 JavaScript/Python hooks。Python 依赖以 `requirements.txt` 为准；Lucide 构建资源由 `package.json` 与 `package-lock.json` 固定版本。
 
 优先使用仓库现有虚拟环境。仅在 `.venv/` 不存在时创建；已有环境缺少依赖时，只执行安装命令：
 
@@ -22,6 +22,9 @@ python3 -m venv .venv
 
 # 需要安装或补齐项目依赖时执行
 .venv/bin/python -m pip install -r requirements.txt
+
+# 首次安装或恢复图标构建依赖（需要 Node.js，CI 使用 22）
+npm ci --ignore-scripts
 ```
 
 常用命令（从仓库根目录执行）：
@@ -82,6 +85,7 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 | --- | --- |
 | 顶层菜单名称、顺序和网址 | `mkdocs.yml` 的 `extra.site_navigation`；顶部、侧栏与手机抽屉共用 |
 | 栏目内的页面、顺序和子栏目 | 各内容目录的 `.nav.yml` |
+| 目录与页面的侧栏图标 | 目录 `.nav.yml` 的 `icon`；页面 Markdown 顶部的 `icon` |
 | 自定义顶部与页脚快速链接的名称、顺序、目标网址 | `mkdocs.yml` 的 `extra.site_navigation`；顶部显示 `title`，页脚显示 `title_en` |
 | 隐藏桌面侧栏最上方的栏目标题 | `extra.site_navigation` 对应项的 `hide_sidebar_title_on_desktop: true`；手机保留 |
 | 页脚格言、近期文章与联系方式 | `overrides/partials/footer.html`；联系方式在 `mkdocs.yml` 的 `extra.social` 中维护 |
@@ -97,6 +101,8 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 - 显式列出页面且没有通配规则的 `.nav.yml`，新增页面时要按需更新列表，不能假定自动进入侧栏。
 - `.nav.yml` 顶层必须是映射（`nav:`），不能写成 `- nav:`。导航引用的目录至少需要一个 Markdown 页面；空文件夹不会成为可发布的导航分类。
 - 标签改名不等于路径迁移。仅调整导航层级时，不必移动目录；用户要求修改网址时，再同步目录、导航与站内链接。
+- 侧栏图标与内容一起维护：目录在自己的 `.nav.yml` 顶层设置 `icon`，单篇页面在 front matter 中设置 `icon`。值为主题图标名（如 `lucide/coffee`），`icon: ""` 隐藏图标；未设置时使用默认文件夹 / 文档图标。目录行与 index 页面合并时，目录的显式设置优先。目录图标只作用于自身，不传给所有下级页面；手机一级栏目保持无前置图标。不要恢复 `extra.navigation_icons` 的标题映射。
+- Lucide 来自官方 `lucide-static` 1.69.0 构建依赖，支持该版本提供的全部 SVG 名称，不再逐个下载到 `overrides/.icons/lucide/`。`hooks/icon_assets.py` 在模板环境中按需读取 `node_modules/lucide-static/icons/`，保留项目自定义 SVG 与主题图标的优先级，只把实际使用的 SVG 嵌入网页；自动发布完整许可证。`node_modules/` 不提交，也不复制整套图标库、图标字体或浏览器图标脚本到网站。升级版本需同时更新依赖和锁文件并验证。
 - Markdown 内部链接优先指向相对 `.md` 源文件；Jinja2 模板中的站内路径通过 `| url` 处理。不要把部署域名或错误的根路径硬编码进普通站内链接。
 - `.nav.yml` 中的 `ignore` 只影响导航，不会阻止页面构建。`docs/404.md` 由 `overrides/404.html` 提供真正的站点 404 内容。
 - 未列入导航不代表不构建或不发布。普通 Markdown 文档不能仅靠 `.nav.yml` 隐藏来实现草稿隔离。
@@ -137,11 +143,11 @@ categories:
 
 ## Now 近况
 
-`docs/now/index.md` 是固定入口，没有已发布记录时展示其中的空状态文案。每期近况直接放在同目录，以 `YYYY-MM-DD.md` 命名；文件名日期是排序依据，`title` 可选，正文从二级标题开始。`hooks/now.py` 在构建时按日期倒序挑选最新的非草稿正文展示在 `/now/`，原文件仍生成 `/now/YYYY-MM-DD/` 永久地址，页面底部 `Past updates` 可回看全部已发布记录。
+`docs/now/index.md` 是固定入口，没有已发布记录时展示其中的空状态文案。每期近况可放在 `docs/now/` 的子目录中，推荐按年份组织，例如 `docs/now/2026/2026-11-09.md`；原来直接放在根目录的日期文件仍可使用。文件名日期是排序依据，接受 `YYYY-MM-DD.md` 与月、日不补零的 `YYYY-M-D.md`；展示和排序统一使用完整日期，同一天只能有一份已发布记录。`title` 可选，正文从二级标题开始。`hooks/now.py` 递归收集记录，按日期倒序挑选最新的非草稿正文展示在 `/now/`；历史地址按实际目录生成，例如 `/now/2026/2026-11-09/`，底部 `Past updates` 可回看全部已发布记录。
 
 Now 标题下的共享介绍在 `docs/now/.meta.yml` 的 `intro` 中维护，由现有 Material `meta` 插件传给入口与历史页；模板只读取内容，不硬编码介绍文案。多行内容使用 YAML 的 `|`，样式保留手动换行与空行，长句自然折行。将 `intro` 设为 `""` 即可隐藏，不额外增加脚本或 hook 配置。
 
-Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件，预览和正式构建一致；日期只用于排序，不提供定时发布。当前按用户要求提供三期明确标注为示例的已发布近况（2026-10-18、2026-11-01、2026-11-09），用于预览最新入口与历史回看；示例内容不代表用户真实经历，可替换或设为草稿。所有版本由 `now.html` 和 `now.css` 统一展示，隐藏桌面侧栏和文章目录，手机保留全站菜单；不增加客户端版本切换脚本。新增一期无需修改导航或复制正文到 `index.md`。完整写作流程见编辑手册的 Now 章节。
+Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件，预览和正式构建一致；日期只用于排序，不提供定时发布。所有版本由 `now.html` 和 `now.css` 统一展示，隐藏桌面侧栏和文章目录，手机保留全站菜单；不增加客户端版本切换脚本。新增一期无需修改导航或复制正文到 `index.md`。复制最新正文时，`NowLinksExtension` 在 MkDocs 原生链接转换前，按原文件目录调整 Markdown 图片与链接，保证嵌套目录的相对路径在最新入口也有效；不替换代码块或行内代码中的文本。完整写作流程见编辑手册的 Now 章节。
 
 ## 主题、样式与 hooks
 
@@ -174,14 +180,16 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `docs/assets/javascripts/footer-jelly.mjs` | 页脚阴影果冻形变、鼠标弹性挤压与离屏暂停 |
 | `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |
-| `overrides/partials/nav-item.html` | 保留 Material 9.7.7 导航宏，扩展图标、栏目显示名称/目标、整行状态容器与顶层标题标记；手机一级栏目由 `nav.html` 单独渲染为纯文字展开项：页面 `icon` 优先，再查 `extra.navigation_icons` 中的导航名称，最后使用文件夹 / 文档默认图标；不使用图标 hook |
+| `overrides/partials/nav-item.html` | 保留 Material 9.7.7 导航宏，读取本地目录 / 页面图标，保留栏目显示名称、整行状态容器与顶层标题标记；手机一级栏目由 `nav.html` 单独渲染为纯文字展开项 |
+| `hooks/navigation_icons.py` | 构建时读取各目录 `.nav.yml` 的 `icon`，按物理目录绑定图标，验证图标名；复用固定版本 awesome-nav 的解析树处理别名、虚拟分组与单子项目录。博客归档从 `docs/blog/archive/.nav.yml` 读取，Tags 在 `docs/blog/tags.md` 中维护；不增加浏览器脚本 |
+| `hooks/icon_assets.py` | 在其他模板环境处理前提供 Lucide 依赖的 SVG 加载器，保持项目与主题覆盖优先级；发布 `assets/licenses/lucide.txt`，依赖缺失时提示安装命令 |
 | `hooks/diagrams.py` | 为 Mermaid 添加滚动容器，横向流程图可拖动 |
 
 样式加载入口是 `mkdocs.yml` 的 `extra_css`。加载顺序为文档基础、页眉、搜索、侧栏，再到各页面与页脚。内部导入包括 `extra.css` → `tokens.css` → `reading-fonts.css`、`blog.css` → `blog-fonts.css` 与 `blog/{common,index,post,meta}.css`，以及 `projects.css` → 本地 Web Awesome 主题。不要把导入文件又重复加入页面。拆分样式时保留选择器、声明与必要的覆盖顺序，并核对拆分前后的浏览器计算样式。
 
 全站使用中性白、浅灰和深灰作为大面积底色，正文与顶部导航保留 VitePress 风格的蓝色强调色。侧栏、手机菜单和独立目录组件使用中性色，选中与悬停背景统一为 `--color-surface` 浅灰（深色模式为深灰），文字、图标和箭头统一使用中性文字色；`.kb-nav-row` 是整行状态容器，带链接与展开箭头的条目也只使用一个完整背景，内部不重复画色块。按用户偏好避免恢复米黄底色和泛黄的纸张色调；配色统一维护在 `tokens.css` 中。
 
-页眉不显示 GitHub 仓库组件，桌面主导航保持居中，右侧保留主题切换和搜索。主题切换沿用 Material 的原生三态循环与偏好保存，图标使用 `overrides/.icons/lucide/` 中的本地日月、太阳和月亮星星，保留其许可证；`site.css` 将这些描边图标设为无填充。首页和页脚提供 GitHub 联系方式；`repo_url` 仍用于反馈与源码链接；手机菜单不插入仓库组件。
+页眉不显示 GitHub 仓库组件，桌面主导航保持居中，右侧保留主题切换和搜索。主题切换沿用 Material 的原生三态循环与偏好保存，图标从固定版本的 Lucide 依赖中读取日月、太阳和月亮星星，保留其许可证；`site.css` 将这些描边图标设为无填充。首页和页脚提供 GitHub 联系方式；`repo_url` 仍用于反馈与源码链接；手机菜单不插入仓库组件。
 
 `overrides/main.html` 统一挂载全站导航和右侧目录。`hide: [navigation]` 在桌面隐藏左栏，手机仍提供配置中的全站入口。桌面树和手机树使用不同 ID 前缀，避免重复控件；手机根分类初始收起，一级标题仅展开、不跳转；原 index 入口保留为下级页面链接。子分类原位展开。桌面状态脚本读取根节点的 `data-nav-key`，避免展示名称改变后丢失已有开合与滚动状态。
 
@@ -205,7 +213,7 @@ Java 内容遵循 [Java 文档编写规范](handbook/Java文档编写规范.md)�
 4. 布局改动检查桌面与手机，必要时覆盖 320、390、1024、1440 像素宽度；确认导航不越界、内容不遮挡、页面不产生意外横向溢出。
 5. JavaScript 改动运行相应 `node --check`，并验证受影响交互。纯协作说明文件的修改以事实、路径、命令及规则一致性核对为主。
 
-GitHub Pages 部署由 `.github/workflows/deploy-pages.yml` 管理：推送 `main` 或手动触发工作流，使用 Python 3.13 与 Node.js 22，安装 `requirements.txt`，先执行 `.venv/bin/python -m unittest discover -s tests` 对应的 Python 测试和自定义顶层 `.mjs` / `.js` 的 `node --check`，再执行 `mkdocs build --strict`，上传 `site/` 后部署。CI 中 Python 命令使用已配置的环境，不带 `.venv/bin/`。当前 `cancel-in-progress: false`，后续触发不会按此设置自动取消正在执行的同组工作流。
+GitHub Pages 部署由 `.github/workflows/deploy-pages.yml` 管理：推送 `main` 或手动触发工作流，使用 Python 3.13 与 Node.js 22，安装 `requirements.txt` 并运行 `npm ci --ignore-scripts`，先执行 `.venv/bin/python -m unittest discover -s tests` 对应的 Python 测试和自定义顶层 `.mjs` / `.js` 的 `node --check`，再执行 `mkdocs build --strict`，上传 `site/` 后部署。CI 中 Python 命令使用已配置的环境，不带 `.venv/bin/`。当前 `cancel-in-progress: false`，后续触发不会按此设置自动取消正在执行的同组工作流。
 
 ## CodeGraph
 

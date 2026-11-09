@@ -15,6 +15,7 @@ kosmigen 的个人技术文档、项目与博客，使用 Material for MkDocs �
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
+npm ci --ignore-scripts
 .venv/bin/mkdocs serve --dev-addr 127.0.0.1:8000
 ```
 
@@ -32,7 +33,7 @@ SH
 .venv/bin/mkdocs build --strict
 ```
 
-脚本语法检查需要 Node.js，部署流程使用 Node.js 22；日常写作和本地预览仍只需 Python 环境。
+首次安装图标依赖需要 Node.js（部署使用 Node.js 22）。安装完成后，日常写作和本地预览继续使用 MkDocs；构建会从本地依赖读取 SVG，不调用图标 CDN。
 
 推送 `main` 会触发 GitHub Pages 工作流；不要直接编辑或提交生成的 `site/`。
 
@@ -54,23 +55,29 @@ docs/                    网站内容与公开资源
   about/                 关于网站与作者
   assets/                字体、图片、样式、脚本与本地组件
 overrides/               实际需要自定义的主题模板
-hooks/                   图片说明、字数统计、项目卡片、Now 与图表
+hooks/                   图片说明、字数统计、项目卡片、Now、侧栏图标与图表
 scripts/                 按需运行的维护工具（字体分片）
 tests/                   博客元数据等构建逻辑的检查
 handbook/                内容编辑手册，不发布到网站
 mkdocs.yml               站点配置与功能开关
 requirements.txt         固定的直接依赖
+package.json             固定的 Lucide 构建依赖
+package-lock.json        图标依赖的版本与完整性锁定
 ```
 
 顶部顺序为 **博客｜文档｜项目｜Now｜关于**；“文档”入口页标题为“技术文档”。底层页面树由插件发现，各栏目内部由对应的 `.nav.yml` 管理；顶部、侧栏、手机菜单与页脚快速链接共同读取 `mkdocs.yml` 的 `extra.site_navigation`，中英文名称、顺序与目标地址只需维护一处。手机使用单行页眉、圆角导航浮层和右下角独立的 `On this page` 目录按钮；一级栏目是纯文字展开项，页面链接位于下级列表，选中条目使用整行浅灰背景。
 
 各栏目可用 `hide_sidebar_title_on_desktop: true` 隐藏桌面侧栏最上方的分组标题，手机保留；目前文档和关于启用，设为 `false` 或省略即可恢复。
 
+侧栏图标在内容旁维护：目录的 `.nav.yml` 顶层写 `icon: lucide/coffee`，单篇页面在 Markdown 顶部写 `icon`。`icon: ""` 隐藏图标，未配置时使用默认图标；目录图标不传给下级文章。配置由构建时读取，改导航显示名称无需同步图标映射。写法见[侧栏图标](handbook/网站内容编辑手册.md#侧栏图标)。
+
+图标名称到 [Lucide 图标库](https://lucide.dev/icons/) 按用途查找，前面加 `lucide/` 即可。项目通过固定版本的 `lucide-static` 提供完整 SVG 图标库，无需逐个下载文件；例如可以直接设置 `icon: lucide/rocket`。`node_modules/` 不提交，构建只嵌入用到的 SVG，许可证自动发布到 `assets/licenses/lucide.txt`。
+
 当前技术文档统一位于 `docs/notes/`，栏目目录使用上面的大小写。新增内容按主题加入对应目录和 `.nav.yml`。
 
 当前只维护现有页面网址，不生成旧地址跳转；移动页面后同步导航入口和站内链接。
 
-Now 的固定入口 `/now/` 自动展示最新一期。每期写在 `docs/now/YYYY-MM-DD.md`，旧版本保留独立地址并列入 `Past updates`。当前附有三期标注为示例的近况，可直接替换正文；最新一期是 `docs/now/2026-11-09.md`。`draft: false` 表示发布，改为 `true` 后不生成网页，也不进入搜索。写法见[编辑手册的 Now 章节](handbook/网站内容编辑手册.md#now近况)。
+Now 的固定入口 `/now/` 自动展示最新一期。每期推荐按年份保存为 `docs/now/YYYY/YYYY-MM-DD.md`，也支持根目录日期文件与月、日不补零的写法（如 `2026-11-9.md`）；系统递归收集并按实际日期排序。旧版本按目录保留独立地址，列入 `Past updates`。`draft: false` 表示发布，改为 `true` 后不生成网页，也不进入搜索。写法见[编辑手册的 Now 章节](handbook/网站内容编辑手册.md#now近况)。
 
 Now 标题下的介绍在 `docs/now/.meta.yml` 的 `intro` 中修改，入口与历史页共用；设为 `intro: ""` 即可隐藏。
 
