@@ -150,6 +150,7 @@ extra:
 extra_css:
   - assets/stylesheets/extra.css
   - assets/stylesheets/site.css
+  - assets/stylesheets/search.css
   - assets/stylesheets/home.css
   - assets/stylesheets/projects.css
   - assets/stylesheets/blog.css
