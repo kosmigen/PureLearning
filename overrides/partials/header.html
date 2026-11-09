@@ -55,24 +55,19 @@
     {% endif %}
   </nav>
   <nav class="kb-site-navigation" aria-label="主导航" data-site-root="{{ config.site_url | e }}">
-    {% set sections = [
-      ('blog', '博客', 'blog/', ['blog/']),
-      ('docs', '文档', 'notes/overview/', ['notes/']),
-      ('projects', '项目', 'projects/', ['projects/']),
-      ('about', '关于', 'about/', ['about/'])
-    ] %}
+    {% set sections = config.extra.site_navigation %}
     {% set current = namespace(section='', length=0) %}
-    {% for section, title, target, paths in sections %}
-      {% for path in paths %}
+    {% for section in sections %}
+      {% for path in section.paths %}
         {% if page and page.url and page.url.startswith(path) and path | length > current.length %}
-          {% set current.section = section %}
+          {% set current.section = section.id %}
           {% set current.length = path | length %}
         {% endif %}
       {% endfor %}
     {% endfor %}
-    {% for section, title, target, paths in sections %}
-      {% set active = section == current.section %}
-      <a href="{{ target | url }}" data-site-section="{{ section }}" data-site-paths="{{ paths | join(' ') | e }}"{% if active %} class="is-active" aria-current="{{ 'page' if page.url == target else 'true' }}"{% endif %}>{{ title }}</a>
+    {% for section in sections %}
+      {% set active = section.id == current.section %}
+      <a href="{{ section.url | url }}" data-site-section="{{ section.id }}" data-site-paths="{{ section.paths | join(' ') | e }}"{% if active %} class="is-active" aria-current="{{ 'page' if page.url == section.url else 'true' }}"{% endif %}>{{ section.title }}</a>
     {% endfor %}
   </nav>
   {% if "navigation.tabs.sticky" in features %}

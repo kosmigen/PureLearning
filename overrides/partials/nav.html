@@ -1,0 +1,64 @@
+{# Match desktop header navigation, while retaining each section's page tree. #}
+{% import "partials/nav-item.html" as item with context %}
+{% macro render_mobile_section(section, root, path) %}
+  <li class="md-nav__item md-nav__item--nested">
+    <input class="md-nav__toggle md-toggle" type="checkbox" id="{{ path }}">
+    <label class="md-nav__link kb-nav-row kb-mobile-section-title" for="{{ path }}" id="{{ path }}_label" tabindex="0">
+      <span class="md-ellipsis">{{ section.title }}</span>
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" data-md-level="1" aria-labelledby="{{ path }}_label">
+      <ul class="md-nav__list" data-md-scrollfix>
+        {% if root and root.children %}
+          {% for child in root.children %}
+            {% if child.is_index %}
+              <li class="md-nav__item">
+                <a href="{{ section.url | url }}" class="md-nav__link kb-nav-row{% if page.url == section.url %} md-nav__link--active{% endif %}">
+                  {{ item.render_content(child, label=section.title) }}
+                </a>
+              </li>
+            {% else %}
+              {{ item.render(child, path ~ "_" ~ loop.index, 2, root, expand_active=false) }}
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <li class="md-nav__item"><a class="md-nav__link kb-nav-row" href="{{ section.url | url }}">{{ section.title }}</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </li>
+{% endmacro %}
+{% macro render_navigation(mobile=false) %}
+  {% set class = "md-nav md-nav--primary" %}
+  {% if mobile %}
+    {% set class = class ~ " kb-navigation--mobile" %}
+  {% else %}
+    {% set class = class ~ " md-nav--lifted kb-navigation--desktop" %}
+  {% endif %}
+  <nav class="{{ class }}" aria-label="主导航" data-md-level="0">
+    <label class="md-nav__title" for="__drawer">
+      <a href="{{ nav.homepage.url | url }}" class="md-nav__button md-logo" aria-label="{{ config.site_name }}">
+        {% include "partials/logo.html" %}
+      </a>
+      {{ config.site_name }}
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      {% for section in config.extra.site_navigation %}
+        {% set root = namespace(item=none) %}
+        {% for landing in nav.pages if landing.url == section.url %}
+          {% set ancestors = landing.ancestors | list %}
+          {% set root.item = ancestors | last if ancestors else landing %}
+        {% endfor %}
+        {% if mobile %}
+          {{ render_mobile_section(section, root.item, "__mobile_nav_" ~ loop.index) }}
+        {% elif root.item %}
+          {{ item.render(root.item, "__nav_" ~ loop.index, 1, section=section) }}
+        {% else %}
+          <li class="md-nav__item"><a class="md-nav__link kb-nav-row" href="{{ section.url | url }}">{{ section.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+{% endmacro %}
+{{ render_navigation() }}
+{{ render_navigation(mobile=true) }}

@@ -35,10 +35,9 @@
       <nav class="kb-footer__navigation" aria-labelledby="footer-navigation" lang="en">
         <h2 id="footer-navigation">Quick Links</h2>
         <ul>
-          <li><a href="{{ 'blog/' | url }}">Blog</a></li>
-          <li><a href="{{ 'notes/overview/' | url }}">Docs</a></li>
-          <li><a href="{{ 'projects/' | url }}">Projects</a></li>
-          <li><a href="{{ 'about/' | url }}">About</a></li>
+          {% for section in config.extra.site_navigation %}
+            <li><a href="{{ section.url | url }}">{{ section.title_en }}</a></li>
+          {% endfor %}
         </ul>
       </nav>
 

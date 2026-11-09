@@ -56,7 +56,6 @@ body { background: var(--color-paper); }
 [data-md-color-scheme="slate"] .kb-site-header .md-header__button.md-logo img,
 [data-md-color-scheme="slate"] .md-nav__button.md-logo img { filter: brightness(0) invert(1); }
 .md-tabs { display: none; }
-body:has(.kb-home, .kb-projects, .kb-blog-post) .md-header__button[for="__drawer"] { display: none; }
 
 .kb-site-navigation {
   position: absolute;
@@ -97,67 +96,6 @@ body:has(.kb-home, .kb-projects, .kb-blog-post) .md-header__button[for="__drawer
   outline-offset: var(--space-1);
 }
 
-.md-nav__title,
-.md-nav--primary .md-nav__title[for="__drawer"] {
-  color: var(--color-ink);
-  background: var(--color-paper);
-  box-shadow: none;
-}
-.md-nav__source { color: var(--color-ink); background: var(--color-surface); }
-
-/* Navigation follows the same quiet, rounded rows as the header controls. */
-.md-sidebar--primary { --text-doc-nav: .7rem; }
-.md-sidebar .md-nav { font-family: var(--font-body); font-size: .7rem; }
-.md-sidebar--primary .md-nav__link {
-  gap: .55rem;
-  margin: .05rem .2rem;
-  padding: .35rem .6rem;
-  border-radius: .4rem;
-  color: var(--color-muted);
-  font-weight: 400;
-  transition: color var(--dur-short), background-color var(--dur-short);
-}
-.md-sidebar--primary .md-nav__link .md-ellipsis { min-width: 0; }
-.md-sidebar--primary .md-nav__container { padding: 0; gap: 0; }
-.md-sidebar--primary .md-nav__container > .md-nav__link { margin: 0; }
-.md-sidebar--primary .md-nav__container > label { padding-inline: .25rem; }
-.md-sidebar--primary .md-nav__link > svg {
-  flex-shrink: 0;
-  width: 1.3em;
-  height: 1.3em;
-  opacity: .6;
-}
-.md-sidebar--primary .md-nav__link > svg[stroke] { fill: none; stroke: currentColor; }
-.md-sidebar--primary .md-nav__link:is(a, label):not(.md-nav__link--active):hover {
-  color: var(--color-ink);
-  background: var(--color-surface);
-}
-.md-sidebar--primary .md-nav__link--active:not(.md-nav__container) {
-  color: var(--color-accent-strong);
-  background: var(--color-accent-soft);
-  font-weight: 500;
-}
-.md-sidebar--primary .md-nav__link--active > svg { opacity: 1; }
-.md-sidebar--primary .md-nav__item--section > .md-nav__link { font-weight: 600; }
-@media screen and (min-width: 76.25em) {
-  body:has(.kb-site-navigation [data-site-section="docs"].is-active)
-    .md-nav--primary > .md-nav__list > .md-nav__item--active.md-nav__item--section > .md-nav__link {
-    display: none;
-  }
-}
-.md-sidebar--secondary .md-nav__link {
-  padding: .25rem .5rem;
-  border-radius: .4rem;
-  color: var(--color-muted);
-}
-.md-sidebar--secondary .md-nav__link--active { color: var(--color-accent-strong); }
-.md-sidebar--primary .md-nav__link:focus-visible {
-  outline: var(--rule-focus) solid var(--color-focus);
-  outline-offset: -2px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .md-sidebar--primary .md-nav__link { transition: none; }
-}
 .md-typeset :is(h1, h2, h3, h4, h5, h6)[id] {
   scroll-margin-top: calc(var(--site-header-height) + 1rem);
 }
@@ -168,21 +106,19 @@ body:has(.kb-home, .kb-projects, .kb-blog-post) .md-header__button[for="__drawer
   .kb-site-navigation { height: 3.2rem; }
 }
 @media (max-width: 59.99em) {
-  :root, [data-md-color-scheme] { --site-header-height: 5.5rem; }
-  .kb-site-navigation {
-    position: static;
-    height: 2.3rem;
-    justify-content: center;
-    gap: clamp(.6rem, 3vw, 1.2rem);
-    padding-inline: .5rem;
-    transform: none;
+  :root, [data-md-color-scheme] { --site-header-height: 2.4rem; }
+  .kb-site-navigation { display: none; }
+  .kb-site-header {
+    border-bottom: 0;
+    background: color-mix(in srgb, var(--color-paper) 70%, transparent);
+    backdrop-filter: blur(8px);
   }
+  .kb-site-header .md-header__inner { height: 2.4rem; padding-inline: .4rem; }
+  .kb-site-header .md-header__title { font-size: .9rem; font-weight: 600; }
+  .kb-site-header .md-header__button { margin: .2rem; padding: .4rem; }
+  .kb-site-header .md-header__button svg { width: 1rem; height: 1rem; }
+  .md-typeset h1 { color: var(--color-ink); }
 }
 @media (max-width: 39.99em) {
-  .kb-site-header .md-header__inner { padding-inline: .25rem; }
-  .kb-site-navigation {
-    gap: clamp(.25rem, 1.6vw, .75rem);
-    padding-inline: .4rem;
-    font-size: .7rem;
-  }
+  .kb-site-header .md-header__title { margin-inline: .4rem; }
 }

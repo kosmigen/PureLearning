@@ -14,6 +14,7 @@ theme:
   logo: assets/images/cipher-wheel.svg
   favicon: assets/images/cipher-wheel.svg
   icon:
+    menu: lucide/menu
     repo: fontawesome/brands/github
     search: lucide/search
   font: false
@@ -89,7 +90,6 @@ hooks:
   - hooks/blog_metadata.py
   - hooks/project_cards.py
   - hooks/diagrams.py
-  - hooks/navigation_redirects.py
 
 markdown_extensions:
   - abbr
@@ -99,6 +99,7 @@ markdown_extensions:
   - footnotes
   - md_in_html
   - toc:
+      title: On this page
       permalink: true
       permalink_title: 链接到本节
   - pymdownx.caret
@@ -123,6 +124,30 @@ markdown_extensions:
   - pymdownx.tilde
 
 extra:
+  # Shared header and footer links; sidebar structure remains in .nav.yml files.
+  site_navigation:
+    - id: blog
+      title: 博客
+      title_en: Blog
+      url: blog/
+      paths: [blog/]
+    - id: docs
+      title: 文档
+      title_en: Docs
+      url: notes/overview/
+      paths: [notes/]
+      hide_sidebar_title_on_desktop: true
+    - id: projects
+      title: 项目
+      title_en: Projects
+      url: projects/
+      paths: [projects/]
+    - id: about
+      title: 关于
+      title_en: About
+      url: about/website/
+      paths: [about/]
+      hide_sidebar_title_on_desktop: true
   navigation_icons:
     首页: lucide/house
     博客: lucide/newspaper
@@ -151,6 +176,7 @@ extra_css:
   - assets/stylesheets/extra.css
   - assets/stylesheets/site.css
   - assets/stylesheets/search.css
+  - assets/stylesheets/sidebar.css
   - assets/stylesheets/home.css
   - assets/stylesheets/projects.css
   - assets/stylesheets/blog.css
@@ -159,6 +185,7 @@ extra_css:
 
 extra_javascript:
   - assets/javascripts/site-navigation.mjs
+  - assets/javascripts/site-toc.mjs
   - assets/javascripts/site-search.mjs
   - assets/javascripts/sidebar-state.mjs
   - assets/javascripts/home-animation.mjs

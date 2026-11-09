@@ -47,7 +47,7 @@ function mountSidebarState() {
     if (!label) continue;
     const parent = item.parentElement.closest("li.md-nav__item--nested");
     // Heading paths survive navigation reordering, unlike positional __nav IDs.
-    const title = encodeURIComponent(label.textContent.trim().replace(/\s+/g, " "));
+    const title = encodeURIComponent((item.dataset.navKey || label.textContent).trim().replace(/\s+/g, " "));
     const key = `${paths.get(parent) || ""}/${title}`;
     paths.set(item, key);
     folders.set(toggle, {
@@ -130,7 +130,8 @@ function mountSidebarState() {
   // position in that same frame, before paint, and reveal new links only as needed.
   const frame = requestAnimationFrame(() => {
     if (scrollTop !== null) scrollwrap.scrollTop = scrollTop;
-    const active = section.querySelector("a.md-nav__link--active[href]");
+    const active = [...section.querySelectorAll("a.md-nav__link--active[href]")]
+      .find((link) => !link.closest(".kb-sidebar-title--desktop-hidden"));
     if (active) {
       const bounds = scrollwrap.getBoundingClientRect();
       const link = active.getBoundingClientRect();

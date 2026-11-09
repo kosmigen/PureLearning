@@ -11,4 +11,8 @@ package-open, users, tags, and archive. Navigation defaults are configured in
 `mkdocs.yml` under `extra.navigation_icons`; explicit page icon metadata takes
 precedence.
 
+`menu.svg` and `list-filter.svg` are Lucide icons used for the mobile navigation
+and standalone table-of-contents control, following the layout at
+<https://zensical.org/docs/create-your-site/>.
+
 Copyright and license: see [LICENSE](LICENSE), copied from the upstream project.

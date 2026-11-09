@@ -1,15 +1,2 @@
-{# Reading layout: article plus an optional right-hand table of contents. #}
+{# Use Material's native navigation and table of contents for blog articles. #}
 {% extends "main.html" %}
-
-{% block site_nav %}
-  {% set first = page.toc | first %}
-  {% if "toc" not in page.meta.get("hide", []) and first and (first.level != 1 or first.children) %}
-  <div class="md-sidebar md-sidebar--secondary kb-blog-toc" data-md-component="sidebar" data-md-type="toc">
-    <div class="md-sidebar__scrollwrap">
-      <div class="md-sidebar__inner">
-        {% include "partials/toc.html" %}
-      </div>
-    </div>
-  </div>
-  {% endif %}
-{% endblock %}
