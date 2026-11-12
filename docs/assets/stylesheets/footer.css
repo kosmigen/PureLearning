@@ -10,8 +10,8 @@
   --footer-accent: var(--color-accent-strong);
   --footer-rule: var(--color-rule);
   --footer-surface: var(--color-surface);
-  --footer-shape: var(--color-surface);
-  --footer-emblem: color-mix(in oklab, var(--footer-faint) 38%, var(--footer-shape));
+  --footer-snow: #7486ad;
+  --footer-emblem: color-mix(in oklab, var(--footer-faint) 38%, var(--footer-surface));
   position: relative;
   isolation: isolate;
   margin-top: var(--space-10);
@@ -24,37 +24,16 @@
 }
 
 [data-md-color-scheme="slate"] .md-footer.kb-footer {
-  --footer-shape: color-mix(in srgb, var(--color-paper) 35%, var(--color-surface));
+  --footer-snow: #c4d1f5;
 }
 
-.kb-footer::before {
-  position: absolute;
-  top: -14rem;
-  left: -15rem;
-  width: 56rem;
-  height: 33rem;
-  border-radius: 50%;
-  background: var(--footer-shape);
-  content: "";
-  pointer-events: none;
-  transform: rotate(12deg);
-}
-
-.kb-footer__jelly {
+.kb-footer__snow {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  visibility: hidden;
+  color: var(--footer-snow);
   pointer-events: none;
-}
-
-.kb-footer[data-jelly-ready]::before {
-  visibility: hidden;
-}
-
-.kb-footer[data-jelly-ready] .kb-footer__jelly {
-  visibility: visible;
 }
 
 .kb-footer__inner {
@@ -299,12 +278,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kb-footer[data-jelly-ready]::before {
-    visibility: visible;
-  }
-
-  .kb-footer[data-jelly-ready] .kb-footer__jelly {
-    visibility: hidden;
+  .kb-footer__snow {
+    display: none;
   }
 
   .kb-footer a {

@@ -1,7 +1,7 @@
 {% set blog = config.plugins.get("material/blog") %}
 {% set recent_posts = (blog.blog.posts | rejectattr("config.draft") | sort(attribute="config.date.created", reverse=true)) if blog and blog.config.enabled else [] %}
 <footer class="md-footer kb-footer" id="site-footer" aria-label="网站信息">
-  <canvas class="kb-footer__jelly" aria-hidden="true"></canvas>
+  <canvas class="kb-footer__snow" aria-hidden="true"></canvas>
   <div class="kb-footer__inner md-grid">
     <div class="kb-footer__grid">
       <section class="kb-footer__intro" aria-labelledby="footer-brand">

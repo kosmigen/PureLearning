@@ -177,7 +177,7 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `docs/assets/stylesheets/blog/common.css` | 共享链接状态与辅助交互规则 |
 | `docs/assets/stylesheets/blog/index.css`、`blog/post.css`、`blog/meta.css` | 分别负责列表与归档、正文与文章目录、作者标签与阅读统计 |
 | `docs/assets/stylesheets/footer.css` | 随全站明暗主题切换的四列页脚、密码轮品牌标志与响应式排版 |
-| `docs/assets/javascripts/footer-jelly.mjs` | 页脚阴影果冻形变、鼠标弹性挤压与离屏暂停 |
+| `docs/assets/javascripts/footer-snow.mjs` | React Bits PixelSnow 页脚背景、鼠标扰动与离屏暂停 |
 | `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |
 | `overrides/partials/nav-item.html` | 保留 Material 9.7.7 导航宏，读取本地目录 / 页面图标，保留栏目显示名称、整行状态容器与顶层标题标记；手机一级栏目由 `nav.html` 单独渲染为纯文字展开项 |
@@ -201,7 +201,7 @@ Web Awesome 3.14.0 的 Card、Badge 及其依赖保存在 `docs/assets/javascrip
 
 Java 内容遵循 [Java 文档编写规范](handbook/Java文档编写规范.md)：参考 Tpoint Tech 的讲解组织方式，统一采用概念、语法、独立示例、输出、注意事项、练习与参考资料的形式。当前示例基准为 JDK 21，完整程序需要编译运行；按现有核心、进阶、框架、第三方库分类组织，正文与示例独立编写。
 
-修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。四列页脚跟随全站 `data-md-color-scheme` 切换：明暗模式均复用全站底色、文字、强调色与分隔线变量，深色装饰阴影由全站底色和表面色混合，保持低对比；左列展示站名与低对比的密码轮标志（复用 `cipher-wheel.svg`），联系方式集中在 Connect 栏并使用 Material 图标，英文格言位于底栏。`footer-jelly.mjs` 为背景阴影提供自动果冻形变和鼠标弹性挤压，读取静态伪元素的计算背景色，确保动画和静态阴影一致；离屏或后台时暂停，减少动态效果时保留 CSS 静态阴影；装饰画布不阻挡链接和手机滚动。近期文章从 Blog 插件的数据中按日期取最近两篇，始终排除草稿，缺少封面时使用文档图标。博客右侧目录应在正文边界前避让页脚。
+修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。四列页脚跟随全站 `data-md-color-scheme` 切换：明暗模式均复用全站底色、文字、强调色与分隔线变量；左列展示站名与低对比的密码轮标志（复用 `cipher-wheel.svg`），联系方式集中在 Connect 栏并使用 Material 图标，英文格言位于底栏。`footer-snow.mjs` 将 React Bits PixelSnow 的 WebGL 渲染用于页脚背景，雪花颜色由 `footer.css` 按主题设置。进入视口时初始化，离屏、后台或开启减少动态效果时暂停，画布不阻挡链接和手机滚动。近期文章从 Blog 插件的数据中按日期取最近两篇，始终排除草稿，缺少封面时使用文档图标。博客右侧目录应在正文边界前避让页脚。
 
 ## 验证与部署
 
