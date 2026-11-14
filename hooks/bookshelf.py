@@ -49,8 +49,11 @@ def on_files(files, *, config):
         try:
             subprocess.run(
                 [
-                    "node", "node_modules/esbuild/bin/esbuild", "frontend/bookshelf/Bookshelf.jsx",
-                    "--bundle", "--minify", "--format=esm", "--jsx=automatic", "--legal-comments=inline",
+                    "node", "node_modules/esbuild/bin/esbuild",
+                    "bookshelf=frontend/bookshelf/Bookshelf.jsx",
+                    "skills-wall=frontend/skills/SkillsWall.jsx",
+                    "--bundle", "--splitting", "--minify", "--format=esm", "--jsx=automatic",
+                    "--legal-comments=inline",
                     f"--outdir={destination}",
                 ],
                 cwd=root,
@@ -59,12 +62,11 @@ def on_files(files, *, config):
                 check=True,
             )
         except OSError as error:
-            raise ConfigurationError("构建书架需要 Node.js 和 npm ci --ignore-scripts。") from error
+            raise ConfigurationError("构建作者页组件需要 Node.js 和 npm ci --ignore-scripts。") from error
         except subprocess.CalledProcessError as error:
-            raise ConfigurationError(f"书架构建失败。请确认已运行 npm ci --ignore-scripts。\n{error.stderr}") from error
-        for extension in ("js", "css"):
-            content = (Path(destination) / f"Bookshelf.{extension}").read_bytes()
-            files.append(File.generated(config, f"assets/bookshelf.{extension}", content=content))
+            raise ConfigurationError(f"作者页组件构建失败。请确认已运行 npm ci --ignore-scripts。\n{error.stderr}") from error
+        for asset in Path(destination).iterdir():
+            files.append(File.generated(config, f"assets/{asset.name}", content=asset.read_bytes()))
     licenses = {
         "react": "LICENSE",
         "react-dom": "LICENSE",

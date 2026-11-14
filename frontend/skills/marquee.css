@@ -1,0 +1,44 @@
+/*! Magic UI Marquee · MIT · https://magicui.design/r/marquee.json */
+.magic-marquee {
+  --gap: 1rem;
+  --duration: 40s;
+  display: flex;
+  gap: var(--gap);
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.magic-marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-around;
+  gap: var(--gap);
+  animation: magic-marquee var(--duration) linear infinite;
+}
+
+.magic-marquee[data-vertical],
+.magic-marquee[data-vertical] > .magic-marquee__track {
+  flex-direction: column;
+}
+
+.magic-marquee[data-vertical] > .magic-marquee__track {
+  animation-name: magic-marquee-vertical;
+}
+
+.magic-marquee[data-reverse] > .magic-marquee__track {
+  animation-direction: reverse;
+}
+
+.magic-marquee[data-pause-on-hover]:hover > .magic-marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes magic-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--gap))); }
+}
+
+@keyframes magic-marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap))); }
+}

@@ -12,6 +12,7 @@ copyright: Copyright &copy; 2026 kosmigen
 watch:
   - overrides
   - frontend/bookshelf
+  - frontend/skills
 
 theme:
   name: material
@@ -184,6 +185,7 @@ extra_css:
   - assets/stylesheets/not-found.css
   - assets/stylesheets/bending-marquee.css
   - assets/stylesheets/hometown-globe.css
+  - assets/stylesheets/author-skills.css
 
 extra_javascript:
   - assets/javascripts/site-navigation.mjs
@@ -197,3 +199,4 @@ extra_javascript:
   - assets/javascripts/bending-marquee.mjs
   - assets/javascripts/hometown-globe.mjs
   - assets/javascripts/bookshelf.mjs
+  - assets/javascripts/author-skills.mjs
