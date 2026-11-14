@@ -44,6 +44,8 @@ node --check docs/assets/javascripts/site-navigation.mjs
 node --check docs/assets/javascripts/sidebar-state.mjs
 ```
 
+`mkdocs.yml` 的 `watch: [overrides]` 让本地预览在修改模板后自动重建；改动模板后面板未更新时先确认该配置仍在。
+
 `site/` 是被 Git 忽略的生成目录，修改源文件后重新构建，不直接编辑生成页面。
 
 `--strict` 将构建警告视为错误，但不能代替所有链接和浏览器检查。未列入导航的页面可能仅产生 INFO；硬编码 HTML 链接、交互和布局还需要按改动检查。
@@ -156,7 +158,7 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | 文件 | 职责 |
 | --- | --- |
 | `overrides/blog.html`、`overrides/partials/post.html` | 博客列表、摘要与可选封面 |
-| `overrides/blog-post.html`、`overrides/partials/content.html` | 博客正文布局、元信息与文章切换；移动端共用全站菜单及独立目录弹层，桌面隐藏左栏 |
+| `overrides/blog-post.html`、`overrides/partials/content.html` | 博客正文布局、元信息与文章切换；正文无 h1 时注入页面标题（front matter 的 `hide_h1: true` 则完全不渲染 h1）；移动端共用全站菜单及独立目录弹层，桌面隐藏左栏 |
 | `overrides/partials/blog-post-meta.html` | 标题下方的作者、日期、纯文字标签与阅读统计 |
 | `overrides/404.html` | 复用 `docs/404.md` 的自定义 404 |
 | `docs/assets/stylesheets/extra.css` | 文档阅读样式与全站基础覆盖 |
@@ -178,6 +180,8 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `docs/assets/stylesheets/blog/index.css`、`blog/post.css`、`blog/meta.css` | 分别负责列表与归档、正文与文章目录、作者标签与阅读统计 |
 | `docs/assets/stylesheets/footer.css` | 随全站明暗主题切换的四列页脚、密码轮品牌标志与响应式排版 |
 | `docs/assets/javascripts/footer-snow.mjs` | React Bits PixelSnow 页脚背景、鼠标扰动与离屏暂停 |
+| `docs/assets/stylesheets/bending-marquee.css`、`docs/assets/javascripts/bending-marquee.mjs` | 关于作者页的 React Bits 折叠横幅：三折面板 3D 透视、交替方向滚动、悬停缓停与减少动态效果 |
+| `docs/assets/stylesheets/hometown-globe.css`、`docs/assets/javascripts/hometown-globe.mjs`、`docs/assets/javascripts/vendor/cobe.esm.js` | 关于作者页的 COBE 点阵地球（npm 与 vendor 均为 2.0.1）。COBE 绘制球体和教育地点之间的弧线，学校使用旋转的黑色三棱锥和照片卡片，海外地标使用彩色图标。支持自动旋转和拖拽，离屏、后台或开启减少动态效果时暂停自动动画。许可证在 `docs/assets/licenses/cobe.txt` |
 | `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |
 | `overrides/partials/nav-item.html` | 保留 Material 9.7.7 导航宏，读取本地目录 / 页面图标，保留栏目显示名称、整行状态容器与顶层标题标记；手机一级栏目由 `nav.html` 单独渲染为纯文字展开项 |
@@ -201,7 +205,7 @@ Web Awesome 3.14.0 的 Card、Badge 及其依赖保存在 `docs/assets/javascrip
 
 Java 内容遵循 [Java 文档编写规范](handbook/Java文档编写规范.md)：参考 Tpoint Tech 的讲解组织方式，统一采用概念、语法、独立示例、输出、注意事项、练习与参考资料的形式。当前示例基准为 JDK 21，完整程序需要编译运行；按现有核心、进阶、框架、第三方库分类组织，正文与示例独立编写。
 
-修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。四列页脚跟随全站 `data-md-color-scheme` 切换：明暗模式均复用全站底色、文字、强调色与分隔线变量；左列展示站名与低对比的密码轮标志（复用 `cipher-wheel.svg`），联系方式集中在 Connect 栏并使用 Material 图标，英文格言位于底栏。`footer-snow.mjs` 将 React Bits PixelSnow 的 WebGL 渲染用于页脚背景，雪花颜色由 `footer.css` 按主题设置。进入视口时初始化，离屏、后台或开启减少动态效果时暂停，画布不阻挡链接和手机滚动。近期文章从 Blog 插件的数据中按日期取最近两篇，始终排除草稿，缺少封面时使用文档图标。博客右侧目录应在正文边界前避让页脚。
+修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。四列页脚跟随全站 `data-md-color-scheme` 切换：明暗模式均复用全站底色、文字、强调色与分隔线变量；左列展示站名与低对比的密码轮标志（复用 `cipher-wheel.svg`），联系方式集中在 Connect 栏并使用 Material 图标，英文格言位于底栏。`footer-snow.mjs` 将 React Bits PixelSnow 的 WebGL 渲染用于页脚背景，雪花颜色由 `footer.css` 按主题设置。进入视口时初始化，离屏、后台或开启减少动态效果时暂停，画布不阻挡链接和手机滚动。关于作者页的折叠横幅由 `bending-marquee.mjs` 按 `docs/about/author.md` 中容器的 `data-items`、`data-rows` 等属性构建三折面板与滚动条，文字与参数在页面侧维护，配色与分隔符摆动在 `bending-marquee.css`；同样遵守即时导航清理、离屏暂停与减少动态效果。近期文章从 Blog 插件的数据中按日期取最近两篇，始终排除草稿，缺少封面时使用文档图标。博客右侧目录应在正文边界前避让页脚。
 
 ## 验证与部署
 
