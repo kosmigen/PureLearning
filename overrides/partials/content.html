@@ -23,7 +23,7 @@
   {% endset %}
 {% endif %}
 
-{% if "\u003ch1" not in page.content %}
+{% if "\u003ch1" not in page.content and not page.meta.hide_h1 %}
   <h1>{{ page.title | d(config.site_name, true)}}</h1>
   {% if is_blog_post %}{{ post_meta }}{% endif %}
   {{ page.content }}
