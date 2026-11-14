@@ -11,6 +11,7 @@ copyright: Copyright &copy; 2026 kosmigen
 # files in overrides/ change (by default only docs/ is watched).
 watch:
   - overrides
+  - frontend/bookshelf
 
 theme:
   name: material
@@ -98,6 +99,7 @@ hooks:
   - hooks/now.py
   - hooks/navigation_icons.py
   - hooks/diagrams.py
+  - hooks/bookshelf.py
 
 markdown_extensions:
   - abbr
@@ -194,3 +196,4 @@ extra_javascript:
   - assets/javascripts/footer-snow.mjs
   - assets/javascripts/bending-marquee.mjs
   - assets/javascripts/hometown-globe.mjs
+  - assets/javascripts/bookshelf.mjs
