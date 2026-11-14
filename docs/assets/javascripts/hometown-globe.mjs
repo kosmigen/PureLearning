@@ -147,7 +147,10 @@ function createHometownGlobe(container) {
   };
   const globeCanvas = document.createElement("canvas");
   globeCanvas.className = "kb-hometown-globe__surface";
-  globeCanvas.setAttribute("aria-hidden", "true");
+  const viewport = document.createElement("div");
+  viewport.className = "kb-hometown-globe__viewport";
+  viewport.setAttribute("aria-hidden", "true");
+  viewport.append(globeCanvas);
   const locations = [...points, ...landmarks].map((point, index) => {
     const landmark = index >= points.length;
     const card = !landmark && Boolean(point.image);
@@ -182,7 +185,7 @@ function createHometownGlobe(container) {
     label.setAttribute("data-hidden", "");
     return { pin, label, landmark, card, vector: vectors[index] ?? unitVector(point.lat, point.lng) };
   });
-  container.append(globeCanvas, ...locations.flatMap(({ pin, label, card }) => card ? [pin] : [pin, label]));
+  container.append(viewport, ...locations.flatMap(({ pin, label, card }) => card ? [pin] : [pin, label]));
   const cards = locations.filter(location => location.card);
   const cardRow = document.createElement("div");
   const schoolPicker = document.createElement("div");
@@ -423,11 +426,11 @@ function createHometownGlobe(container) {
     const size = Math.max(1, Math.round(container.clientWidth));
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
     scene.size = size;
+    const fill = Number.parseFloat(getComputedStyle(container).getPropertyValue("--kb-globe-fill")) || 1;
+    camera.scale = config.zoom * fill;
     floatingCards = !compactScreen.matches && size >= 420 && cards.length === 2;
     cardRow.toggleAttribute("data-floating", floatingCards);
     if (cards.length) container.setAttribute("aria-hidden", String(floatingCards));
-    globeCanvas.style.width = `${size}px`;
-    globeCanvas.style.height = `${size}px`;
     if (!globe) return;
     globe.update({ width: size, height: size, devicePixelRatio: ratio });
     applyView();
