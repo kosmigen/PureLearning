@@ -1,0 +1,105 @@
+/* Folded triptych marquee on the author page: scrolling text bands across a
+   flat center panel and two wings folded back in 3D, adapted from React Bits
+   Bending Marquee. Panel geometry and motion live in bending-marquee.mjs;
+   typography, colors, and the separator sway are styled here. */
+
+/* On the author page the marquee is the only content: start the content
+   area flush at the top instead of Material's 0.6rem inset. */
+.md-content__inner:has(> .kb-bend-marquee) {
+  padding-top: 0;
+}
+
+.kb-bend-marquee {
+  --kb-marquee-item-gap: 1.625rem;
+  --kb-marquee-pad: 1.125rem;
+  --kb-marquee-gap: 1.375rem;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  perspective-origin: 50% 50%;
+  font-family: var(--font-body);
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.kb-bend-marquee__scene {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+.kb-bend-marquee__panel {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kb-marquee-gap);
+  overflow: hidden;
+  background: var(--color-paper);
+}
+
+.kb-bend-marquee__panel--left {
+  transform-origin: 100% 50%;
+}
+
+.kb-bend-marquee__panel--right {
+  transform-origin: 0% 50%;
+}
+
+.kb-bend-marquee__band {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: var(--kb-marquee-pad) 0;
+}
+
+.kb-bend-marquee__strip,
+.kb-bend-marquee__run {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.kb-bend-marquee__strip {
+  will-change: transform;
+  color: var(--color-ink);
+}
+
+.kb-bend-marquee__phrase {
+  margin-right: var(--kb-marquee-item-gap);
+}
+
+.kb-bend-marquee__mark {
+  display: inline-block;
+  margin-right: var(--kb-marquee-item-gap);
+  animation: kb-marquee-sway 2.6s ease-in-out infinite alternate;
+}
+
+.kb-bend-marquee__measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes kb-marquee-sway {
+  from {
+    transform: rotate(-14deg);
+  }
+
+  to {
+    transform: rotate(14deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-bend-marquee__mark {
+    animation: none;
+  }
+
+  .kb-bend-marquee__strip {
+    will-change: auto;
+  }
+}

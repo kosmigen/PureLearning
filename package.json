@@ -4,5 +4,8 @@
   "description": "Build-time icon assets for the MkDocs site",
   "devDependencies": {
     "lucide-static": "1.69.0"
+  },
+  "dependencies": {
+    "cobe": "^2.0.1"
   }
 }

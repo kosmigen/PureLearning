@@ -180,6 +180,8 @@ extra_css:
   - assets/stylesheets/blog.css
   - assets/stylesheets/footer.css
   - assets/stylesheets/not-found.css
+  - assets/stylesheets/bending-marquee.css
+  - assets/stylesheets/hometown-globe.css
 
 extra_javascript:
   - assets/javascripts/site-navigation.mjs
@@ -190,3 +192,5 @@ extra_javascript:
   - assets/javascripts/projects.mjs
   - assets/javascripts/diagram-drag.mjs
   - assets/javascripts/footer-snow.mjs
+  - assets/javascripts/bending-marquee.mjs
+  - assets/javascripts/hometown-globe.mjs
