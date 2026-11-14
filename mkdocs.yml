@@ -7,6 +7,11 @@ repo_name: kosmigen
 edit_uri: edit/main/docs/
 copyright: Copyright &copy; 2026 kosmigen
 
+# Also watch the theme override templates so `mkdocs serve` rebuilds when
+# files in overrides/ change (by default only docs/ is watched).
+watch:
+  - overrides
+
 theme:
   name: material
   custom_dir: overrides
