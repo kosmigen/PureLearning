@@ -155,11 +155,13 @@ extra:
       title_en: Projects
       url: projects/
       paths: [projects/]
+      mobile_direct_link: true
     - id: now
       title: Now
       title_en: Now
       url: now/
       paths: [now/]
+      mobile_direct_link: true
     - id: about
       title: 关于
       title_en: About

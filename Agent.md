@@ -90,13 +90,14 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 | 目录与页面的侧栏图标 | 目录 `.nav.yml` 的 `icon`；页面 Markdown 顶部的 `icon` |
 | 自定义顶部与页脚快速链接的名称、顺序、目标网址 | `mkdocs.yml` 的 `extra.site_navigation`；顶部显示 `title`，页脚显示 `title_en` |
 | 隐藏桌面侧栏最上方的栏目标题 | `extra.site_navigation` 对应项的 `hide_sidebar_title_on_desktop: true`；手机保留 |
+| 手机一级栏目点击直接进入页面 | `extra.site_navigation` 对应项的 `mobile_direct_link: true`；未设置时点击展开下级 |
 | 页脚格言、近期文章与联系方式 | `overrides/partials/footer.html`；联系方式在 `mkdocs.yml` 的 `extra.social` 中维护 |
 | 默认页面的元数据和正文标题 | 对应 `index.md` 的 `title` 与一级标题（如果有） |
 | 即时导航、前进后退后的选中状态 | `docs/assets/javascripts/site-navigation.mjs`；读取顶部链接的 `data-site-paths` |
 | 左侧目录开合状态的保持 | `docs/assets/javascripts/sidebar-state.mjs`；为全部技术文档记录桌面端手动开合状态，在 `window.document$` 更新后恢复，并保留侧栏滚动位置 |
 
 - “文档”的入口为 `notes/overview/`，选中范围仍为 `notes/`。`extra.site_navigation` 中的 `url` 为入口、`paths` 为选中范围；`header.html` 据此同时生成服务端选中状态及 `data-site-paths`，客户端基于 `data-site-root` 解析路径。`id` 是脚本与样式使用的稳定标识，修改文案时不要改动。以后增加其他根目录下的文档分类时，再按实际路径补充别名。
-- 文档侧栏以目录标题的层级路径为标识，通过 `sessionStorage` 在同一标签页内记住开合状态与滚动位置；离开页面时用实际开合状态覆盖旧记录（包括当前文章自动展开后覆盖旧的收起记录），新文章所在路径始终展开。恢复时暂时关闭开合动画，先同步恢复滚动位置，再在主题首帧定位后校正；刷新和整页跳转也恢复位置。手机抽屉使用与顶部相同的栏目名称和顺序；一级栏目为无前置图标的纯文字展开项，点击整行只展示下级，不跳转；实际页面链接位于展开后的子列表。不保存桌面目录开合状态。
+- 文档侧栏以目录标题的层级路径为标识，通过 `sessionStorage` 在同一标签页内记住开合状态与滚动位置；离开页面时用实际开合状态覆盖旧记录（包括当前文章自动展开后覆盖旧的收起记录），新文章所在路径始终展开。恢复时暂时关闭开合动画，先同步恢复滚动位置，再在主题首帧定位后校正；刷新和整页跳转也恢复位置。手机抽屉使用与顶部相同的栏目名称和顺序；一级栏目默认是无前置图标的纯文字展开项，点击整行只展示下级，不跳转，实际页面链接位于展开后的子列表；配置 `mobile_direct_link: true` 的栏目（当前“项目”和“Now”）直接链接到 `url`，不再展开，并按 `paths` 保持选中状态。不保存桌面目录开合状态。
 - 顶部与页脚快速链接共用 `extra.site_navigation`，左侧名称和层级仍由 `.nav.yml` 独立配置。只修改 `.nav.yml` 标签不会自动修改顶部或页脚；改栏目时检查各处和文档链接是否需要一起更新。
 - `navigation.indexes` 将栏目 `index.md` 合并为可点击的栏目入口。栏目名称与页面正文标题可以不同。需要点击标题只展开、不跳转的目录，不要在该目录放 `index.md`；把栏目页改为普通页面（如 `overview.md`、`intro.md`）并在 `.nav.yml` 中列出，Material 会把没有 index 页的目录原生渲染为展开开关。Java 栏目采用这种方式。
 - 只包含一篇文章时直接用单个 `.md` 文件（如 `basics/syntax.md`），不为其创建目录。`use_directory_urls` 下单个文件与 `index.md` 的网址相同，摊平不会改变已发布网址；目录留给多篇文章或子栏目。Java 的 `basics` 采用这种方式。
@@ -196,7 +197,7 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 
 页眉不显示 GitHub 仓库组件，桌面主导航保持居中，右侧保留主题切换和搜索。主题切换沿用 Material 的原生三态循环与偏好保存，图标从固定版本的 Lucide 依赖中读取日月、太阳和月亮星星，保留其许可证；`site.css` 将这些描边图标设为无填充。首页和页脚提供 GitHub 联系方式；`repo_url` 仍用于反馈与源码链接；手机菜单不插入仓库组件。
 
-`overrides/main.html` 统一挂载全站导航和右侧目录。`hide: [navigation]` 在桌面隐藏左栏，手机仍提供配置中的全站入口。桌面树和手机树使用不同 ID 前缀，避免重复控件；手机根分类初始收起，一级标题仅展开、不跳转；原 index 入口保留为下级页面链接。子分类原位展开。桌面状态脚本读取根节点的 `data-nav-key`，避免展示名称改变后丢失已有开合与滚动状态。
+`overrides/main.html` 统一挂载全站导航和右侧目录。`hide: [navigation]` 在桌面隐藏左栏，手机仍提供配置中的全站入口。桌面树和手机树使用不同 ID 前缀，避免重复控件；手机根分类初始收起，一级标题默认仅展开、不跳转（`mobile_direct_link: true` 的栏目除外）；原 index 入口保留为下级页面链接。子分类原位展开。桌面状态脚本读取根节点的 `data-nav-key`，避免展示名称改变后丢失已有开合与滚动状态。
 
 文档阅读、博客正文、首页和界面文字有各自的字体与字号作用域。博客正文使用自托管 Charter；更换字体或资源时保留对应授权文件，不把不同字体的许可证混用。
 

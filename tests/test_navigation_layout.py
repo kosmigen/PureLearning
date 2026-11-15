@@ -45,7 +45,7 @@ class PageNavigation(HTMLParser):
                     and "md-nav__link" in classes
                 )
                 if root_link or (mobile and "md-nav__link" in classes):
-                    self.link = {"href": attrs["href"], "text": ""}
+                    self.link = {"href": attrs["href"], "text": "", "classes": classes}
                     if root_link:
                         menu["links"].append(self.link)
                     if mobile:
@@ -53,8 +53,11 @@ class PageNavigation(HTMLParser):
         if tag == "label" and "kb-mobile-section-title" in classes:
             self.group = {"attrs": attrs, "text": "", "has_icon": False}
             self.mobile_groups.append(self.group)
-        if tag == "svg" and self.group is not None:
-            self.group["has_icon"] = True
+        if tag == "svg":
+            if self.group is not None:
+                self.group["has_icon"] = True
+            if self.link is not None:
+                self.link["has_icon"] = True
         if tag == "button" and "md-sidebar-button" in classes:
             self.toc_buttons.append(attrs)
         if tag == "label" and attrs.get("for") == "__toc" and any(
@@ -110,23 +113,47 @@ class NavigationLayoutTests(unittest.TestCase):
                     actual = [(link["text"].strip(), urljoin(base, link["href"]))
                               for link in page.menus[kind]]
                     self.assertEqual(actual, expected)
+                expandable = [section for section in sections
+                              if not section.get("mobile_direct_link", False)]
                 self.assertEqual([group["text"].strip() for group in page.mobile_groups],
-                                 [section["title"] for section in sections])
-                self.assertFalse(page.menus["kb-navigation--mobile"])
+                                 [section["title"] for section in expandable])
+                direct = [(link["text"].strip(), urljoin(base, link["href"]))
+                          for link in page.menus["kb-navigation--mobile"]]
+                self.assertEqual(direct, [
+                    (section["title"], urljoin(self.config.site_url, section["url"]))
+                    for section in sections if section.get("mobile_direct_link", False)
+                ])
                 reachable = {urljoin(base, link["href"]) for link in page.mobile_links}
                 self.assertTrue({url for _, url in expected}.issubset(reachable))
                 self.assertFalse(page.drawer_toc_controls)
                 navigation_ids = [identifier for identifier in page.ids if identifier.startswith("__")]
                 self.assertEqual(len(navigation_ids), len(set(navigation_ids)))
 
-    def test_mobile_section_headings_only_expand_and_have_no_leading_icons(self):
+    def test_mobile_sections_expand_or_link_directly_as_configured(self):
         page = PageNavigation((self.site / "index.html").read_text())
-        self.assertEqual(len(page.mobile_groups), len(self.config.extra["site_navigation"]))
+        sections = self.config.extra["site_navigation"]
+        expandable = [section for section in sections
+                      if not section.get("mobile_direct_link", False)]
+        self.assertEqual(len(page.mobile_groups), len(expandable))
         for group in page.mobile_groups:
             self.assertFalse(group["has_icon"])
             self.assertNotIn("href", group["attrs"])
             self.assertTrue(group["attrs"]["for"].startswith("__mobile_nav_"))
             self.assertEqual(Counter(page.ids)[group["attrs"]["for"]], 1)
+        direct = page.menus["kb-navigation--mobile"]
+        self.assertEqual([link["text"].strip() for link in direct],
+                         [section["title"] for section in sections
+                          if section.get("mobile_direct_link", False)])
+        for link in direct:
+            self.assertFalse(link.get("has_icon"))
+
+    def test_mobile_direct_links_stay_active_across_their_section(self):
+        history = PageNavigation(next(
+            path.read_text() for path in self.site.glob("now/*/*/index.html")
+        ))
+        now = next(link for link in history.menus["kb-navigation--mobile"]
+                   if link["text"].strip() == "Now")
+        self.assertIn("md-nav__link--active", now["classes"])
 
     def test_article_toc_has_its_own_accessible_button(self):
         paths = [Path("notes/Java/basics/syntax/index.html")]
