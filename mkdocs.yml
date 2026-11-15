@@ -1,7 +1,9 @@
 site_name: kosmigen
 site_description: C、Python、Java、计算机基础与 AI 的技术文档，以及项目实践和博客
 site_author: kosmigen
-site_url: https://kosmigen.github.io/PureLearning/
+# Defaults to the Cloudflare custom domain; the GitHub Pages workflow sets
+# SITE_URL to the /PureLearning/ mirror.
+site_url: !ENV [SITE_URL, "https://kosmigen.com/"]
 repo_url: https://github.com/kosmigen/PureLearning
 repo_name: kosmigen
 edit_uri: edit/main/docs/

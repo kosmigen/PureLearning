@@ -54,6 +54,8 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build documentation
+        env:
+          SITE_URL: https://kosmigen.github.io/PureLearning/
         run: mkdocs build --strict
 
       - name: Upload GitHub Pages artifact

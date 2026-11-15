@@ -7,7 +7,7 @@
 - 默认使用中文沟通。先理解用户是在讨论、询问，还是要求实施，不把讨论自动变成代码修改。
 - 开始前检查 `git status --short` 和相关差异，保留用户已有的修改、未跟踪文件和未完成内容。移动目录时也要保留其中的未跟踪文件及其内容。
 - 按任务完成必要修改和验证；不要顺带重写无关页面、升级依赖或更换现有设计。
-- 用户要求提交或推送时，只纳入已授权的相关变更，检查暂存差异后再提交。推送 `main` 会触发部署。
+- 用户要求提交或推送时，只纳入已授权的相关变更，检查暂存差异后再提交。推送 `main` 会触发 Cloudflare Workers 与 GitHub Pages 部署。
 - 本地预览按任务需要启动；明确区分用户已有服务和自己启动的临时验证服务，结束时清理自己的临时服务。用户要求关闭服务时，确认对应进程和端口后停止。
 
 ## 项目与命令
@@ -36,7 +36,7 @@ npm ci --ignore-scripts
 # 使用独立目录验证，避免覆盖其他预览正在使用的构建输出
 .venv/bin/mkdocs build --strict --site-dir /tmp/purelearning-check
 
-# 本地预览，访问 http://127.0.0.1:8000/PureLearning/
+# 本地预览，访问 http://127.0.0.1:8000/；设置 SITE_URL 时挂载路径跟随该值
 .venv/bin/mkdocs serve --dev-addr 127.0.0.1:8000
 
 # 修改 JavaScript 模块后的语法检查示例
@@ -52,23 +52,23 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 
 ## 内容目录与网址
 
-站点地址为 `https://kosmigen.github.io/PureLearning/`。站内链接必须考虑 `/PureLearning/` 这一部署前缀。
+站点地址为 `https://kosmigen.com/`（Cloudflare Workers）。GitHub Pages 作为备用部署运行在 `https://kosmigen.github.io/PureLearning/`，构建时通过 `SITE_URL` 注入该前缀。站内链接保持相对路径，不硬编码域名或部署前缀。
 
 顶部顺序：**博客 → 文档 → 项目 → Now → 关于**。首页通过左上角站点名称或标志返回；文档入口页标题为“技术文档”，侧栏从 overview 与各分类开始。
 
 | 栏目 | 内容目录 | 当前访问路径 |
 | --- | --- | --- |
-| 博客 | `docs/blog/` | `/PureLearning/blog/` |
-| 文档 | `docs/notes/overview.md` | `/PureLearning/notes/overview/` |
-| 项目 | `docs/projects/` | `/PureLearning/projects/` |
-| Now | `docs/now/` | `/PureLearning/now/` |
-| 关于 | `docs/about/website.md` | `/PureLearning/about/website/` |
-| 文档 / C | `docs/notes/C/` | `/PureLearning/notes/C/` |
-| 文档 / Python | `docs/notes/Python/` | `/PureLearning/notes/Python/` |
-| 文档 / Java | `docs/notes/Java/` | `/PureLearning/notes/Java/` |
-| 文档 / AI | `docs/notes/AI/` | `/PureLearning/notes/AI/` |
-| 文档 / CSAPP | `docs/notes/CSAPP/` | `/PureLearning/notes/CSAPP/` |
-| 文档 / 工具 | `docs/notes/Tools/` | `/PureLearning/notes/Tools/` |
+| 博客 | `docs/blog/` | `/blog/` |
+| 文档 | `docs/notes/overview.md` | `/notes/overview/` |
+| 项目 | `docs/projects/` | `/projects/` |
+| Now | `docs/now/` | `/now/` |
+| 关于 | `docs/about/website.md` | `/about/website/` |
+| 文档 / C | `docs/notes/C/` | `/notes/C/` |
+| 文档 / Python | `docs/notes/Python/` | `/notes/Python/` |
+| 文档 / Java | `docs/notes/Java/` | `/notes/Java/` |
+| 文档 / AI | `docs/notes/AI/` | `/notes/AI/` |
+| 文档 / CSAPP | `docs/notes/CSAPP/` | `/notes/CSAPP/` |
+| 文档 / 工具 | `docs/notes/Tools/` | `/notes/Tools/` |
 
 - 当前技术文档统一位于 `docs/notes/`，一级分类为 C、Python、Java、AI、CSAPP 和 Tools。沿用现有目录大小写；在区分大小写的部署环境中，`notes/Java/` 与 `notes/java/` 是不同路径。
 - 原 `docs/ai/` 已迁入 `docs/notes/AI/`，原 `docs/fundamentals/` 及其分类已撤下，计算机系统内容以 CSAPP 为当前入口。新增框架或工具内容按主题加入现有分类，必要时再扩充 `notes/` 下的栏目。
@@ -218,7 +218,9 @@ Java 内容遵循 [Java 文档编写规范](handbook/Java文档编写规范.md)�
 4. 布局改动检查桌面与手机，必要时覆盖 320、390、1024、1440 像素宽度；确认导航不越界、内容不遮挡、页面不产生意外横向溢出。
 5. JavaScript 改动运行相应 `node --check`，并验证受影响交互。纯协作说明文件的修改以事实、路径、命令及规则一致性核对为主。
 
-GitHub Pages 部署由 `.github/workflows/deploy-pages.yml` 管理：推送 `main` 或手动触发工作流，使用 Python 3.13 与 Node.js 22，安装 `requirements.txt` 并运行 `npm ci --ignore-scripts`，先执行 `.venv/bin/python -m unittest discover -s tests` 对应的 Python 测试和自定义顶层 `.mjs` / `.js` 的 `node --check`，再执行 `mkdocs build --strict`，上传 `site/` 后部署。CI 中 Python 命令使用已配置的环境，不带 `.venv/bin/`。当前 `cancel-in-progress: false`，后续触发不会按此设置自动取消正在执行的同组工作流。
+主站部署在 Cloudflare Workers：连接 Git 仓库后，Workers Builds 依次执行 `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && npm ci --ignore-scripts && .venv/bin/mkdocs build --strict`，再用 `npx wrangler deploy` 发布 `site/`；自定义域名为 `https://kosmigen.com/`，构建变量建议 `PYTHON_VERSION=3.13`、`NODE_VERSION=22`。`site_url` 通过 `!ENV` 读取 `SITE_URL`，未设置时使用 `https://kosmigen.com/`。
+
+GitHub Pages 作为备用部署由 `.github/workflows/deploy-pages.yml` 管理：推送 `main` 或手动触发工作流，使用 Python 3.13 与 Node.js 22，安装 `requirements.txt` 并运行 `npm ci --ignore-scripts`，先执行 `python -m unittest discover -s tests` 和自定义顶层 `.mjs` / `.js` 的 `node --check`，再以 `SITE_URL=https://kosmigen.github.io/PureLearning/` 执行 `mkdocs build --strict`，上传 `site/` 后部署。CI 中 Python 命令使用已配置的环境，不带 `.venv/bin/`。当前 `cancel-in-progress: false`，后续触发不会按此设置自动取消正在执行的同组工作流。
 
 ## CodeGraph
 
