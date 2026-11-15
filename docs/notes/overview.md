@@ -10,8 +10,8 @@ icon: lucide/book-open
 
 <div class="grid cards" markdown>
 
-- [**C**](C/index.md)
-- [**Python**](Python/index.md)
+- [**C**](C/intro.md)
+- [**Python**](Python/intro.md)
 - [**Java**](Java/intro.md)
 
 </div>
