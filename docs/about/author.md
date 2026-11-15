@@ -27,7 +27,7 @@ hide_h1: true
 
 幼儿园，小学都是在回龙乡本地读的书，如今幼儿园已荒废，小学也快了。**儿童散学归来早，忙趁东风放纸鸢**的场景已经不复存在了（至少在现如今的中国乡村）。不由得常常回忆小时候和同村三两好朋友一起“照屎”的快乐时光。
 
-小学最值得遇到的老师是我的数学 & 体育 & 科学 & 书法老师——杨光富老师。他的字写得十分漂亮，与其为人颇为搭配（字如其人我是万万不信的）。由于他在小学时候对我的引导，如今我还会偶尔练练毛笔字。
+小学最值得遇到的老师是我的数学 & 体育 & 科学 & 书法老师——杨老师。他的字写得十分漂亮，与其为人颇为搭配（字如其人我是万万不信的）。由于他在小学时候对我的引导，如今我还会偶尔练练毛笔字。
 
 初中就到了隔壁乡镇——「丹山镇」的丹山中学就读，非常幸运的是在这个中学里遇到了我现在的女朋友（大概率也会是我未来的爱人，我以后就称呼她为小圆吧）！当时对于学习是一点不上心，甚至天天幻想能否和小圆在一起，现在想想当时的自己确实有点“窝囊”了，尽管采取了一些实际行动。
 
@@ -72,11 +72,21 @@ hide_h1: true
   <li data-column="6"><img src="../../assets/images/skills/github.svg" alt="" loading="lazy" width="48" height="48"><span>GitHub</span></li>
 </ul>
 
+AI 时代，所谓的技能的用处真得还有那么重要吗？我认为的答案是技能是有用的，但是人没有之前那样有用了。
+
+社会必然要进行生产和消费，尽管 AI 能帮助生产，但无法消费，这一点就能保住人的意义，但从事于生产环节的人必然不会再像之前那样多，这才是这个时代最重要的问题。
+
+市场的反应必然是“裁员增效”，但裁员后，谁又来消费产品呢？不消费产品又会导致裁员进一步升级，从而陷入一个恶性循环，唯一的解法是国家参与市场调节！
+
+但国家什么时候真正保证员工的工作，生活，只有天知道。
+
 ## 看过的书
 
 文学是思想的温床。
 
 看文学作品不仅可以学习别人对一件事的叙述方式，还能体验一种新的“人生”，我称之为「书中的平行世界」，而你（阅读者）就是书中的主人公。
+
+真正开始阅读是在大一，当时和前女友分手，心情不佳，听说读书可以体验另一种人生，我便尝试着读了一些，体感不错，也就保持了这一习惯。
 
 ### 2026 年
 
@@ -93,6 +103,36 @@ hide_h1: true
   author: George Orwell
   cover: https://raw.githubusercontent.com/kosmigen/picgo-pictures/master/20261114202305305.jpg
   note: 谁控制过去就控制未来；谁控制现在就控制过去。
+- title: 我与地坛
+  author: 史铁生
+  cover: https://raw.githubusercontent.com/kosmigen/picgo-pictures/master/20261115085714474.jpg
+  note: 生命的意义就在于你能创造这过程的美好与精彩，生命的价值就在于你能够镇静而又激动地欣赏这过程的美丽与悲壮。
+```
+
+### 2025 年
+
+```bookshelf
+- title: 兄弟
+  author: 余华
+  cover: https://raw.githubusercontent.com/kosmigen/picgo-pictures/master/20261115085241490.jpg
+  note: 我想无论是写作还是人生，正确的出发都是走进窄门。不要被宽阔的大门所迷惑，那里面的路没有多长。
+- title: 黄金时代
+  author: 王小波
+  cover: https://raw.githubusercontent.com/kosmigen/picgo-pictures/master/20261115090044991.jpg
+  note: 人活在世上，就是为了忍受摧残，一直到死。想明白了这一点，一切都能泰然处之。
+```
+
+### 2024 年
+
+```bookshelf
+- title: 三体
+  author: 刘慈欣
+  cover: https://raw.githubusercontent.com/kosmigen/picgo-pictures/master/20261115084313963.jpg
+  note: 一切都将逝去，只有死神永生。
+- title: 活着
+  author: 余华
+  cover: https://raw.githubusercontent.com/kosmigen/picgo-pictures/master/20261115084931638.jpg
+  note: 只要一家人天天在一起，也就不在乎什么福分了。
 ```
 
 ### 2023 年
