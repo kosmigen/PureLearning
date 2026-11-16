@@ -28,10 +28,10 @@ icon: lucide/book-open
 
 <div class="grid cards" markdown>
 
-- [**Git**]()
-- [**Maven**]()
-- [**CMake**]()
-- [**uv**]()
+- [**Git**](Tools/index.md#git)
+- [**Maven**](Tools/index.md#maven)
+- [**CMake**](Tools/index.md#cmake)
+- [**uv**](Tools/index.md#uv)
 
 </div>
 
