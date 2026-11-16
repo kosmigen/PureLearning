@@ -22,6 +22,13 @@ _CJK_CHARACTER = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
 _LATIN_WORD = re.compile(r"[A-Za-z0-9]+(?:[._+#/-][A-Za-z0-9]+)*")
 
 
+def count_text(text: str) -> tuple[int, int]:
+    """Return CJK character and Latin word counts for plain text."""
+    cjk_count = len(_CJK_CHARACTER.findall(text))
+    latin_text = _CJK_CHARACTER.sub(" ", text)
+    return cjk_count, len(_LATIN_WORD.findall(latin_text))
+
+
 def _reading_stats(markdown: str) -> tuple[int, int]:
     """Return a mixed-language word count and a reading-time estimate."""
 
@@ -32,9 +39,7 @@ def _reading_stats(markdown: str) -> tuple[int, int]:
     text = _HTML_TAG.sub(" ", text)
     text = text.replace("`", " ")
 
-    cjk_count = len(_CJK_CHARACTER.findall(text))
-    latin_text = _CJK_CHARACTER.sub(" ", text)
-    latin_count = len(_LATIN_WORD.findall(latin_text))
+    cjk_count, latin_count = count_text(text)
     word_count = cjk_count + latin_count
 
     # Chinese prose is commonly read faster per character than English prose

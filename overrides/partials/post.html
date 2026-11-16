@@ -22,7 +22,7 @@
   <div class="kb-blog-entry__main">
     <div class="kb-blog-entry__body">
       <div class="md-post__content md-typeset kb-blog-entry__content">
-        {{ post.content }}
+        {{ post.content | scope_excerpt_ids(post.url) }}
       </div>
 
       {% if image %}

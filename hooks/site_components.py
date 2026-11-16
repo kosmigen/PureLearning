@@ -1,4 +1,4 @@
-"""Render author-maintained bookshelves and ship the local React bundle."""
+"""Render author-maintained bookshelves and bundle local React components."""
 
 import json
 import subprocess
@@ -45,6 +45,8 @@ def on_config(config):
 
 def on_files(files, *, config):
     root = Path(config.config_file_path).parent
+    background = config.extra.get("home_background_entry")
+    entries = [background] if background else []
     with TemporaryDirectory() as destination:
         try:
             subprocess.run(
@@ -52,6 +54,7 @@ def on_files(files, *, config):
                     "node", "node_modules/esbuild/bin/esbuild",
                     "bookshelf=frontend/bookshelf/Bookshelf.jsx",
                     "skills-wall=frontend/skills/SkillsWall.jsx",
+                    *entries,
                     "--bundle", "--splitting", "--minify", "--format=esm", "--jsx=automatic",
                     "--legal-comments=inline",
                     f"--outdir={destination}",
@@ -62,9 +65,9 @@ def on_files(files, *, config):
                 check=True,
             )
         except OSError as error:
-            raise ConfigurationError("构建作者页组件需要 Node.js 和 npm ci --ignore-scripts。") from error
+            raise ConfigurationError("构建页面组件需要 Node.js 和 npm ci --ignore-scripts。") from error
         except subprocess.CalledProcessError as error:
-            raise ConfigurationError(f"作者页组件构建失败。请确认已运行 npm ci --ignore-scripts。\n{error.stderr}") from error
+            raise ConfigurationError(f"页面组件构建失败。请确认已运行 npm ci --ignore-scripts。\n{error.stderr}") from error
         for asset in Path(destination).iterdir():
             files.append(File.generated(config, f"assets/{asset.name}", content=asset.read_bytes()))
     licenses = {
