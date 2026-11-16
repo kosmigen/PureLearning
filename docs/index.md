@@ -10,16 +10,19 @@ hide:
 <div class="kb-home">
 
 <section class="kb-home-hero" aria-labelledby="kosmigen">
+  <div class="kb-home-grainient" data-home-grainient aria-hidden="true"></div>
   <div class="kb-home-hero-main">
     <header class="kb-home-hero-copy" lang="en">
-      <h1 id="kosmigen"><span class="kb-home-name">kosmigen</span></h1>
-      <p class="kb-home-intro">Exploring computer science and AI through software development, experiments, and technical writing.</p>
-      <p class="kb-home-note">I share learning notes, projects, and reflections along the way. Outside of coding, I enjoy reading and exercising.</p>
-      <nav class="kb-home-actions" aria-label="Get to know me">
-        <a href="about/author/">About me</a>
-        <a href="https://github.com/kosmigen">GitHub</a>
-        <a href="https://x.com/kosmigen">X</a>
-      </nav>
+      <div class="kb-home-hero-text">
+        <h1 id="kosmigen"><span class="kb-home-name">kosmigen</span></h1>
+        <p class="kb-home-intro">Exploring computer science and AI through software development, experiments, and technical writing.</p>
+        <p class="kb-home-note">I share learning notes, projects, and reflections along the way. Outside of coding, I enjoy reading and exercising.</p>
+        <nav class="kb-home-actions" aria-label="Get to know me">
+          <a href="about/author/">About me</a>
+          <a href="https://github.com/kosmigen">GitHub</a>
+          <a href="https://x.com/kosmigen">X</a>
+        </nav>
+      </div>
     </header>
     <figure class="kb-home-portrait">
       <div class="kb-home-character">
