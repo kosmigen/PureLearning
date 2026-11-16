@@ -109,6 +109,86 @@ pre {
   font-family: var(--font-body);
 }
 
+.md-typeset .kb-about-links {
+  gap: var(--space-3);
+}
+
+.md-typeset .kb-about-links svg.lucide {
+  fill: none;
+}
+
+.md-typeset .kb-about-links > ul > li {
+  position: relative;
+  border-color: var(--color-rule);
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklab, var(--color-surface) 45%, var(--color-paper));
+}
+
+.md-typeset .kb-about-links > ul > li > p + p {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+}
+
+.md-typeset .kb-about-links > ul > li a::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.md-typeset .kb-about-links > ul > li:focus-within {
+  outline: var(--rule-focus) solid var(--color-focus);
+  outline-offset: var(--space-1);
+}
+
+.md-typeset .kb-framework-links > ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--space-4);
+  margin-inline: 0;
+  padding-inline-start: 1em;
+}
+
+.md-typeset .kb-framework-links > ul > li {
+  margin: 0;
+}
+
+.md-typeset .kb-framework-links > ul > li::marker {
+  color: var(--color-faint);
+}
+
+.md-typeset .kb-framework-links a {
+  display: block;
+  padding-block: var(--space-1);
+}
+
+@media (max-width: 39.99rem) {
+  .md-typeset .kb-framework-links > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.md-typeset .kb-site-word-count {
+  margin-block: var(--space-4) var(--space-5);
+}
+
+.kb-site-word-count__value {
+  white-space: nowrap;
+}
+
+.kb-site-word-count__digits {
+  display: inline-block;
+  color: var(--color-ink);
+  font-size: clamp(1.6em, 4vw, 2.2em);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.kb-site-word-count__spoken {
+  position: absolute;
+  clip-path: inset(50%);
+}
+
 /* Mermaid renders into a closed shadow root; contain its host, not the SVG. */
 .md-typeset .mermaid {
   width: 100%;
