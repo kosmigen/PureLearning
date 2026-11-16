@@ -117,5 +117,9 @@ def on_page_markdown(markdown, *, page, config, files):
         "now_entry": current,
         "now_is_index": is_index,
     })
-    if is_index and current:
-        return current["markdown"]
+    if current and current == entries[0]:
+        if is_index:
+            return current["markdown"]
+        # The latest entry is searchable at /now/ and also keeps its permalink.
+        search = page.meta.get("search") or {}
+        page.meta["search"] = {**search, "exclude": True}

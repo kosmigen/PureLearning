@@ -82,7 +82,12 @@ class NowTests(unittest.TestCase):
                 for target in ("now/picture.svg", "reading/", "now/2026-11-03/#focus"):
                     self.assertIn(urljoin(self.config.site_url, target), targets)
         self.assertFalse((self.site / "now/2099-01-01/index.html").exists())
-        self.assertNotIn("PRIVATE_DRAFT", self.read("search/search_index.json"))
+        search = self.read("search/search_index.json")
+        self.assertNotIn("PRIVATE_DRAFT", search)
+        indexed = json.loads(search)["docs"]
+        latest_matches = [doc["location"] for doc in indexed if "LATEST_BODY" in doc["text"]]
+        self.assertEqual(latest_matches, ["now/#focus"])
+        self.assertTrue(any(doc["location"].startswith("now/2026-11-03/") for doc in indexed))
 
     def test_year_folders_keep_dates_links_and_shared_intro_on_latest_and_archive(self):
         self.write_entry("2025-12-31", "## Focus\nPREVIOUS_YEAR", directory="2025")
