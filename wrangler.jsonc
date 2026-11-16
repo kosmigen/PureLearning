@@ -1,0 +1,9 @@
+{
+  // Workers Builds targets the Worker connected to this repository.
+  "name": "kosmigen",
+  "compatibility_date": "2026-11-16",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page"
+  }
+}
