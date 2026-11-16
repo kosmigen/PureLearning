@@ -12,7 +12,7 @@ icon: lucide/layout-dashboard
 
 ## 网站内容
 
-页脚的 **Not By AI** 徽章适用于符合徽章规则的原创文章。
+本站内容承诺均非 **AI** 创作。
 
 <div class="grid cards kb-about-links" markdown>
 
