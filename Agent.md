@@ -52,7 +52,7 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 
 ## 内容目录与网址
 
-站点地址为 `https://kosmigen.com/`（Cloudflare Workers）。GitHub Pages 作为备用部署运行在 `https://kosmigen.github.io/PureLearning/`，构建时通过 `SITE_URL` 注入该前缀。站内链接保持相对路径，不硬编码域名或部署前缀。
+站点地址为 `https://kosmigen.com/`（Cloudflare Workers）。GitHub Pages 作为备用部署运行在 `https://kosmigen.github.io/PureLearning/`，构建时通过 `SITE_URL` 注入该前缀。站内链接保持相对路径，不硬编码域名或部署前缀。 镜像 HTML 的 canonical 指向主站。镜像的 sitemap 仍使用镜像地址，供 Material 即时导航读取；搜索平台使用主站 sitemap。
 
 顶部顺序：**博客 → 文档 → 项目 → Now → 关于**。首页通过左上角站点名称或标志返回；文档入口页标题为“技术文档”，侧栏从 overview 与各分类开始。
 
@@ -74,7 +74,7 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 - 原 `docs/ai/` 已迁入 `docs/notes/AI/`，原 `docs/fundamentals/` 及其分类已撤下，计算机系统内容以 CSAPP 为当前入口。新增框架或工具内容按主题加入现有分类，必要时再扩充 `notes/` 下的栏目。
 - `docs/projects/index.md` 是隐藏左右侧栏的项目卡片展示页。使用 Web Awesome 卡片，省略页内标题和开发记录。项目列表在该文件的 `projects` 元数据中维护；每项的 `url` 同时用于自动首页缩略图和网站入口，新增示例见 `handbook/网站内容编辑手册.md`。项目栏目只维护项目展示；技术实践文档按主题放入“技术文档”。
 - `docs/notes/overview.md` 是顶部“文档”的入口页，标题为“技术文档”。
-- `docs/about/website.md` 是顶部“关于”和页脚 About 的入口，作者介绍仍在 `docs/about/author.md`。保留独立的普通页面，便于通过 `docs/about/.nav.yml` 分别命名“关于网站”和“关于作者”。
+- `docs/about/author.md` 是顶部“关于”和页脚 About 的入口，网站说明在 `docs/about/website.md`。保留独立的普通页面，便于通过 `docs/about/.nav.yml` 分别命名“关于网站”和“关于作者”。
 - 桌面侧栏的顶层分组标题由 `extra.site_navigation` 各项的 `hide_sidebar_title_on_desktop` 控制，默认 `false`，目前“文档”和“关于”启用。`nav-item.html` 根据配置的路径范围识别当前栏目，为需要隐藏的顶层分组标题添加 `kb-sidebar-title--desktop-hidden`；`sidebar.css` 通过桌面媒体查询控制显示，不依赖栏目 ID、标题文字或多层 DOM 选择器。文档侧栏直接显示 overview 与各分类；手机抽屉保留分组入口和返回标题。
 - `docs/index.md` 是首页，目前是个人介绍和插画，不是 SVG 学习路线图。
 - 普通知识文档按主题组织；博客用于完整文章、随笔。不要把所有普通文档都假定为 `docs/notes/` 下的内容。
@@ -171,6 +171,7 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `docs/assets/javascripts/site-toc.mjs` | 目录按钮、键盘与关闭行为；页面切换清理旧监听器 |
 | `docs/assets/stylesheets/home.css` | 首页布局与插画 |
 | `docs/assets/javascripts/home-animation.mjs` | 首页文字淡入、插画鼠标跟随和弹跳；支持减少动态效果与即时导航清理 |
+| `frontend/grainient/`、`docs/assets/javascripts/home-grainient.mjs` | React Bits Grainient 首页顶部颗粒渐变，色彩集中在左侧，首页按需加载；减少动态效果时使用静态渐变 |
 | `overrides/projects.html`、`overrides/partials/project-cards.html` | 项目展示页和卡片，不插入文档默认标题 |
 | `docs/assets/stylesheets/projects.css` | 项目卡片配色、响应式网格和组件未加载时的基础布局 |
 | `docs/assets/javascripts/projects.mjs` | 按需加载本地组件、处理预览成功和失败，兼容即时导航 |
@@ -182,8 +183,8 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `docs/assets/stylesheets/footer.css` | 随全站明暗主题切换的四列页脚、密码轮品牌标志与响应式排版 |
 | `docs/assets/javascripts/footer-snow.mjs` | React Bits PixelSnow 页脚背景、鼠标扰动与离屏暂停 |
 | `docs/assets/stylesheets/bending-marquee.css`、`docs/assets/javascripts/bending-marquee.mjs` | 关于作者页的 React Bits 折叠横幅：三折面板 3D 透视、交替方向滚动、悬停缓停与减少动态效果 |
-| `frontend/bookshelf/`、`hooks/bookshelf.py`、`docs/assets/javascripts/bookshelf.mjs` | Markdown 的 `bookshelf` 围栏生成书单并嵌入数据。构建时打包 React Bits BounceCards 和 FlipCard，浏览器仅在含书架的页面加载，兼容即时导航。React Bits 许可证在 `docs/assets/licenses/react-bits.txt` |
-| `docs/assets/stylesheets/hometown-globe.css`、`docs/assets/javascripts/hometown-globe.mjs`、`docs/assets/javascripts/vendor/cobe.esm.js` | 关于作者页的 COBE 点阵地球（npm 与 vendor 均为 2.0.1）。COBE 绘制球体和教育地点之间的弧线，学校使用旋转的黑色三棱锥和照片卡片，海外地标使用彩色图标。支持自动旋转和拖拽，离屏、后台或开启减少动态效果时暂停自动动画。许可证在 `docs/assets/licenses/cobe.txt` |
+| `frontend/bookshelf/`、`hooks/site_components.py`、`docs/assets/javascripts/bookshelf.mjs` | Markdown 的 `bookshelf` 围栏生成书单并嵌入数据。构建时打包 React Bits BounceCards 和 FlipCard，浏览器仅在含书架的页面加载，兼容即时导航。React Bits 许可证在 `docs/assets/licenses/react-bits.txt` |
+| `docs/assets/stylesheets/hometown-globe.css`、`docs/assets/javascripts/hometown-globe.mjs`、`docs/assets/javascripts/vendor/cobe.esm.js` | 关于作者页的 COBE 点阵地球（使用 vendor 中的 2.0.1）。COBE 绘制球体和教育地点之间的弧线，学校使用旋转的黑色三棱锥和照片卡片，海外地标使用彩色图标。支持自动旋转和拖拽，离屏、后台或开启减少动态效果时暂停自动动画。许可证在 `docs/assets/licenses/cobe.txt` |
 | `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |
 | `overrides/partials/nav-item.html` | 保留 Material 9.7.7 导航宏，读取本地目录 / 页面图标，保留栏目显示名称、整行状态容器与顶层标题标记；手机一级栏目由 `nav.html` 单独渲染为纯文字展开项 |
@@ -191,7 +192,7 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `hooks/icon_assets.py` | 在其他模板环境处理前提供 Lucide 依赖的 SVG 加载器，保持项目与主题覆盖优先级；发布 `assets/licenses/lucide.txt`，依赖缺失时提示安装命令 |
 | `hooks/diagrams.py` | 为 Mermaid 添加滚动容器，横向流程图可拖动 |
 
-样式加载入口是 `mkdocs.yml` 的 `extra_css`。加载顺序为文档基础、页眉、搜索、侧栏，再到各页面与页脚。内部导入包括 `extra.css` → `tokens.css` → `reading-fonts.css`、`blog.css` → `blog-fonts.css` 与 `blog/{common,index,post,meta}.css`，以及 `projects.css` → 本地 Web Awesome 主题。不要把导入文件又重复加入页面。拆分样式时保留选择器、声明与必要的覆盖顺序，并核对拆分前后的浏览器计算样式。
+样式加载入口是 `mkdocs.yml` 的 `extra_css`。加载顺序为文档基础、页眉、搜索、侧栏，再到各页面与页脚。内部导入包括 `extra.css` → `tokens.css`、`blog.css` → `blog-fonts.css` 与 `blog/{common,index,post,meta}.css`，以及 `projects.css` → 本地 Web Awesome 主题。不要把导入文件又重复加入页面。拆分样式时保留选择器、声明与必要的覆盖顺序，并核对拆分前后的浏览器计算样式。
 
 全站使用中性白、浅灰和深灰作为大面积底色，正文与顶部导航保留 VitePress 风格的蓝色强调色。侧栏、手机菜单和独立目录组件使用中性色，选中与悬停背景统一为 `--color-surface` 浅灰（深色模式为深灰），文字、图标和箭头统一使用中性文字色；`.kb-nav-row` 是整行状态容器，带链接与展开箭头的条目也只使用一个完整背景，内部不重复画色块。按用户偏好避免恢复米黄底色和泛黄的纸张色调；配色统一维护在 `tokens.css` 中。
 
@@ -214,12 +215,12 @@ Java 内容遵循 [Java 文档编写规范](handbook/Java文档编写规范.md)�
 按改动选择必要检查，不为简单文案改动新增复杂测试，也不把构建成功当作所有交互都已验证：
 
 1. 检查任务相关差异和 `git diff --check`。
-2. 文档、配置或模板改动运行严格构建；确认 warning 和 INFO 的实际含义。
+2. 文档、配置或模板改动运行严格构建；确认 warning 和 INFO 的实际含义。 用 `python scripts/check_site.py <构建目录> <站点 URL>` 检查生成页面的空链接、缺失资源与锚点、重复 ID。
 3. 导航或网址改动核对顶部、侧栏、页脚、所有相关站内链接、canonical。验证即时导航及后退后的选中状态；迁移还要验证嵌套页面和查询参数、锚点。
 4. 布局改动检查桌面与手机，必要时覆盖 320、390、1024、1440 像素宽度；确认导航不越界、内容不遮挡、页面不产生意外横向溢出。
 5. JavaScript 改动运行相应 `node --check`，并验证受影响交互。纯协作说明文件的修改以事实、路径、命令及规则一致性核对为主。
 
-主站部署在 Cloudflare Workers：连接 Git 仓库后，Workers Builds 依次执行 `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && npm ci --ignore-scripts && .venv/bin/mkdocs build --strict`，再用 `npx wrangler deploy` 发布 `site/`；自定义域名为 `https://kosmigen.com/`，构建变量建议 `PYTHON_VERSION=3.13`、`NODE_VERSION=22`。`site_url` 通过 `!ENV` 读取 `SITE_URL`，未设置时使用 `https://kosmigen.com/`。
+主站部署在 Cloudflare Workers：连接 Git 仓库后，Workers Builds 依次执行 `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && npm ci --ignore-scripts && .venv/bin/mkdocs build --strict`，再用 `npx wrangler deploy` 按仓库的 `wrangler.jsonc` 发布 `site/` 并启用自定义 404；自定义域名为 `https://kosmigen.com/`，构建变量建议 `PYTHON_VERSION=3.13`、`NODE_VERSION=22`。`site_url` 通过 `!ENV` 读取 `SITE_URL`，未设置时使用 `https://kosmigen.com/`。
 
 GitHub Pages 作为备用部署由 `.github/workflows/deploy-pages.yml` 管理：推送 `main` 或手动触发工作流，使用 Python 3.13 与 Node.js 22，安装 `requirements.txt` 并运行 `npm ci --ignore-scripts`，先执行 `python -m unittest discover -s tests` 和自定义顶层 `.mjs` / `.js` 的 `node --check`，再以 `SITE_URL=https://kosmigen.github.io/PureLearning/` 执行 `mkdocs build --strict`，上传 `site/` 后部署。CI 中 Python 命令使用已配置的环境，不带 `.venv/bin/`。当前 `cancel-in-progress: false`，后续触发不会按此设置自动取消正在执行的同组工作流。
 

@@ -3,7 +3,7 @@
 // the dotted sphere and the arcs between consecutive points. This
 // module drives the camera and anchors the school pins and landmark icons.
 //
-// cobe@2.0.1 is an npm dependency; its dist is vendored in vendor/.
+// COBE 2.0.1 is bundled locally in vendor/.
 // License: assets/licenses/cobe.txt
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");

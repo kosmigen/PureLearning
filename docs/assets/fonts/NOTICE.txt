@@ -14,24 +14,12 @@ Charter (blog article reading font)
 - BITSTREAM CHARTER is a registered trademark of Bitstream Inc.
 - The complete original license is in charter/LICENSE.txt.
 
-PureLearning Sans (navigation and technical reading font)
-- Derived web subsets of Adobe Source Han Sans CN VF 2.005
-  (Simplified Chinese regional glyphs).
-- Source:
-  https://github.com/adobe-fonts/source-han-sans/blob/release/Variable/WOFF2/TTF/Subset/SourceHanSansCN-VF.ttf.woff2
-- Copyright 2014-2025 Adobe.
-- Reserved Font Name: Source. The derived family is named PureLearning Sans;
-  original copyright and license remain embedded.
-- Complete source character coverage is split into Unicode-ranged WOFF2
-  shards, with hinting removed. Weights 250-900 remain variable.
-- Rebuild instructions and source hashes: scripts/subset_reading_fonts.py.
-- reading-sans/ is used for navigation, headings and technical prose.
-
-Maple Mono NF CN
+Kosmigen Mono (Latin brand wordmark)
 - Source: https://github.com/subframe7536/maple-font/releases/tag/v7.9
-- The Regular face is self-hosted as a WOFF2 webfont with complete Unicode
-  coverage; font hinting and unused metadata were removed for web delivery.
-- Copyright 2022 The Maple Mono Project Authors.
+- Derived from Maple Mono NF CN Regular. The subset keeps U+0020–007E
+  and was renamed to Kosmigen Mono. The upstream notice and license are
+  preserved in maple-mono-OFL.txt.
+- Chinese body text uses system fonts.
 
 Excalifont (embedded in assets/images/readme-logo.svg)
 - Source: https://github.com/excalidraw/excalidraw/tree/master/packages/excalidraw/fonts/Excalifont
@@ -41,4 +29,4 @@ Excalifont (embedded in assets/images/readme-logo.svg)
 - Excalifont modifications by Jan Filipek / DizajnDesign.
 
 All font assets except Charter are distributed under the SIL Open Font License 1.1. The
-complete license text is included in OFL-1.1.txt.
+applicable notices and full license texts accompany the assets.
