@@ -15,8 +15,8 @@
           {% for post in recent_posts[:2] %}
             <a class="kb-footer__post" href="{{ post.url | url }}" title="{{ post.title | e }}">
               <span class="kb-footer__thumbnail" aria-hidden="true">
-                {% if post.meta.get("image") %}
-                  <img src="{{ post.meta.image | url | e }}" alt="" width="56" height="56" loading="lazy" decoding="async">
+                {% if post.meta.get("thumbnail") %}
+                  <img src="{{ post.meta.thumbnail | url | e }}" alt="" width="56" height="56" loading="lazy" decoding="async">
                 {% else %}
                   {% include ".icons/material/file-document-outline.svg" %}
                 {% endif %}
@@ -63,10 +63,21 @@
     </div>
     <div class="kb-footer__bottom">
       <p class="kb-footer__quote" lang="en">
-        <q cite="https://calteches.library.caltech.edu/51/2/CargoCult.htm">The first principle is that you must not fool yourself—and you are the easiest person to fool.</q>
-        <span class="kb-footer__attribution">Richard Feynman</span>
+        <q cite="https://germanhistorydocs.org/en/the-holy-roman-empire-1648-1815/ghdi%3Adocument-3589">Dare to know!</q>
+        <span class="kb-footer__attribution">Immanuel Kant</span>
       </p>
-      <p class="kb-footer__copyright">{{ config.copyright }}</p>
+      <div class="kb-footer__credits">
+        <p>{{ config.copyright }}</p>
+        <div class="kb-footer__badges">
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener noreferrer">
+            <img src="{{ 'assets/images/cc-by-nc-sa.svg' | url }}" alt="CC BY-NC-SA 4.0 国际许可协议" width="120" height="42" loading="lazy">
+          </a>
+          <a class="kb-footer__badge" href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
+            <img class="kb-footer__badge-light" src="{{ 'assets/images/not-by-ai-white.svg' | url }}" alt="本站文章由人撰写 · Not By AI" width="131" height="42" loading="lazy">
+            <img class="kb-footer__badge-dark" src="{{ 'assets/images/not-by-ai-black.svg' | url }}" alt="本站文章由人撰写 · Not By AI" width="131" height="42" loading="lazy">
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
