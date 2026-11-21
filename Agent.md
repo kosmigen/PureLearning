@@ -66,12 +66,11 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 | 文档 / C | `docs/notes/C/` | `/notes/C/` |
 | 文档 / Python | `docs/notes/Python/` | `/notes/Python/` |
 | 文档 / Java | `docs/notes/Java/` | `/notes/Java/` |
-| 文档 / AI | `docs/notes/AI/` | `/notes/AI/` |
-| 文档 / CSAPP | `docs/notes/CSAPP/` | `/notes/CSAPP/` |
+| 文档 / AI | `docs/notes/AI/intro.md` | `/notes/AI/intro/` |
 | 文档 / 工具 | `docs/notes/Tools/` | `/notes/Tools/` |
 
-- 当前技术文档统一位于 `docs/notes/`，一级分类为 C、Python、Java、AI、CSAPP 和 Tools。沿用现有目录大小写；在区分大小写的部署环境中，`notes/Java/` 与 `notes/java/` 是不同路径。
-- 原 `docs/ai/` 已迁入 `docs/notes/AI/`，原 `docs/fundamentals/` 及其分类已撤下，计算机系统内容以 CSAPP 为当前入口。新增框架或工具内容按主题加入现有分类，必要时再扩充 `notes/` 下的栏目。
+- 当前技术文档统一位于 `docs/notes/`，一级分类为 C、Python、Java、AI 和 Tools。沿用现有目录大小写；在区分大小写的部署环境中，`notes/Java/` 与 `notes/java/` 是不同路径。
+- 原 `docs/ai/` 已迁入 `docs/notes/AI/`，原 `docs/fundamentals/` 及其分类已撤下。新增框架或工具内容按主题加入现有分类，必要时再扩充 `notes/` 下的栏目。
 - `docs/projects/index.md` 是隐藏左右侧栏的项目卡片展示页。使用 Web Awesome 卡片，省略页内标题和开发记录。项目列表在该文件的 `projects` 元数据中维护；每项的 `url` 同时用于自动首页缩略图和网站入口，新增示例见 `handbook/网站内容编辑手册.md`。项目栏目只维护项目展示；技术实践文档按主题放入“技术文档”。
 - `docs/notes/overview.md` 是顶部“文档”的入口页，标题为“技术文档”。
 - `docs/about/author.md` 是顶部“关于”和页脚 About 的入口，网站说明在 `docs/about/website.md`。保留独立的普通页面，便于通过 `docs/about/.nav.yml` 分别命名“关于网站”和“关于作者”。
@@ -124,7 +123,7 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 - `draft: true` 的文章默认不进入生产构建；当前 Material 默认 `draft_on_serve: true`，因此 `mkdocs serve` 会显示博客草稿。这条规则只适用于博客插件管理的文章。
 - `docs/blog/posts/.meta.yml` 提供默认作者 ID。展示名称、简介和头像在 `docs/blog/.authors.yml` 修改；点击作者后的完整介绍页是 `docs/about/author.md`。显示名称与内部作者 ID 不要混淆。
 - 博客阅读页采用正文与右侧目录两列，不显示左侧信息栏。标题下首行以纯文字展示作者、日期及可选更新日期；下一行按留白分组展示标签、阅读时长与字数，统计样式与列表一致，不显示头像、简介引用块、分隔点或标签胶囊。作者姓名可点击查看介绍，简介保留为悬停提示；上一篇、下一篇位于文末。窄屏自然换行。移动端布局以 https://zensical.org/docs/create-your-site/ 为参考：48px 单行页眉，左上圆角导航浮层，文章右下独立目录按钮；点一次在内容上方展开 `On this page`，不需要打开导航抽屉。桌面保留正文与右侧目录，不显示左侧信息栏；目录标题由 `markdown_extensions.toc.title` 统一设置。
-- 封面使用 `image`，可配 `image_alt`、`image_layout: top` 或 `side`；默认 `top`，只有显式填写 `side` 才使用右侧小图。布局同时作用于列表、时间归档和文章详情：详情页 `top` 在标题信息下方显示通栏封面，`side` 在宽屏标题信息右侧显示小图，手机统一上下排列；详情封面保持原图比例，正文其他插图仍使用 Markdown。拼成 `iamge_layout` 会产生明确构建警告。完整写作与元数据说明见 `handbook/网站内容编辑手册.md`。
+- 封面使用 `image`，可配 `image_alt`。`image_layout: top` 或 `side` 控制列表和时间归档的封面布局，默认 `top`。详情页封面在文章信息下方居中显示，保留原图比例。页脚近期文章的缩略图从 `image` 生成。拼成 `iamge_layout` 会产生明确构建警告。完整写作与元数据说明见 `handbook/网站内容编辑手册.md`。
 
 文章示例（日期替换为实际发布日期，`categories` 可省略）：
 
@@ -187,6 +186,7 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `docs/assets/stylesheets/hometown-globe.css`、`docs/assets/javascripts/hometown-globe.mjs`、`docs/assets/javascripts/vendor/cobe.esm.js` | 关于作者页的 COBE 点阵地球（使用 vendor 中的 2.0.1）。COBE 绘制球体和教育地点之间的弧线，学校使用旋转的黑色三棱锥和照片卡片，海外地标使用彩色图标。支持自动旋转和拖拽，离屏、后台或开启减少动态效果时暂停自动动画。许可证在 `docs/assets/licenses/cobe.txt` |
 | `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |
+| `hooks/blog_thumbnails.py` | 按日期获取最近三篇已发布博客，从 `image` 构建页脚 WebP 缩略图；已有 `thumbnail` 优先 |
 | `overrides/partials/nav-item.html` | 保留 Material 9.7.7 导航宏，读取本地目录 / 页面图标，保留栏目显示名称、整行状态容器与顶层标题标记；手机一级栏目由 `nav.html` 单独渲染为纯文字展开项 |
 | `hooks/navigation_icons.py` | 构建时读取各目录 `.nav.yml` 的 `icon`，按物理目录绑定图标，验证图标名；复用固定版本 awesome-nav 的解析树处理别名、虚拟分组与单子项目录。博客归档从 `docs/blog/archive/.nav.yml` 读取，Tags 在 `docs/blog/tags.md` 中维护；不增加浏览器脚本 |
 | `hooks/icon_assets.py` | 在其他模板环境处理前提供 Lucide 依赖的 SVG 加载器，保持项目与主题覆盖优先级；发布 `assets/licenses/lucide.txt`，依赖缺失时提示安装命令 |
@@ -208,7 +208,7 @@ Web Awesome 3.14.0 的 Card、Badge 及其依赖保存在 `docs/assets/javascrip
 
 Java 内容遵循 [Java 文档编写规范](handbook/Java文档编写规范.md)：参考 Tpoint Tech 的讲解组织方式，统一采用概念、语法、独立示例、输出、注意事项、练习与参考资料的形式。当前示例基准为 JDK 21，完整程序需要编译运行；按现有核心、进阶、框架、第三方库分类组织，正文与示例独立编写。
 
-修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。四列页脚跟随全站 `data-md-color-scheme` 切换：明暗模式均复用全站底色、文字、强调色与分隔线变量；左列展示站名与低对比的密码轮标志（复用 `cipher-wheel.svg`），联系方式集中在 Connect 栏并使用 Material 图标，英文格言位于底栏。`footer-snow.mjs` 将 React Bits PixelSnow 的 WebGL 渲染用于页脚背景，雪花颜色由 `footer.css` 按主题设置。进入视口时初始化，离屏、后台或开启减少动态效果时暂停，画布不阻挡链接和手机滚动。关于作者页的折叠横幅由 `bending-marquee.mjs` 按 `docs/about/author.md` 中容器的 `data-items`、`data-rows` 等属性构建三折面板与滚动条，文字与参数在页面侧维护，配色与分隔符摆动在 `bending-marquee.css`；同样遵守即时导航清理、离屏暂停与减少动态效果。近期文章从 Blog 插件的数据中按日期取最近两篇，始终排除草稿，缺少封面时使用文档图标。博客右侧目录应在正文边界前避让页脚。
+修改 JavaScript 时考虑 Material 即时导航的 `document$` 生命周期，清理旧动画、监听器和 observers。动画应尊重减少动态效果设置，离屏时停止不必要的工作。四列页脚跟随全站 `data-md-color-scheme` 切换：明暗模式均复用全站底色、文字、强调色与分隔线变量；左列展示站名与低对比的密码轮标志（复用 `cipher-wheel.svg`），联系方式集中在 Connect 栏并使用 Material 图标，英文格言位于底栏。`footer-snow.mjs` 将 React Bits PixelSnow 的 WebGL 渲染用于页脚背景，雪花颜色由 `footer.css` 按主题设置。进入视口时初始化，离屏、后台或开启减少动态效果时暂停，画布不阻挡链接和手机滚动。关于作者页的折叠横幅由 `bending-marquee.mjs` 按 `docs/about/author.md` 中容器的 `data-items`、`data-rows` 等属性构建三折面板与滚动条，文字与参数在页面侧维护，配色与分隔符摆动在 `bending-marquee.css`；同样遵守即时导航清理、离屏暂停与减少动态效果。近期文章从 Blog 插件的数据中按日期取最近三篇，始终排除草稿，缺少封面时使用文档图标。博客右侧目录应在正文边界前避让页脚。
 
 ## 验证与部署
 
