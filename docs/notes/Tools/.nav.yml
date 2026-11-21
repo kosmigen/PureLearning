@@ -1,4 +1,4 @@
 icon: lucide/wrench
 
 nav:
-  - index.md
+  - 工具概述: intro.md

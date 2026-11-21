@@ -10,7 +10,6 @@ icon: lucide/book-open
 
 <div class="grid cards" markdown>
 
-- [**C**](C/intro.md)
 - [**Python**](Python/intro.md)
 - [**Java**](Java/intro.md)
 
@@ -28,10 +27,10 @@ icon: lucide/book-open
 
 <div class="grid cards" markdown>
 
-- [**Git**](Tools/index.md#git)
-- [**Maven**](Tools/index.md#maven)
-- [**CMake**](Tools/index.md#cmake)
-- [**uv**](Tools/index.md#uv)
+- [**Git**](Tools/intro.md#git)
+- [**Maven**](Tools/intro.md#maven)
+- [**CMake**](Tools/intro.md#cmake)
+- [**uv**](Tools/intro.md#uv)
 
 </div>
 
@@ -45,8 +44,7 @@ icon: lucide/book-open
 
 <div class="grid cards" markdown>
 
-- [**CSAPP**](CSAPP/index.md)
-- [**AI**](AI/index.md) 
+- [**AI**](AI/intro.md)
 
 </div>
 

@@ -1,8 +1,13 @@
 ---
-title: Python
+title: Python 入门
 description: Python 核心内容和相关生态
+icon: lucide/circle-play
 ---
 
-如果已经会一点编程，可以跟着 [Python 官方中文教程](https://docs.python.org/zh-cn/3/tutorial/index.html) 写几个小脚本。建议先练容器、函数和文件读写，再学习模块、异常和测试。
+# Python 入门
 
-想管理项目的 Python 版本和依赖，可以从 [uv](../Tools/index.md#uv) 开始。
+Python 是由 **** 在
+
+其特点是
+
+如今 AI 时代，此编程语言的重要性也日益凸显！
