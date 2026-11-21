@@ -1,4 +1,4 @@
-icon: lucide/terminal
+icon: simple/python
 
 nav:
   - Python 入门: intro.md

@@ -182,7 +182,7 @@ extra:
       paths: [about/]
       hide_sidebar_title_on_desktop: true
   social:
-    - icon: fontawesome/brands/github
+    - icon: simple/github
       link: https://github.com/kosmigen
       name: GitHub
     - icon: fontawesome/brands/x-twitter
