@@ -7,7 +7,8 @@
   --kb-book-paper: #262627;
   --kb-book-image-opacity: 0.4;
 }
-.kb-bookshelf__stage { overflow: clip; }
+/* Contain the cards' stacking so the fan never covers the sticky header. */
+.kb-bookshelf__stage { overflow: clip; isolation: isolate; }
 .kb-bookshelf__fan .bounce-cards__card {
   aspect-ratio: auto;
   overflow: visible;
