@@ -235,7 +235,7 @@ body:not(:has(.kb-home, .kb-blog-index, .kb-blog-post, .kb-projects)) .md-sideba
 @media screen and (min-width: 76.25em) {
   .md-sidebar--primary.kb-sidebar--desktop-hidden { display: none; }
   .md-sidebar--primary {
-    top: calc(var(--site-header-height) + 1px) !important;
+    top: var(--site-header-height) !important;
     height: auto;
   }
 

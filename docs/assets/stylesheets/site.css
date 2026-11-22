@@ -32,9 +32,9 @@ body { background: var(--color-paper); }
   position: sticky;
   z-index: 4;
   top: 0;
-  border-bottom: 1px solid var(--color-rule);
   color: var(--color-ink);
-  background: var(--color-paper);
+  background: color-mix(in srgb, var(--color-paper) 70%, transparent);
+  backdrop-filter: blur(8px);
   box-shadow: none;
 }
 .kb-site-header .md-header__inner {
@@ -108,11 +108,6 @@ body { background: var(--color-paper); }
 @media (max-width: 59.99em) {
   :root, [data-md-color-scheme] { --site-header-height: 2.4rem; }
   .kb-site-navigation { display: none; }
-  .kb-site-header {
-    border-bottom: 0;
-    background: color-mix(in srgb, var(--color-paper) 70%, transparent);
-    backdrop-filter: blur(8px);
-  }
   .kb-site-header .md-header__inner { height: 2.4rem; padding-inline: .4rem; }
   .kb-site-header .md-header__title { font-size: .9rem; font-weight: 600; }
   .kb-site-header .md-header__button { margin: .2rem; padding: .4rem; }
