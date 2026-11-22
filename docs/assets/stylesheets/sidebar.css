@@ -377,3 +377,12 @@ body:not(:has(.kb-home, .kb-blog-index, .kb-blog-post, .kb-projects)) .md-sideba
     padding-inline-start: 0;
   }
 }
+
+/* Archive rows stay text-only when expanded. */
+.md-nav--primary
+  .md-nav__item--nested:has(
+    > .md-nav__link > svg.lucide-archive
+  )
+  > nav .md-nav__link > svg {
+  display: none;
+}
