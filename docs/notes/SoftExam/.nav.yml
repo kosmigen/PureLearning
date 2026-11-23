@@ -1,0 +1,5 @@
+icon: lucide/monitor-cloud
+
+nav:
+  - 软考概述: intro.md
+  - 中级软件设计师: intermediate-software-designer
