@@ -152,7 +152,7 @@ class NavigationIconTests(unittest.TestCase):
         self.assert_icon(rows, "时间归档", "archive")
         self.assert_icon(rows, "Tags", "tags")
         rows = self.rows("notes/overview/index.html")
-        for title, icon in (("C", "code"), ("Python", "terminal"), ("Java", "coffee"),
-                            ("AI", "brain"), ("CSAPP", "cpu"), ("工具", "wrench"),
+        for title, icon in (("Java", "coffee"), ("AI", "brain"), ("工具", "wrench"),
+                            ("软考", "monitor-cloud"),
                             ("overview", "book-open")):
             self.assert_icon(rows, title, icon)

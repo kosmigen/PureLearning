@@ -156,7 +156,7 @@ class NavigationLayoutTests(unittest.TestCase):
         self.assertIn("md-nav__link--active", now["classes"])
 
     def test_article_toc_has_its_own_accessible_button(self):
-        paths = [Path("notes/Java/basics/syntax/index.html")]
+        paths = [Path("notes/overview/index.html")]
         paths += [path.relative_to(self.site)
                   for path in self.site.glob("blog/*/*/*/*/index.html")
                   if 'data-md-component="toc"' in path.read_text()]

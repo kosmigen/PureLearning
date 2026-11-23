@@ -62,14 +62,9 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 | 文档 | `docs/notes/overview.md` | `/notes/overview/` |
 | 项目 | `docs/projects/` | `/projects/` |
 | Now | `docs/now/` | `/now/` |
-| 关于 | `docs/about/website.md` | `/about/website/` |
-| 文档 / C | `docs/notes/C/` | `/notes/C/` |
-| 文档 / Python | `docs/notes/Python/` | `/notes/Python/` |
-| 文档 / Java | `docs/notes/Java/` | `/notes/Java/` |
-| 文档 / AI | `docs/notes/AI/intro.md` | `/notes/AI/intro/` |
-| 文档 / 工具 | `docs/notes/Tools/` | `/notes/Tools/` |
+| 关于 | `docs/about/author.md` | `/about/author/` |
 
-- 当前技术文档统一位于 `docs/notes/`，一级分类为 C、Python、Java、AI 和 Tools。沿用现有目录大小写；在区分大小写的部署环境中，`notes/Java/` 与 `notes/java/` 是不同路径。
+- 技术文档统一位于 `docs/notes/`，一级分类和顺序由 [docs/notes/.nav.yml](docs/notes/.nav.yml) 维护。保留现有路径的大小写，例如 `notes/Java/`。
 - 原 `docs/ai/` 已迁入 `docs/notes/AI/`，原 `docs/fundamentals/` 及其分类已撤下。新增框架或工具内容按主题加入现有分类，必要时再扩充 `notes/` 下的栏目。
 - `docs/projects/index.md` 是隐藏左右侧栏的项目卡片展示页。使用 Web Awesome 卡片，省略页内标题和开发记录。项目列表在该文件的 `projects` 元数据中维护；每项的 `url` 同时用于自动首页缩略图和网站入口，新增示例见 `handbook/网站内容编辑手册.md`。项目栏目只维护项目展示；技术实践文档按主题放入“技术文档”。
 - `docs/notes/overview.md` 是顶部“文档”的入口页，标题为“技术文档”。
@@ -99,7 +94,7 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 - 文档侧栏以目录标题的层级路径为标识，通过 `sessionStorage` 在同一标签页内记住开合状态与滚动位置；离开页面时用实际开合状态覆盖旧记录（包括当前文章自动展开后覆盖旧的收起记录），新文章所在路径始终展开。恢复时暂时关闭开合动画，先同步恢复滚动位置，再在主题首帧定位后校正；刷新和整页跳转也恢复位置。手机抽屉使用与顶部相同的栏目名称和顺序；一级栏目默认是无前置图标的纯文字展开项，点击整行只展示下级，不跳转，实际页面链接位于展开后的子列表；配置 `mobile_direct_link: true` 的栏目（当前“项目”和“Now”）直接链接到 `url`，不再展开，并按 `paths` 保持选中状态。不保存桌面目录开合状态。
 - 顶部与页脚快速链接共用 `extra.site_navigation`，左侧名称和层级仍由 `.nav.yml` 独立配置。只修改 `.nav.yml` 标签不会自动修改顶部或页脚；改栏目时检查各处和文档链接是否需要一起更新。
 - `navigation.indexes` 将栏目 `index.md` 合并为可点击的栏目入口。栏目名称与页面正文标题可以不同。需要点击标题只展开、不跳转的目录，不要在该目录放 `index.md`；把栏目页改为普通页面（如 `overview.md`、`intro.md`）并在 `.nav.yml` 中列出，Material 会把没有 index 页的目录原生渲染为展开开关。Java 栏目采用这种方式。
-- 只包含一篇文章时直接用单个 `.md` 文件（如 `basics/syntax.md`），不为其创建目录。`use_directory_urls` 下单个文件与 `index.md` 的网址相同，摊平不会改变已发布网址；目录留给多篇文章或子栏目。Java 的 `basics` 采用这种方式。
+- 只包含一篇文章时直接用单个 `.md` 文件。使用 `use_directory_urls` 时，`topic.md` 与 `topic/index.md` 对应同一个网址。目录留给多篇文章或子栏目。
 - 显式列出页面且没有通配规则的 `.nav.yml`，新增页面时要按需更新列表，不能假定自动进入侧栏。
 - `.nav.yml` 顶层必须是映射（`nav:`），不能写成 `- nav:`。导航引用的目录至少需要一个 Markdown 页面；空文件夹不会成为可发布的导航分类。
 - 标签改名不等于路径迁移。仅调整导航层级时，不必移动目录；用户要求修改网址时，再同步目录、导航与站内链接。
