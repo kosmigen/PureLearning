@@ -71,22 +71,13 @@ plugins:
   - awesome-nav
   - meta
   - blog:
-      blog_dir: blog
-      post_dir: "{blog}/posts"
       post_url_format: "{date}/{slug}"
-      authors: true
-      authors_file: "{blog}/.authors.yml"
-      post_readtime: true
-      archive: true
       archive_name: 时间归档
       archive_date_format: yyyy 年 MM 月
       archive_url_date_format: yyyy/MM
-      archive_url_format: "archive/{date}"
       categories: false
-      pagination: true
       pagination_per_page: 8
       pagination_format: "$link_first $link_previous ~2~ $link_next $link_last"
-      draft: false
   - tags:
       filters:
         include:
