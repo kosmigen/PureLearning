@@ -4,18 +4,27 @@ description: 不同编程语言使用的工具以及一些优质的工具
 icon: lucide/circle-play
 ---
 
+# 工具概述
+
+![一组复古的工作坊工具，包括扳手、钉子和锤子，展示在一张木桌上](https://raw.githubusercontent.com/kosmigen/picgo-pictures/master/20261123140301273.jpg)
+
+工具（英语：tool）或称器具、器材，是指能够方便人们完成工作的器具。广义上，工具可以是机械性的，也可以是智能性的。
+
+中国有句古话：“君子生非异也，善假于物也”，早就告诉我们要好好地利用工具去完成我们想完成的任务。
+
+在计算机的世界中，工具种类繁杂，但目的都是为了帮助我们便捷地完成一些事。所以，对于工具，如果我们掌握了它是用来解决什么问题，使用什么机制和方法进行解决，那么学习它就变得非常简单了！
+
 ## Git
 
-用于管理版本和协作。先练习提交、查看差异和创建分支，再学习合并与解决冲突。[《Pro Git》中文版](https://git-scm.com/book/zh/v2)
+
 
 ## Maven
 
-用于构建 Java 项目和管理依赖。可以先建一个小项目，读懂 `pom.xml`，再运行测试和打包。[Maven 官方入门](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
-## CMake
-
-用于描述 C 或 C++ 项目的构建方式。从一个可执行文件开始，再把公共代码拆成库，练习链接依赖。[CMake 官方教程](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
 
 ## uv
 
-用于管理 Python 项目、虚拟环境和依赖。可以先按官方入门创建一个项目，理解 `pyproject.toml` 和锁文件各自记录什么。[uv 官方入门](https://docs.astral.sh/uv/getting-started/)
+
+
+## 更多工具
+
