@@ -1,4 +1,4 @@
-"""Render standalone Markdown images with their alt text as a caption."""
+"""Caption standalone Markdown images and lazy-load remote images."""
 
 from xml.etree import ElementTree as ET
 
@@ -10,6 +10,10 @@ class ImageCaptions(Treeprocessor):
     def run(self, root):
         def visit(parent, in_figure=False):
             for element in list(parent):
+                if element.tag == "img" and element.get("src", "").lower().startswith(("https://", "http://", "//")):
+                    element.attrib.setdefault("loading", "lazy")
+                    element.attrib.setdefault("decoding", "async")
+
                 if not in_figure and element.tag == "p" and len(element) == 1 and not (element.text or "").strip():
                     child = element[0]
                     image = child if child.tag == "img" else (

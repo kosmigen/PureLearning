@@ -50,5 +50,5 @@
   {% endif %}
 </div>
 {% if page.meta.get("image") %}
-  <p class="kb-blog-post-cover"><img src="{{ page.meta.image | url | e }}" alt="{{ (page.meta.get('image_alt') or '') | e }}" decoding="async"></p>
+  <p class="kb-blog-post-cover"><img src="{{ page.meta.image | url | e }}" alt="{{ (page.meta.get('image_alt') or '') | e }}" loading="lazy" decoding="async"></p>
 {% endif %}
