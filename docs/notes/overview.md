@@ -29,7 +29,6 @@ icon: lucide/book-open
 
 - [**Git**](Tools/intro.md#git)
 - [**Maven**](Tools/intro.md#maven)
-- [**CMake**](Tools/intro.md#cmake)
 - [**uv**](Tools/intro.md#uv)
 
 </div>
@@ -45,14 +44,19 @@ icon: lucide/book-open
 <div class="grid cards" markdown>
 
 - [**AI**](AI/intro.md)
+- [**软考**](SoftExam/intro.md)
 
 </div>
 
-## 推荐学习资料
+## 更多资料
 
 [Point Tech](https://www.tpointtech.com/)
 
 印度的编程资源，内容全面并详细，更新时间很新，用于学习各类编程语言是不错的选择。
+
+[Python 教程](https://www.pythontutorial.net/)
+
+专注于 Pyhton 相关知识。
 
 [SpringBoot](https://docs.spring.io/spring-boot/docs/3.0.0/reference/html/index.html)
 

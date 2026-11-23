@@ -1,5 +1,5 @@
 site_name: kosmigen
-site_description: C、Python、Java、计算机基础与 AI 的技术文档，以及项目实践和博客
+site_description: Python、Java、AI、软考与开发工具的技术文档，以及项目实践和博客
 site_author: kosmigen
 # Defaults to the Cloudflare custom domain; the GitHub Pages workflow sets
 # SITE_URL to the /PureLearning/ mirror.
