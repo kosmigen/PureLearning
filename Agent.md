@@ -187,7 +187,7 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `docs/assets/stylesheets/hometown-globe.css`、`docs/assets/javascripts/hometown-globe.mjs`、`docs/assets/javascripts/vendor/cobe.esm.js` | 关于作者页的 COBE 点阵地球（使用 vendor 中的 2.0.1）。COBE 绘制球体和教育地点之间的弧线，学校使用旋转的黑色三棱锥和照片卡片，海外地标使用彩色图标。支持自动旋转和拖拽，离屏、后台或开启减少动态效果时暂停自动动画。许可证在 `docs/assets/licenses/cobe.txt` |
 | `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |
-| `hooks/blog_thumbnails.py` | 按日期获取最近三篇已发布博客，从 `image` 构建页脚 WebP 缩略图；已有 `thumbnail` 优先 |
+| `hooks/blog_thumbnails.py` | 按日期获取最近三篇已发布博客，从 `image` 构建页脚 WebP 缩略图；已有 `thumbnail` 优先。远程封面生成的 WebP 缓存在 `.cache/blog-thumbnails/` 并按 URL 复用，后续构建不再联网；同 URL 换图需删除缓存 |
 | `overrides/partials/nav-item.html` | 保留 Material 9.7.7 导航宏，读取本地目录 / 页面图标，保留栏目显示名称、整行状态容器与顶层标题标记；手机一级栏目由 `nav.html` 单独渲染为纯文字展开项 |
 | `hooks/navigation_icons.py` | 构建时读取各目录 `.nav.yml` 的 `icon`，按物理目录绑定图标，验证图标名；复用固定版本 awesome-nav 的解析树处理别名、虚拟分组与单子项目录。博客归档从 `docs/blog/archive/.nav.yml` 读取，Tags 在 `docs/blog/tags.md` 中维护；不增加浏览器脚本 |
 | `hooks/icon_assets.py` | 在其他模板环境处理前提供 Lucide 依赖的 SVG 加载器，保持项目与主题覆盖优先级；发布 `assets/licenses/lucide.txt`，依赖缺失时提示安装命令 |
