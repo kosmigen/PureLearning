@@ -183,6 +183,7 @@ Now 的 `draft: true` 会在生成导航、搜索和页面之前排除该文件�
 | `docs/assets/javascripts/footer-snow.mjs` | React Bits PixelSnow 页脚背景、鼠标扰动与离屏暂停 |
 | `docs/assets/stylesheets/bending-marquee.css`、`docs/assets/javascripts/bending-marquee.mjs` | 关于作者页的 React Bits 折叠横幅：三折面板 3D 透视、交替方向滚动、悬停缓停与减少动态效果 |
 | `frontend/bookshelf/`、`hooks/site_components.py`、`docs/assets/javascripts/bookshelf.mjs` | Markdown 的 `bookshelf` 围栏生成书单并嵌入数据。构建时打包 React Bits BounceCards 和 FlipCard，浏览器仅在含书架的页面加载，兼容即时导航。React Bits 许可证在 `docs/assets/licenses/react-bits.txt` |
+| `docs/assets/javascripts/math.mjs`、`docs/assets/javascripts/vendor/mathjax/tex-svg.js` | `pymdownx.arithmatex` 的公式渲染：含 `.arithmatex` 的页面按需加载自托管 MathJax 3.2.2（SVG 输出，`currentColor` 跟随明暗主题），即时导航后重新排版；许可证在 `docs/assets/licenses/mathjax.txt` |
 | `docs/assets/stylesheets/hometown-globe.css`、`docs/assets/javascripts/hometown-globe.mjs`、`docs/assets/javascripts/vendor/cobe.esm.js` | 关于作者页的 COBE 点阵地球（使用 vendor 中的 2.0.1）。COBE 绘制球体和教育地点之间的弧线，学校使用旋转的黑色三棱锥和照片卡片，海外地标使用彩色图标。支持自动旋转和拖拽，离屏、后台或开启减少动态效果时暂停自动动画。许可证在 `docs/assets/licenses/cobe.txt` |
 | `docs/assets/stylesheets/not-found.css` | 腾讯公益 404 的整屏布局与独立“返回首页”入口 |
 | `hooks/blog_metadata.py` | 中英文混合字数与阅读时长；显式 `readtime` 优先 |

@@ -8,6 +8,7 @@ const features = [
   ["[data-bookshelf]", () => import("./bookshelf.mjs")],
   ["[data-skills]", () => import("./author-skills.mjs")],
   ["[data-site-word-count]", () => import("./site-word-count.mjs")],
+  [".arithmatex", () => import("./math.mjs")],
 ];
 
 const loaded = new Set();
