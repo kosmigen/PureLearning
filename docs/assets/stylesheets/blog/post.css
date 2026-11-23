@@ -80,6 +80,11 @@
   font-weight: 600;
 }
 
+.kb-blog-post :is(strong, b):not(.kb-blog-post-nav__title) {
+  text-decoration: underline wavy currentColor 1px;
+  text-underline-offset: 0.2em;
+}
+
 .kb-blog-post code {
   font-size: var(--text-blog-post-code);
   line-height: 20px;
