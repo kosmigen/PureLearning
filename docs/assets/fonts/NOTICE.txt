@@ -21,12 +21,5 @@ Kosmigen Mono (Latin brand wordmark)
   preserved in maple-mono-OFL.txt.
 - Chinese body text uses system fonts.
 
-Excalifont (embedded in assets/images/readme-logo.svg)
-- Source: https://github.com/excalidraw/excalidraw/tree/master/packages/excalidraw/fonts/Excalifont
-- The repository README logo embeds a small Latin subset. No standalone
-  Excalifont webfont is used by the website.
-- Copyright (c) 2024 by Excalidraw. All rights reserved.
-- Excalifont modifications by Jan Filipek / DizajnDesign.
-
 All font assets except Charter are distributed under the SIL Open Font License 1.1. The
 applicable notices and full license texts accompany the assets.
