@@ -92,22 +92,9 @@
       {% endfor %}
     {% endif %}
     {% set index = _.index %}
-    {% if "navigation.tabs" in features %}
-      {% if level == 1 and nav_item.active %}
-        {% set class = class ~ " md-nav__item--section" %}
-        {% set is_section = true %}
-      {% endif %}
-      {% if "navigation.sections" in features %}
-        {% if level == 2 and parent.active %}
-          {% set class = class ~ " md-nav__item--section" %}
-          {% set is_section = true %}
-        {% endif %}
-      {% endif %}
-    {% elif "navigation.sections" in features %}
-      {% if level == 1 %}
-        {% set class = class ~ " md-nav__item--section" %}
-        {% set is_section = true %}
-      {% endif %}
+    {% set is_section = (level == 1 and nav_item.active) or ("navigation.sections" in features and level == 2 and parent.active) %}
+    {% if is_section %}
+      {% set class = class ~ " md-nav__item--section" %}
     {% endif %}
     {% if "navigation.prune" in features %}
       {% if not is_section and not nav_item.active %}

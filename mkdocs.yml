@@ -5,8 +5,7 @@ site_author: kosmigen
 # SITE_URL to the /PureLearning/ mirror.
 site_url: !ENV [SITE_URL, &primary_origin "https://kosmigen.com/"]
 repo_url: https://github.com/kosmigen/PureLearning
-repo_name: kosmigen
-edit_uri: edit/main/docs/
+edit_uri: ""
 not_in_nav: /404.md
 copyright: Copyright &copy; 2026 kosmigen
 
@@ -26,7 +25,6 @@ theme:
   favicon: assets/images/cipher-wheel.svg
   icon:
     menu: lucide/menu
-    repo: fontawesome/brands/github
     search: lucide/search
   font: false
   palette:
@@ -53,7 +51,6 @@ theme:
   features:
     - navigation.instant
     - navigation.instant.prefetch
-    - navigation.tabs
     - navigation.indexes
     - navigation.top
     - navigation.tracking

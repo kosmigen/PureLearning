@@ -1,11 +1,5 @@
 {# Preserve Material controls and direct-header selectors; add shared section navigation. #}
-{% set class = "md-header kb-site-header" %}
-{% if "navigation.tabs.sticky" in features %}
-  {% set class = class ~ " md-header--shadow md-header--lifted" %}
-{% elif "navigation.tabs" not in features %}
-  {% set class = class ~ " md-header--shadow" %}
-{% endif %}
-<header class="{{ class }}" data-md-component="header">
+<header class="md-header kb-site-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
     <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
       {% include "partials/logo.html" %}
@@ -70,9 +64,4 @@
       <a href="{{ section.url | url }}" data-site-section="{{ section.id }}" data-site-paths="{{ section.paths | join(' ') | e }}"{% if active %} class="is-active" aria-current="{{ 'page' if page.url == section.url else 'true' }}"{% endif %}>{{ section.title }}</a>
     {% endfor %}
   </nav>
-  {% if "navigation.tabs.sticky" in features %}
-    {% if "navigation.tabs" in features %}
-      {% include "partials/tabs.html" %}
-    {% endif %}
-  {% endif %}
 </header>

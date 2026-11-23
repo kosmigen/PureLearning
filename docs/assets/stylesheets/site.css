@@ -55,7 +55,6 @@ body { background: var(--color-paper); }
 .md-nav__button.md-logo img { filter: grayscale(1); }
 [data-md-color-scheme="slate"] .kb-site-header .md-header__button.md-logo img,
 [data-md-color-scheme="slate"] .md-nav__button.md-logo img { filter: brightness(0) invert(1); }
-.md-tabs { display: none; }
 
 .kb-site-navigation {
   position: absolute;
