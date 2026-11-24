@@ -24,10 +24,8 @@
   {% set icon_ref = directory or ref %}
   {% if icon_ref.kb_nav_icon is defined %}
     {% set icon = icon_ref.kb_nav_icon %}
-  {% elif nav_item.meta and "icon" in nav_item.meta %}
-    {% set icon = nav_item.meta.icon %}
   {% else %}
-    {% set icon = "lucide/folder" if nav_item.children or ref.children else "lucide/file-text" %}
+    {% set icon = nav_item.meta.get("icon") if nav_item.meta else none %}
   {% endif %}
   {% if icon %}
     {% include ".icons/" ~ icon ~ ".svg" %}

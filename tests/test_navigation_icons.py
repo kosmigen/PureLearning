@@ -58,7 +58,7 @@ class NavigationIconTests(unittest.TestCase):
         self.write(".nav.yml", "nav:\n  - index.md\n  - Renamed directory: guide\n")
         self.write("guide/.nav.yml", "icon: lucide/coffee\nnav:\n  - start.md\n"
                    "  - Renamed page: page.md\n  - hidden.md\n  - plain.md\n"
-                   "  - Indexed: indexed\n  - Hidden folder: hidden-folder\n"
+                   "  - Indexed: indexed\n  - Index icon: index-icon\n  - Hidden folder: hidden-folder\n"
                    "  - Single folder: single\n  - Virtual group:\n    - virtual.md\n")
         self.write("guide/start.md", "# Start")
         self.write("guide/page.md", "---\nicon: lucide/brain\n---\n\n# Page")
@@ -68,6 +68,7 @@ class NavigationIconTests(unittest.TestCase):
         self.write("guide/indexed/.nav.yml", "icon: lucide/cpu\n")
         self.write("guide/indexed/index.md", "---\nicon: lucide/coffee\n---\n\n# Index")
         self.write("guide/indexed/other.md", "# Other")
+        self.write("guide/index-icon/index.md", "---\nicon: lucide/coffee\n---\n\n# Index")
         self.write("guide/hidden-folder/.nav.yml", 'icon: ""\n')
         self.write("guide/hidden-folder/index.md", "---\nicon: lucide/coffee\n---\n\n# Index")
         self.write("guide/single/.nav.yml", "icon: lucide/wrench\n")
@@ -95,22 +96,27 @@ class NavigationIconTests(unittest.TestCase):
         for row in matching:
             self.assertIn("lucide-" + icon, row["icons"], row)
 
+    def assert_no_icon(self, rows, title):
+        matching = [row for row in rows if row["text"] == title]
+        self.assertTrue(matching, title)
+        for row in matching:
+            self.assertEqual(row["icons"], [], row)
+
     def test_directory_and_page_icons_survive_aliases_without_inheriting_into_children(self):
         build(self.config)
         rows = self.rows()
         for title, icon in (("Guides", "coffee"), ("Renamed page", "brain"),
-                            ("Plain page", "file-text"), ("Indexed", "cpu"),
-                            ("Single folder", "wrench"), ("Only page", "file-text"),
-                            ("Virtual group", "folder"), ("Virtual page", "file-text")):
+                            ("Indexed", "cpu"), ("Index icon", "coffee"),
+                            ("Single folder", "wrench")):
             self.assert_icon(rows, title, icon)
+        for title in ("Plain page", "Only page", "Virtual group", "Virtual page"):
+            self.assert_no_icon(rows, title)
 
     def test_empty_icons_hide_pages_and_directories_including_indexed_ones(self):
         build(self.config)
         rows = self.rows()
         for title in ("Hidden page", "Hidden folder"):
-            matching = [row for row in rows if row["text"] == title]
-            self.assertTrue(matching)
-            self.assertTrue(all(not row["icons"] for row in matching))
+            self.assert_no_icon(rows, title)
 
     def test_new_icon_can_be_selected_without_adding_an_svg(self):
         self.write("guide/page.md", "---\nicon: lucide/rocket\n---\n\n# Page")

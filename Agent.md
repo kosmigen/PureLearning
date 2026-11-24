@@ -98,7 +98,7 @@ node --check docs/assets/javascripts/sidebar-state.mjs
 - 显式列出页面且没有通配规则的 `.nav.yml`，新增页面时要按需更新列表，不能假定自动进入侧栏。
 - `.nav.yml` 顶层必须是映射（`nav:`），不能写成 `- nav:`。导航引用的目录至少需要一个 Markdown 页面；空文件夹不会成为可发布的导航分类。
 - 标签改名不等于路径迁移。仅调整导航层级时，不必移动目录；用户要求修改网址时，再同步目录、导航与站内链接。
-- 侧栏图标与内容一起维护：目录在自己的 `.nav.yml` 顶层设置 `icon`，单篇页面在 front matter 中设置 `icon`。值为主题图标名（如 `lucide/coffee`），`icon: ""` 隐藏图标；未设置时使用默认文件夹 / 文档图标。目录行与 index 页面合并时，目录的显式设置优先。目录图标只作用于自身，不传给所有下级页面；手机一级栏目保持无前置图标。不要恢复 `extra.navigation_icons` 的标题映射。
+- 侧栏图标与内容一起维护：目录在自己的 `.nav.yml` 顶层设置 `icon`，单篇页面在 front matter 中设置 `icon`。值为主题图标名（如 `lucide/coffee`），省略或写 `icon: ""` 时不显示图标。目录行与 index 页面合并时，目录的显式设置优先，目录未设置时读取 index 页的 `icon`。目录图标只作用于自身，不传给所有下级页面；手机一级栏目保持无前置图标。不要恢复 `extra.navigation_icons` 的标题映射。
 - Lucide 来自官方 `lucide-static` 1.69.0 构建依赖，支持该版本提供的全部 SVG 名称，不再逐个下载到 `overrides/.icons/lucide/`。`hooks/icon_assets.py` 在模板环境中按需读取 `node_modules/lucide-static/icons/`，保留项目自定义 SVG 与主题图标的优先级，只把实际使用的 SVG 嵌入网页；自动发布完整许可证。`node_modules/` 不提交，也不复制整套图标库、图标字体或浏览器图标脚本到网站。升级版本需同时更新依赖和锁文件并验证。
 - Markdown 内部链接优先指向相对 `.md` 源文件；Jinja2 模板中的站内路径通过 `| url` 处理。不要把部署域名或错误的根路径硬编码进普通站内链接。
 - `.nav.yml` 中的 `ignore` 只影响导航，不会阻止页面构建。`docs/404.md` 由 `overrides/404.html` 提供真正的站点 404 内容。
