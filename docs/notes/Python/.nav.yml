@@ -2,3 +2,11 @@ icon: simple/python
 
 nav:
   - Python 概述: intro.md
+  - 语法基础: 01-language-foundations
+  - 模块、包与项目: 02-modules-and-projects
+  - 对象模型与类型: 03-data-model-and-typing
+  - 迭代与抽象: 04-iteration-and-abstractions
+  - 工程实践: 05-engineering
+  - 并发与异步: 06-concurrency
+  - 应用方向: 07-applications
+  - 解释器与性能: 08-internals-and-performance
