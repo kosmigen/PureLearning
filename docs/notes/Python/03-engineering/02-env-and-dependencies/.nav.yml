@@ -1,0 +1,4 @@
+icon: lucide/settings
+
+nav:
+  - 04-pyproject-and-uv.md

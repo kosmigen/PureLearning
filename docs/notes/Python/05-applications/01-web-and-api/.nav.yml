@@ -1,0 +1,5 @@
+nav:
+  - 00-http-fundamentals.md
+  - 01-fastapi-core.md
+  - 02-pydantic-v2.md
+  - 03-api-persistence-and-deployment.md

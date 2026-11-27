@@ -1,0 +1,5 @@
+icon: lucide/list-checks
+
+nav:
+  - 01-testing-with-pytest.md
+  - 06-test-design-and-ci.md

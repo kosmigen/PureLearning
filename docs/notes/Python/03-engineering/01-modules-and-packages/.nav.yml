@@ -1,0 +1,5 @@
+icon: lucide/package
+
+nav:
+  - 01-modules-and-imports.md
+  - 02-packages-and-entry-points.md

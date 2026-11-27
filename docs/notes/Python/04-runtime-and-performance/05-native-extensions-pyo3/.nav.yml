@@ -1,0 +1,4 @@
+icon: lucide/plug
+
+nav:
+  - 05-native-extensions-and-pyo3.md

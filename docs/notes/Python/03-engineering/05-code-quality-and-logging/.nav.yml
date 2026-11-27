@@ -1,0 +1,6 @@
+icon: lucide/shield-check
+
+nav:
+  - 02-linting-and-formatting.md
+  - 03-static-type-checking.md
+  - 04-logging-and-debugging.md

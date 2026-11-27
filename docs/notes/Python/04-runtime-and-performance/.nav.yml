@@ -1,0 +1,8 @@
+icon: lucide/activity
+
+nav:
+  - CPython 内部机制: 01-cpython-internals
+  - 内存与垃圾回收: 02-memory-and-gc
+  - GIL 与自由线程: 03-gil-and-free-threading
+  - JIT 与性能优化: 04-jit-and-performance
+  - 原生扩展与 PyO3: 05-native-extensions-pyo3

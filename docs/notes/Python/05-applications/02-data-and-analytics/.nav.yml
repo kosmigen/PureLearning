@@ -1,0 +1,5 @@
+nav:
+  - 00-numpy-and-tabular-data.md
+  - 01-polars-lazy-queries.md
+  - 02-duckdb-analytics.md
+  - 03-data-quality-and-visualization.md

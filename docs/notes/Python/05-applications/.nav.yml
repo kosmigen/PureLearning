@@ -1,0 +1,6 @@
+icon: lucide/apple
+
+nav:
+  - Web 与 API: 01-web-and-api
+  - 数据处理与分析: 02-data-and-analytics
+  - AI 与 LLM 开发: 03-ai-and-llm-development

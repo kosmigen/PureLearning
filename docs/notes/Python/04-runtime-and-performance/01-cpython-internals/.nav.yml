@@ -1,0 +1,4 @@
+icon: lucide/cpu
+
+nav:
+  - 02-bytecode-and-vm.md

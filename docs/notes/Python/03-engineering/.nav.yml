@@ -1,0 +1,9 @@
+icon: lucide/omega
+
+nav:
+  - 模块与包: 01-modules-and-packages
+  - 环境与依赖: 02-env-and-dependencies
+  - 测试与 Mock: 03-testing-and-mocking
+  - 调试与性能剖析: 04-debugging-and-profiling
+  - 代码质量与日志: 05-code-quality-and-logging
+  - 打包与 CI/CD: 06-packaging-and-ci-cd

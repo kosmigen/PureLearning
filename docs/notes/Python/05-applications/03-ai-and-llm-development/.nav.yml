@@ -1,0 +1,5 @@
+nav:
+  - 01-llm-native-client.md
+  - 02-function-calling.md
+  - 03-local-rag-vector-db.md
+  - 04-evaluating-llm-apps.md
