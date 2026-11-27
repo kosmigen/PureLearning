@@ -1,0 +1,16 @@
+icon: lucide/terminal
+
+nav:
+  - overview.md
+  - 01-text-and-regex.md
+  - 02-collections-and-algorithms.md
+  - 03-datetime-and-timezone.md
+  - 04-filesystem-and-paths.md
+  - 05-io-streams-and-serialization.md
+  - 06-crypto-hashing-and-random.md
+  - 07-os-processes-and-cli.md
+  - 08-threading-and-multiprocessing.md
+  - 09-asyncio-and-structured-concurrency.md
+  - 10-socket-and-network-protocols.md
+  - 11-http-tls-and-websocket.md
+  - 12-sqlite-and-local-caching.md
