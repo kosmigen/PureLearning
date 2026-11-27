@@ -1,0 +1,15 @@
+icon: lucide/star
+
+nav:
+  - overview.md
+  - 01-basics-and-object-model.md
+  - 02-builtin-types.md
+  - 03-control-flow.md
+  - 04-functions.md
+  - 05-oop-and-classes.md
+  - 06-data-model.md
+  - 07-iterators-and-context.md
+  - 08-exceptions.md
+  - 09-modules-and-packages.md
+  - 10-type-annotations.md
+  - 11-metaprogramming.md
